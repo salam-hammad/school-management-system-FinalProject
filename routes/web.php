@@ -59,12 +59,12 @@ Route::group(['prefix' => 'Classrooms'], function () {
  Route::get('/Classrooms', [ClassroomController::class, 'index'])->name('Classrooms.index');
  Route::post('/Classrooms/store', [ClassroomController::class, 'store'])->name('Classrooms.store');
  Route::post('/Classrooms', [ClassroomController::class, 'Filter_Classes'])->name('Filter_Classes');
- Route::patch('/update/{id}', [ClassroomController::class, 'update'])->name('Classrooms.update');
- Route::delete('/destroy', [ClassroomController::class, 'destroy'])->name('Classrooms.destroy'); //name('delete_all');
-//  Route::delete('/destroy', [ClassroomController::class, 'deleteAll'])->name('delete_all');
- Route::post('/delete_all', [ClassroomController::class, 'delete_all'])->name('Classrooms.delete_all');
-});
+ Route::patch('/Classrooms/update/{id}', [ClassroomController::class, 'update'])->name('Classrooms.update');
+ Route::delete('/Classrooms/destroy', [ClassroomController::class, 'destroy'])->name('Classrooms.destroy'); //name('delete_all');
+ Route::post('/Classrooms/delete_all', [ClassroomController::class, 'delete_all'])->name('Classrooms.delete_all');
+ Route::post('/Classrooms/filter_classes', [ClassroomController::class, 'Filter_Classes'])->name('Filter_Classes');
 
+});
 
 
 });

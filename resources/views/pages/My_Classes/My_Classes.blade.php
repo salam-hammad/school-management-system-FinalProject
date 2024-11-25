@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('css')
     @toastr_css
-
-
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta/dist/css/bootstrap-select.min.css"> --}}
+    
 @section('title')
     {{ trans('My_Classes_trans.title_page') }}
 @stop
@@ -40,7 +40,6 @@
                     {{ trans('My_Classes_trans.delete_checkbox') }}
                 </button>
 
-
             <br><br>
 
                 <form action="{{ route('Filter_Classes') }}" method="POST">
@@ -54,7 +53,7 @@
                     </select>
                 </form>
 
-
+            <br><br>
 
             <div class="table-responsive">
                 <table id="datatable" class="table  table-hover table-sm table-bordered p-0" data-page-length="50"
