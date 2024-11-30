@@ -1,15 +1,19 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 
-class CreateForeignKeys extends Migration {
 
-	public function up()
-	{
-		Schema::table('Classrooms', function(Blueprint $table) {
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('Classrooms', function(Blueprint $table) {
 			$table->foreign('Grade_id')->references('id')->on('Grades')
 						->onDelete('cascade');
 		});
@@ -37,9 +41,13 @@ class CreateForeignKeys extends Migration {
         // });
 
 	}
+    
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
 
-	public function down()
-	{
 		Schema::table('Classrooms', function(Blueprint $table) {
 			$table->dropForeign('Classrooms_Grade_id_foreign');
 		});
@@ -49,5 +57,6 @@ class CreateForeignKeys extends Migration {
         Schema::table('sections', function(Blueprint $table) {
             $table->dropForeign('sections_Class_id_foreign');
         });
-	}
-}
+    
+    }
+};
