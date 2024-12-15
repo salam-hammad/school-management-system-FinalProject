@@ -25,4 +25,5 @@ class Section extends Model
         return $this->belongsToMany('App\Models\Teacher','teacher_section');
     }
 
+
 }

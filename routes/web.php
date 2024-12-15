@@ -6,7 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\Classrooms\ClassroomController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\Teachers\TeacherController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Livewire\Livewire;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +79,26 @@ Route::group([
     });
     //==============================End dashboard page of Sections============================
 
+    //==============================Start dashboard page of Parents============================
+    // Route::view('add_parent','livewire.show_Form');
+ 
+        Route::view('add_parent','livewire.show_Form');
+    
+        Livewire::setUpdateRoute(function ($handle) {
+            return Route::post('/en/livewire/update', $handle);
+        }); 
+    //==============================End dashboard page of Parents============================
 
 
+    //==============================Start dashboard page of Teachers============================
+        Route::group(['prefix' => 'teachers', 'namespace' => 'Teachers'], function () {
+            Route::get('/Teachers', [TeacherController::class, 'index'])->name('Teachers.index'); 
+            Route::get('/Teachers/create', [TeacherController::class, 'create'])->name('Teachers.create');
+            Route::post('/Teachers/store', [TeacherController::class, 'store'])->name('Teachers.store');
+            Route::get('/Teachers/edit/{id}', [TeacherController::class, 'edit'])->name('Teachers.edit');
+            Route::patch('/Teachers/update/{id}', [TeacherController::class, 'update'])->name('Teachers.update');
+            Route::delete('/Teachers/destroy', [TeacherController::class, 'destroy'])->name('Teachers.destroy');
+    });
+    //==============================End dashboard page of Parents============================
+    
 });
