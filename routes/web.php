@@ -7,6 +7,7 @@ use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\Classrooms\ClassroomController;
 use App\Http\Controllers\Sections\SectionController;
 use App\Http\Controllers\Teachers\TeacherController;
+use App\Http\Controllers\Students\StudentController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Livewire\Livewire;
 
@@ -101,4 +102,22 @@ Route::group([
     });
     //==============================End dashboard page of Parents============================
     
+    //==============================Start dashboard page of Students============================
+
+    Route::group(['prefix' => 'Students'], function () {
+        Route::get('/Students', [StudentController::class, 'index'])->name('Students.index');
+        Route::get('/Students/create',  [StudentController::class, 'create'])->name('Students.create');
+        Route::get('/Get_classrooms/{id}',  [StudentController::class, 'Get_classrooms']);
+        Route::get('/Get_Sections/{id}',  [StudentController::class, 'Get_Sections']);
+        Route::post('/Students/store', [StudentController::class, 'store'])->name('Students.store');
+        Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('Students.edit');
+        Route::get('/students/{id}', [StudentController::class, 'show'])->name('Students.show');
+        Route::put('/Students/update', [StudentController::class, 'Update'])->name('Students.update');
+        Route::delete('/Students/destroy', [StudentController::class, 'destroy'])->name('Students.destroy');
+        Route::post('Upload_attachment', [StudentController::class, 'Upload_attachment'])->name('Upload_attachment');
+        Route::post('Delete_attachment', [StudentController::class , 'Delete_attachment'])->name('Delete_attachment');
+    });
+    Route::get('/Download_attachment/{studentsname}/{filename}', [StudentController::class, 'Download_attachment'])->name('Download_attachment');
+
+    //==============================End dashboard page of Students============================ 
 });

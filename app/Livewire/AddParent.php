@@ -12,8 +12,6 @@ use Livewire\WithFileUploads;
 use App\Models\ParentAttachment;
 use Illuminate\Support\Facades\Hash;
 
-
-
 class AddParent extends Component
 {
     // #[Url]
@@ -44,7 +42,7 @@ class AddParent extends Component
     //         'National_ID_Mother' => 'required|string|min:10|max:10|regex:/[0-9]{9}/',
     //         'Passport_ID_Mother' => 'min:10|max:10',
     //         'Phone_Mother' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
-        
+
     //         // 'Email' => 'required|email',
     //         // 'National_ID_Father' => 'required|string|min:10|max:10|regex:/[0-9]{9}/',
     //         // 'Passport_ID_Father' => 'nullable|min:10|max:10',
@@ -53,7 +51,7 @@ class AddParent extends Component
     //         // 'Blood_Type_Father_id' => 'required|exists:type_bloods,id',
     //         // 'Religion_Father_id' => 'required|exists:religions,id',
     //         // 'Address_Father' => 'required|string|max:500',
-    
+
     //         // 'Name_Mother' => 'required|string|max:255',
     //         // 'National_ID_Mother' => 'required|string|min:10|max:10|regex:/[0-9]{9}/',
     //         // 'Passport_ID_Mother' => 'nullable|min:10|max:10',
@@ -62,8 +60,8 @@ class AddParent extends Component
     //         // 'Blood_Type_Mother_id' => 'required|exists:type_bloods,id',
     //         // 'Religion_Mother_id' => 'required|exists:religions,id',
     //         // 'Address_Mother' => 'required|string|max:500',
-        
-        
+
+
     //     ]);
     // }
 
@@ -78,7 +76,8 @@ class AddParent extends Component
         ]);
     }
 
-    public function showformadd(){
+    public function showformadd()
+    {
         $this->show_table = false;
     }
 
@@ -123,7 +122,8 @@ class AddParent extends Component
         $this->currentStep = 3;
     }
 
-    public function submitForm(){
+    public function submitForm()
+    {
 
         try {
             $My_Parent = new My_Parent();
@@ -154,7 +154,7 @@ class AddParent extends Component
             $My_Parent->Address_Mother = $this->Address_Mother;
             $My_Parent->save();
 
-            if (!empty($this->photos)){
+            if (!empty($this->photos)) {
                 foreach ($this->photos as $photo) {
                     $photo->storeAs($this->National_ID_Father, $photo->getClientOriginalName(), $disk = 'parent_attachments');
                     ParentAttachment::create([
@@ -166,12 +166,9 @@ class AddParent extends Component
             $this->successMessage = trans('messages.success');
             $this->clearForm();
             $this->currentStep = 1;
-        }
-
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->catchError = $e->getMessage();
         };
-
     }
 
 
@@ -179,7 +176,7 @@ class AddParent extends Component
     {
         $this->show_table = false;
         $this->updateMode = true;
-        $My_Parent = My_Parent::where('id',$id)->first();
+        $My_Parent = My_Parent::where('id', $id)->first();
         $this->Parent_id = $id;
         $this->Email = $My_Parent->Email;
         $this->Password = $My_Parent->Password;
@@ -187,25 +184,25 @@ class AddParent extends Component
         $this->Name_Father_en = $My_Parent->getTranslation('Name_Father', 'en');
         $this->Job_Father = $My_Parent->getTranslation('Job_Father', 'ar');;
         $this->Job_Father_en = $My_Parent->getTranslation('Job_Father', 'en');
-        $this->National_ID_Father =$My_Parent->National_ID_Father;
+        $this->National_ID_Father = $My_Parent->National_ID_Father;
         $this->Passport_ID_Father = $My_Parent->Passport_ID_Father;
         $this->Phone_Father = $My_Parent->Phone_Father;
         $this->Nationality_Father_id = $My_Parent->Nationality_Father_id;
         $this->Blood_Type_Father_id = $My_Parent->Blood_Type_Father_id;
-        $this->Address_Father =$My_Parent->Address_Father;
-        $this->Religion_Father_id =$My_Parent->Religion_Father_id;
+        $this->Address_Father = $My_Parent->Address_Father;
+        $this->Religion_Father_id = $My_Parent->Religion_Father_id;
 
         $this->Name_Mother = $My_Parent->getTranslation('Name_Mother', 'ar');
         $this->Name_Mother_en = $My_Parent->getTranslation('Name_Father', 'en');
         $this->Job_Mother = $My_Parent->getTranslation('Job_Mother', 'ar');;
         $this->Job_Mother_en = $My_Parent->getTranslation('Job_Mother', 'en');
-        $this->National_ID_Mother =$My_Parent->National_ID_Mother;
+        $this->National_ID_Mother = $My_Parent->National_ID_Mother;
         $this->Passport_ID_Mother = $My_Parent->Passport_ID_Mother;
         $this->Phone_Mother = $My_Parent->Phone_Mother;
         $this->Nationality_Mother_id = $My_Parent->Nationality_Mother_id;
         $this->Blood_Type_Mother_id = $My_Parent->Blood_Type_Mother_id;
-        $this->Address_Mother =$My_Parent->Address_Mother;
-        $this->Religion_Mother_id =$My_Parent->Religion_Mother_id;
+        $this->Address_Mother = $My_Parent->Address_Mother;
+        $this->Religion_Mother_id = $My_Parent->Religion_Mother_id;
     }
 
     //firstStepSubmit
@@ -213,7 +210,6 @@ class AddParent extends Component
     {
         $this->updateMode = true;
         $this->currentStep = 2;
-
     }
 
     //secondStepSubmit_edit
@@ -221,12 +217,12 @@ class AddParent extends Component
     {
         $this->updateMode = true;
         $this->currentStep = 3;
-
     }
 
-    public function submitForm_edit(){
+    public function submitForm_edit()
+    {
 
-        if ($this->Parent_id){
+        if ($this->Parent_id) {
             $parent = My_Parent::find($this->Parent_id);
             $parent->update([
                 'Email' => $this->Email,
@@ -257,13 +253,13 @@ class AddParent extends Component
                 'Religion_Mother_id' => $this->Religion_Mother_id,
 
             ]);
-
         }
 
         return redirect()->to('/add_parent');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         My_Parent::findOrFail($id)->delete();
         return redirect()->to('/add_parent');
     }
@@ -278,26 +274,25 @@ class AddParent extends Component
         $this->Job_Father = '';
         $this->Job_Father_en = '';
         $this->Name_Father_en = '';
-        $this->National_ID_Father ='';
+        $this->National_ID_Father = '';
         $this->Passport_ID_Father = '';
         $this->Phone_Father = '';
         $this->Nationality_Father_id = '';
         $this->Blood_Type_Father_id = '';
-        $this->Address_Father ='';
-        $this->Religion_Father_id ='';
+        $this->Address_Father = '';
+        $this->Religion_Father_id = '';
 
         $this->Name_Mother = '';
         $this->Job_Mother = '';
         $this->Job_Mother_en = '';
         $this->Name_Mother_en = '';
-        $this->National_ID_Mother ='';
+        $this->National_ID_Mother = '';
         $this->Passport_ID_Mother = '';
         $this->Phone_Mother = '';
         $this->Nationality_Mother_id = '';
         $this->Blood_Type_Mother_id = '';
-        $this->Address_Mother ='';
-        $this->Religion_Mother_id ='';
-
+        $this->Address_Mother = '';
+        $this->Religion_Mother_id = '';
     }
 
 
@@ -306,5 +301,4 @@ class AddParent extends Component
     {
         $this->currentStep = $step;
     }
-
 }
