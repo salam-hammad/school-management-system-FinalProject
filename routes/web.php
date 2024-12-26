@@ -8,6 +8,10 @@ use App\Http\Controllers\Classrooms\ClassroomController;
 use App\Http\Controllers\Sections\SectionController;
 use App\Http\Controllers\Teachers\TeacherController;
 use App\Http\Controllers\Students\StudentController;
+use App\Http\Controllers\Students\PromotionController;
+use App\Http\Controllers\Students\GraduatedController;
+use App\Http\Controllers\Students\FeesController;
+use App\Http\Controllers\Students\FeesInvoicesController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Livewire\Livewire;
 
@@ -120,4 +124,52 @@ Route::group([
     Route::get('/Download_attachment/{studentsname}/{filename}', [StudentController::class, 'Download_attachment'])->name('Download_attachment');
 
     //==============================End dashboard page of Students============================ 
+
+    //==============================Start Pormotion page of Students============================
+    Route::group(['prefix' => 'Promotion'], function () {
+        Route::get('/Promotion', [PromotionController::class, 'index'])->name('Promotion.index');
+        Route::post('/Promotion/store', [PromotionController::class, 'store'])->name('Promotion.store');
+        Route::get('/Promotion/create',  [PromotionController::class, 'create'])->name('Promotion.create');
+        Route::delete('/Promotion/destroy', [PromotionController::class, 'destroy'])->name('Promotion.destroy');
+    });
+    //==============================End Pormotion page of Students============================
+    
+
+    //==============================Start Graduated page of Students============================
+    Route::group(['prefix' => 'Graduated'], function () {
+        Route::get('/Graduated', [GraduatedController::class, 'index'])->name('Graduated.index');
+        Route::post('/Graduated/store', [GraduatedController::class, 'store'])->name('Graduated.store');
+        Route::get('/Graduated/create',  [GraduatedController::class, 'create'])->name('Graduated.create');
+        Route::put('/Graduated/update', [GraduatedController::class, 'Update'])->name('Graduated.update');
+        Route::delete('/Graduated/destroy', [GraduatedController::class, 'destroy'])->name('Graduated.destroy');
+
+    });    
+    //==============================End Graduated page of Graduated============================
+
+
+    //==============================Start dashboard page of Fees============================
+    Route::group(['prefix' => 'Fees'], function () {
+        Route::get('/Fees', [FeesController::class, 'index'])->name('Fees.index');
+        Route::post('/Fees/store', [FeesController::class, 'store'])->name('Fees.store');
+        Route::get('/Fees/create',  [FeesController::class, 'create'])->name('Fees.create');
+        Route::get('/edit/{id}', [FeesController::class, 'edit'])->name('Fees.edit');
+        Route::put('/Fees/update', [FeesController::class, 'Update'])->name('Fees.update');
+        Route::delete('/Fees/destroy', [FeesController::class, 'destroy'])->name('Fees.destroy');
+
+    });    
+    //==============================End dashboard page of Fees============================    
+
+
+    //==============================Start Fees Invoices page of Students============================
+    Route::group(['prefix' => 'Fees_Invoices'], function () {
+        Route::get('/Fees_Invoices', [FeesInvoicesController::class, 'index'])->name('Fees_Invoices.index');
+        Route::post('/Fees_Invoices/store', [FeesInvoicesController::class, 'store'])->name('Fees_Invoices.store');
+        Route::get('/Fees_Invoices/{id}', [FeesInvoicesController::class, 'show'])->name('Fees_Invoices.show');
+        // Route::get('/Fees_Invoices/create',  [FeesInvoicesController::class, 'create'])->name('Fees_Invoices.create');
+        // Route::get('/edit/{id}', [FeesInvoicesController::class, 'edit'])->name('Fees_Invoices.edit');
+        // Route::put('/Fees_Invoices/update', [FeesInvoicesController::class, 'Update'])->name('Fees_Invoices.update');
+        // Route::delete('/Fees_Invoices/destroy', [FeesInvoicesController::class, 'destroy'])->name('Fees_Invoices.destroy');
+
+    });    
+    //==============================End Fees Invoices page of Students============================
 });

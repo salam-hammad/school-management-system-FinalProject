@@ -29,6 +29,8 @@ return [
     'List_Parents'=>'قائمة أولياء الأمور',
     'Add_Parent'=>'اضافة ولي أمر',
     'Accounts'=>'الحسابات',
+    'tuition_Fees'=>'الرسوم الدراسية',
+    'add_Fees'=>'اضافة رسوم جديدة',
     'Attendance'=>'الحضور والغياب',
     'Exams'=>'الامتحانات',
     'library'=>'المكتبة',
