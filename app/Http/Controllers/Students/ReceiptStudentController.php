@@ -4,15 +4,16 @@ namespace App\Http\Controllers\Students;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repository\FeeInvoicesRepositoryInterface;
+use App\Repository\ReceiptStudentsRepositoryInterface;
 
-class FeesInvoicesController extends Controller
+class ReceiptStudentController extends Controller
 {
 
-    protected $Fees_Invoices;
-    public function __construct(FeeInvoicesRepositoryInterface $Fees_Invoices)
+    protected $Receipt;
+
+    public function __construct(ReceiptStudentsRepositoryInterface $Receipt)
     {
-        $this->Fees_Invoices = $Fees_Invoices;
+        $this->Receipt = $Receipt;
     }
 
     /**
@@ -20,7 +21,7 @@ class FeesInvoicesController extends Controller
      */
     public function index()
     {
-        return $this->Fees_Invoices->index();
+        return $this->Receipt->index();
     }
 
     /**
@@ -28,7 +29,7 @@ class FeesInvoicesController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->Fees_Invoices->store($request);
+        return $this->Receipt->store($request);
     }
 
     /**
@@ -36,7 +37,7 @@ class FeesInvoicesController extends Controller
      */
     public function show(string $id)
     {
-        return $this->Fees_Invoices->show($id);
+        return $this->Receipt->show($id);
     }
 
     /**
@@ -44,7 +45,7 @@ class FeesInvoicesController extends Controller
      */
     public function edit(string $id)
     {
-        return $this->Fees_Invoices->edit($id);
+        return $this->Receipt->edit($id);
     }
 
     /**
@@ -52,7 +53,7 @@ class FeesInvoicesController extends Controller
      */
     public function update(Request $request)
     {
-        return $this->Fees_Invoices->update($request);
+        return $this->Receipt->update($request);
     }
 
     /**
@@ -60,6 +61,6 @@ class FeesInvoicesController extends Controller
      */
     public function destroy(Request $request)
     {
-        return $this->Fees_Invoices->destroy($request);
+        return $this->Receipt->destroy($request);
     }
 }

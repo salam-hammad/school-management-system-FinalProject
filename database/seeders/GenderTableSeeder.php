@@ -19,7 +19,7 @@ class GenderTableSeeder extends Seeder
 
         $genders = [
             ['en'=> 'Male', 'ar'=> 'ذكر'],
-            ['en'=> 'Female', 'ar'=> 'انثى'],
+            ['en'=> 'Female', 'ar'=> 'أنثى'],
 
         ];
         foreach ($genders as $ge) {

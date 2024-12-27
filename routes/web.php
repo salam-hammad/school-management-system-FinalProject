@@ -12,6 +12,7 @@ use App\Http\Controllers\Students\PromotionController;
 use App\Http\Controllers\Students\GraduatedController;
 use App\Http\Controllers\Students\FeesController;
 use App\Http\Controllers\Students\FeesInvoicesController;
+use App\Http\Controllers\Students\ReceiptStudentController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Livewire\Livewire;
 
@@ -163,13 +164,27 @@ Route::group([
     //==============================Start Fees Invoices page of Students============================
     Route::group(['prefix' => 'Fees_Invoices'], function () {
         Route::get('/Fees_Invoices', [FeesInvoicesController::class, 'index'])->name('Fees_Invoices.index');
-        Route::post('/Fees_Invoices/store', [FeesInvoicesController::class, 'store'])->name('Fees_Invoices.store');
         Route::get('/Fees_Invoices/{id}', [FeesInvoicesController::class, 'show'])->name('Fees_Invoices.show');
-        // Route::get('/Fees_Invoices/create',  [FeesInvoicesController::class, 'create'])->name('Fees_Invoices.create');
-        // Route::get('/edit/{id}', [FeesInvoicesController::class, 'edit'])->name('Fees_Invoices.edit');
-        // Route::put('/Fees_Invoices/update', [FeesInvoicesController::class, 'Update'])->name('Fees_Invoices.update');
-        // Route::delete('/Fees_Invoices/destroy', [FeesInvoicesController::class, 'destroy'])->name('Fees_Invoices.destroy');
+        Route::post('/Fees_Invoices/store', [FeesInvoicesController::class, 'store'])->name('Fees_Invoices.store');
+        Route::get('/edit/{id}', [FeesInvoicesController::class, 'edit'])->name('Fees_Invoices.edit');
+        Route::put('/Fees_Invoices/update', [FeesInvoicesController::class, 'Update'])->name('Fees_Invoices.update');
+        Route::delete('/Fees_Invoices/destroy', [FeesInvoicesController::class, 'destroy'])->name('Fees_Invoices.destroy');
 
     });    
     //==============================End Fees Invoices page of Students============================
+
+
+
+    //==============================Start Receipt Student page of Students============================
+    Route::group(['prefix' => 'receipt_student'], function () {
+        Route::get('/receipt_student', [ReceiptStudentController::class, 'index'])->name('receipt_students.index');
+        Route::get('/receipt_students/{id}', [ReceiptStudentController::class, 'show'])->name('receipt_students.show');
+        Route::post('/receipt_students/store', [ReceiptStudentController::class, 'store'])->name('receipt_students.store');
+        Route::get('/edit/{id}', [ReceiptStudentController::class, 'edit'])->name('receipt_students.edit');
+        Route::put('/receipt_students/update', [ReceiptStudentController::class, 'update'])->name('receipt_students.update');
+        Route::delete('/receipt_students/destroy', [ReceiptStudentController::class, 'destroy'])->name('receipt_students.destroy');
+
+    });
+    //==============================End Receipt Student page of Students============================
+
 });

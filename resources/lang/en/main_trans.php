@@ -32,6 +32,7 @@ return [
     'Accounts'=>'Accounts',
     'tuition_Fees'=>'Tuition Fees',
     'add_Fees'=>'Add Fees',
+    'Fees'=>'Fees',
     'Attendance'=>'Attendance',
     'Exams'=>'Exams',
     'library'=>'Library',

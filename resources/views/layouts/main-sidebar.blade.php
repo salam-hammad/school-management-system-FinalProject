@@ -134,17 +134,22 @@
                     <!-- Accounts-->
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#Accounts-menu">
-                            <div class="pull-left"><i class="fa fa-credit-card"></i><span
-                                    class="right-nav-text">{{trans('main_trans.Accounts')}}</span></div>
+                            <div class="pull-left"><i class="fa fa-users"></i><span
+                                    class="right-nav-text">{{trans('main_trans.Accounts')}}</span>
+                                </div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
                         <ul id="Accounts-menu" class="collapse" data-parent="#sidebarnav">
-                            {{-- <li> <a href="{{route('Fees.index')}}"{{trans('main_trans.tuition_Fees')}}</a> </li> --}}
-                            <li> <a href="{{route('Fees.index')}}">{{trans('main_trans.tuition_Fees')}}</a> </li>
+                            <li> <a href="{{route('Fees.index')}}">{{trans('Students_trans.Tuition_fees')}}</a> </li>
+                            <li> <a href="{{route('Fees_Invoices.index')}}">{{trans('Students_trans.Invoices')}}</a> </li>
+                            <li> <a href="{{route('receipt_students.index')}}">{{trans('Students_trans.Receipts')}}</a> </li>
+                            <li> <a href="">{{trans('Students_trans.Exclude_fees')}}</a> </li>
+                            <li> <a href="">{{trans('Students_trans.Exchange_bonds')}}</a> </li>
                         </ul>
                     </li>
 
+                    
                     <!-- Attendance-->
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#Attendance-icon">

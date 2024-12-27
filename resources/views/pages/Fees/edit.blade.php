@@ -1,14 +1,14 @@
 @extends('layouts.master')
 @section('css')
-    @toastr_css
+@toastr_css
 @section('title')
-    {{ trans('Fees_trans.Fees_Edit') }}
+{{trans('Students_trans.Adjustment_of_tuition_fees')}}
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-    {{ trans('Fees_trans.Fees_Edit') }}
+{{trans('Students_trans.Adjustment_of_tuition_fees')}}
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -20,36 +20,34 @@
             <div class="card-body">
 
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 @endif
 
-                <form action="{{ route('Fees.update', 'test') }}" method="post" autocomplete="off">
+                <form action="{{route('Fees.update')}}" method="post" autocomplete="off">
                     @method('PUT')
                     @csrf
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="inputEmail4">{{ trans('Fees_trans.name_ar') }}</label>
-                            <input type="text" value="{{ $fee->getTranslation('title', 'ar') }}" name="title_ar"
-                                class="form-control">
-                            <input type="hidden" value="{{ $fee->id }}" name="id" class="form-control">
+                            <label for="inputEmail4">{{trans('Students_trans.name_ar')}}</label>
+                            <input type="text" value="{{$fee->getTranslation('title','ar')}}" name="title_ar" class="form-control">
+                            <input type="hidden" value="{{$fee->id}}" name="id" class="form-control">
                         </div>
 
                         <div class="form-group col">
-                            <label for="inputEmail4">{{ trans('Fees_trans.name_en') }}</label>
-                            <input type="text" value="{{ $fee->getTranslation('title', 'en') }}" name="title_en"
-                                class="form-control">
+                            <label for="inputEmail4">{{trans('Students_trans.name_en')}}</label>
+                            <input type="text" value="{{$fee->getTranslation('title','en')}}" name="title_en" class="form-control">
                         </div>
 
 
                         <div class="form-group col">
-                            <label for="inputEmail4">{{ trans('Fees_trans.amount') }}</label>
-                            <input type="number" value="{{ $fee->amount }}" name="amount" class="form-control">
+                            <label for="inputEmail4">{{trans('Students_trans.Amount')}}</label>
+                            <input type="number" value="{{$fee->amount}}" name="amount" class="form-control">
                         </div>
 
                     </div>
@@ -58,43 +56,47 @@
                     <div class="form-row">
 
                         <div class="form-group col">
-                            <label for="inputState">{{ trans('Fees_trans.Grade') }}</label>
+                            <label for="inputState">{{trans('Students_trans.Academic_stage')}}</label>
                             <select class="custom-select mr-sm-2" name="Grade_id">
-                                @foreach ($Grades as $Grade)
-                                    <option value="{{ $Grade->id }}"
-                                        {{ $Grade->id == $fee->Grade_id ? 'selected' : '' }}>{{ $Grade->Name }}
-                                    </option>
+                                @foreach($Grades as $Grade)
+                                <option value="{{ $Grade->id }}" {{$Grade->id == $fee->Grade_id ? 'selected' : ""}}>{{ $Grade->Name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group col">
-                            <label for="inputZip">{{ trans('Fees_trans.classrooms') }}</label>
+                            <label for="inputZip">{{trans('Students_trans.classrooms')}}</label>
                             <select class="custom-select mr-sm-2" name="Classroom_id">
-                                <option value="{{ $fee->Classroom_id }}">{{ $fee->classroom->Name_Class }}</option>
+                                <option value="{{$fee->Classroom_id}}">{{$fee->classroom->Name_Class}}</option>
                             </select>
                         </div>
                         <div class="form-group col">
-                            <label for="inputZip">{{ trans('Fees_trans.academic_year') }}</label>
+                            <label for="inputZip">{{trans('Students_trans.Academic_year')}}</label>
                             <select class="custom-select mr-sm-2" name="year">
                                 @php
-                                    $current_year = date('Y');
+                                $current_year = date("Y")
                                 @endphp
-                                @for ($year = $current_year; $year <= $current_year + 1; $year++)
-                                    <option value="{{ $year }}" {{ $year == $fee->year ? 'selected' : ' ' }}>
-                                        {{ $year }}</option>
-                                @endfor
+                                @for($year=$current_year; $year<=$current_year +1 ;$year++)
+                                    <option value="{{ $year}}" {{$year == $fee->year ? 'selected' : ' '}}>{{ $year }}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <div class="form-group col">
+                            <label for="inputZip">{{trans('Students_trans.Fee_type')}}</label>
+                            <select class="custom-select mr-sm-2" name="Fee_type">
+                                <option value="1">رسوم دراسية</option>
+                                <option value="2">رسوم باص</option>
                             </select>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label for="inputAddress">{{ trans('Fees_trans.Notes') }}</label>
-                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="4">{{ $fee->description }}</textarea>
+                        <label for="inputAddress">{{trans('Students_trans.comments')}}</label>
+                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
+                            rows="4">{{$fee->description}}</textarea>
                     </div>
                     <br>
 
-                    <button type="submit" class="btn btn-primary">تاكيد</button>
+                    <button type="submit" class="btn btn-primary">{{trans('Students_trans.submit')}}</button>
 
                 </form>
 
