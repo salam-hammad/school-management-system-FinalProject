@@ -42,7 +42,7 @@
                                         <tbody>
                                         @foreach($students as $student)
                                             <tr>
-                                            <td>{{ $loop->index+1 }}</td>
+                                            <td>{{$loop->index+1}}</td>
                                             <td>{{$student->name}}</td>
                                             <td>{{$student->email}}</td>
                                             <td>{{$student->gender->Name}}</td>
@@ -56,10 +56,13 @@
                                                         </a>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                             <a class="dropdown-item" href="{{route('Students.show',$student->id)}}"><i style="color: #ffc107" class="far fa-eye "></i>&nbsp;  {{trans('Students_trans.View_student')}}</a>
-                                                            <a class="dropdown-item" href="{{route('Students.edit',$student->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp; {{trans('Students_trans.Modify_student_data')}}</a>
-                                                            <a class="dropdown-item" href="{{route('Fees_Invoices.show',$student->id)}}"><i style="color: #0000cc" class="fa fa-edit"></i>&nbsp;{{trans('Students_trans.Add_Fee_Invoice')}}&nbsp;</a>
-                                                            <a class="dropdown-item" data-target="#Delete_Student{{ $student->id }}" data-toggle="modal" href="##Delete_Student{{ $student->id }}"><i style="color: red" class="fa fa-trash"></i>&nbsp; {{trans('Students_trans.Delete_student_data')}} </a>
-                                                        </div>
+                                                            <a class="dropdown-item" href="{{route('Students.edit',$student->id)}}"><i style="color:rgb(204, 111, 11)" class="fa fa-edit"></i>&nbsp; {{trans('Students_trans.Modify_student_data')}}</a>
+                                                            <a class="dropdown-item" href="{{route('Fees_Invoices.show',$student->id)}}"><i style="color: #0000cc" class="fa fa-edit"></i>&nbsp;{{trans('Students_trans.Add_a_fee_invoice')}}&nbsp;</a>
+                                                            <a class="dropdown-item" href="{{route('receipt_students.show',$student->id)}}"><i style="color: #9dc8e2" class="fas fa-money-bill-alt"></i>&nbsp;{{trans('Students_trans.Receipt_voucher')}}&nbsp;</a>
+                                                            <a class="dropdown-item" href="{{route('ProcessingFee.show',$student->id)}}"><i style="color: #aa2801cb" class="fas fa-ban"></i>&nbsp;{{trans('Students_trans.Exclude_Fees')}}&nbsp;</a>
+                                                            <a class="dropdown-item" href="{{route('Payment_students.show',$student->id)}}"><i style="color:rgb(83, 187, 22)" class="fas fa-donate"></i>&nbsp; &nbsp;{{trans('Students_trans.Bill_of_exchange')}}</a>
+                                                            <a class="dropdown-item" data-target="#Delete_Student{{ $student->id }}" data-toggle="modal" href="#Delete_Student{{ $student->id }}"><i style="color: red" class="fa fa-trash"></i>&nbsp; {{trans('Students_trans.Delete_student_data')}} </a>
+                                                    </div>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -13,6 +13,8 @@ use App\Http\Controllers\Students\GraduatedController;
 use App\Http\Controllers\Students\FeesController;
 use App\Http\Controllers\Students\FeesInvoicesController;
 use App\Http\Controllers\Students\ReceiptStudentController;
+use App\Http\Controllers\Students\ProcessingFeeController;
+use App\Http\Controllers\Students\PaymentController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Livewire\Livewire;
 
@@ -174,7 +176,6 @@ Route::group([
     //==============================End Fees Invoices page of Students============================
 
 
-
     //==============================Start Receipt Student page of Students============================
     Route::group(['prefix' => 'receipt_student'], function () {
         Route::get('/receipt_student', [ReceiptStudentController::class, 'index'])->name('receipt_students.index');
@@ -186,5 +187,31 @@ Route::group([
 
     });
     //==============================End Receipt Student page of Students============================
+
+
+    //==============================Start Processing Fees page of Students============================
+    Route::group(['prefix' => 'ProcessingFee'], function () {
+        Route::get('/ProcessingFee', [ProcessingFeeController::class, 'index'])->name('ProcessingFee.index');
+        Route::get('/ProcessingFee/{id}', [ProcessingFeeController::class, 'show'])->name('ProcessingFee.show');
+        Route::post('/ProcessingFee/store', [ProcessingFeeController::class, 'store'])->name('ProcessingFee.store');
+        Route::get('/edit/{id}', [ProcessingFeeController::class, 'edit'])->name('ProcessingFee.edit');
+        Route::put('/ProcessingFee/update', [ProcessingFeeController::class, 'update'])->name('ProcessingFee.update');
+        Route::delete('/ProcessingFee/destroy', [ProcessingFeeController::class, 'destroy'])->name('ProcessingFee.destroy');
+
+    });
+    //==============================End Processing Fees page of Students============================
+
+
+    //==============================Start Payment Student page of Students============================
+    Route::group(['prefix' => 'PaymentStudent'], function () {
+        Route::get('/PaymentStudent', [PaymentController::class, 'index'])->name('Payment_students.index');
+        Route::get('/ProcessingFee/{id}', [PaymentController::class, 'show'])->name('Payment_students.show');
+        Route::post('/ProcessingFee/store', [PaymentController::class, 'store'])->name('Payment_students.store');
+        Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('Payment_students.edit');
+        Route::put('/ProcessingFee/update', [PaymentController::class, 'update'])->name('Payment_students.update');
+        Route::delete('/ProcessingFee/destroy', [PaymentController::class, 'destroy'])->name('Payment_students.destroy');
+
+    });
+    //==============================End Payment Student page of Students============================
 
 });

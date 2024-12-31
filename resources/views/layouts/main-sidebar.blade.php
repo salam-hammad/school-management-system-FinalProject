@@ -130,6 +130,7 @@
                             <li> <a href="{{url('add_parent')}}">{{trans('main_trans.List_Parents')}}</a> </li>
                         </ul>
                     </li>
+                    
 
                     <!-- Accounts-->
                     <li>
@@ -144,8 +145,8 @@
                             <li> <a href="{{route('Fees.index')}}">{{trans('Students_trans.Tuition_fees')}}</a> </li>
                             <li> <a href="{{route('Fees_Invoices.index')}}">{{trans('Students_trans.Invoices')}}</a> </li>
                             <li> <a href="{{route('receipt_students.index')}}">{{trans('Students_trans.Receipts')}}</a> </li>
-                            <li> <a href="">{{trans('Students_trans.Exclude_fees')}}</a> </li>
-                            <li> <a href="">{{trans('Students_trans.Exchange_bonds')}}</a> </li>
+                            <li> <a href="{{route('ProcessingFee.index')}}">{{trans('Students_trans.Exclude_fees')}}</a> </li>
+                            <li> <a href="{{route('Payment_students.index')}}">{{trans('Students_trans.Bill_of_exchange')}}</a> </li>
                         </ul>
                     </li>
 
