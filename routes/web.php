@@ -15,6 +15,11 @@ use App\Http\Controllers\Students\FeesInvoicesController;
 use App\Http\Controllers\Students\ReceiptStudentController;
 use App\Http\Controllers\Students\ProcessingFeeController;
 use App\Http\Controllers\Students\PaymentController;
+use App\Http\Controllers\Students\AttendanceController;
+use App\Http\Controllers\Subjects\SubjectController;
+use App\Http\Controllers\Quizzes\QuizzController;
+use App\Http\Controllers\Questions\QuestionController;
+use App\Http\Controllers\Students\LibraryController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Livewire\Livewire;
 
@@ -213,5 +218,69 @@ Route::group([
 
     });
     //==============================End Payment Student page of Students============================
+
+
+    //==============================Start Attendance page of Students============================
+    Route::group(['prefix' => 'Attendance'], function () {
+        Route::get('/Attendance', [AttendanceController::class, 'index'])->name('Attendance.index');
+        Route::get('/Attendance/{id}', [AttendanceController::class, 'show'])->name('Attendance.show');
+        Route::post('/Attendance/store', [AttendanceController::class, 'store'])->name('Attendance.store');
+        // Route::get('/edit/{id}', [AttendanceController::class, 'edit'])->name('Attendance.edit');
+        // Route::put('/Attendance/update', [AttendanceController::class, 'update'])->name('Attendance.update');
+        // Route::delete('/Attendance/destroy', [AttendanceController::class, 'destroy'])->name('Attendance.destroy');
+
+    });
+    //==============================End Attendance page of Students============================
+
+    
+    //==============================Start dashboard page of Subjects============================
+    Route::group(['prefix' => 'Subjects'], function () {
+        Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects.index');
+        Route::get('/subjects/create',  [SubjectController::class, 'create'])->name('subjects.create');
+        Route::get('/subjects/{id}', [SubjectController::class, 'show'])->name('subjects.show');
+        Route::post('/subjects/store', [SubjectController::class, 'store'])->name('subjects.store');
+        Route::get('/edit/{id}', [SubjectController::class, 'edit'])->name('subjects.edit');
+        Route::Patch('/subjects/update', [SubjectController::class, 'update'])->name('subjects.update');
+        Route::delete('/subjects/destroy', [SubjectController::class, 'destroy'])->name('subjects.destroy');
+
+    });    
+    //==============================End dashboard page of Subjects============================
+
+  
+    //==============================Start dashboard page of Quizzes=========================
+    Route::group(['prefix' => 'Quizzes'], function () {
+        Route::get('/Quizzes', [QuizzController::class, 'index'])->name('Quizzes.index');
+        Route::get('/Quizzes/create',  [QuizzController::class, 'create'])->name('Quizzes.create');
+        Route::post('/Quizzes/store', [QuizzController::class, 'store'])->name('Quizzes.store');
+        Route::get('/edit/{id}', [QuizzController::class, 'edit'])->name('Quizzes.edit');
+        Route::put('/Quizzes/update', [QuizzController::class, 'update'])->name('Quizzes.update');
+        Route::delete('/Quizzes/destroy', [QuizzController::class, 'destroy'])->name('Quizzes.destroy');
+    });
+    //==============================End dashboard page of Quizzes===========================
+
+
+    //==============================Start dashboard page of Questions=======================
+    Route::group(['prefix' => 'Questions'], function () {
+        Route::get('/Questions', [QuestionController::class, 'index'])->name('Questions.index');
+        Route::get('/Questions/create',  [QuestionController::class, 'create'])->name('Questions.create');
+        Route::post('/Questions/store', [QuestionController::class, 'store'])->name('Questions.store');
+        Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('Questions.edit');
+        Route::put('/Questions/update', [QuestionController::class, 'update'])->name('Questions.update');
+        Route::delete('/Questions/destroy', [QuestionController::class, 'destroy'])->name('Questions.destroy');
+    });
+    //==============================End dashboard page of Questions===========================
+
+
+    //==============================Start dashboard page of library==========================
+    Route::group(['prefix' => 'library'], function () {
+        Route::get('/library', [LibraryController::class, 'index'])->name('library.index');
+        Route::get('/library/create',  [LibraryController::class, 'create'])->name('library.create');
+        Route::post('/library/store', [LibraryController::class, 'store'])->name('library.store');
+        Route::get('/edit/{id}', [LibraryController::class, 'edit'])->name('library.edit');
+        Route::put('/library/update', [LibraryController::class, 'update'])->name('library.update');
+        Route::get('library/downloadAttachment/{file}', [LibraryController::class, 'downloadAttachment'])->name('downloadAttachment');
+        Route::delete('/library/destroy', [LibraryController::class, 'destroy'])->name('library.destroy');
+    });
+    //==============================End dashboard page of library===========================
 
 });
