@@ -133,5 +133,8 @@ return [
     'School_address'=>'School address',
     'End_of_first_semester'=>'End of first semester',
     'End_of_second_semester'=>'End of second semester',
-    'School_logo'=>'School logo'
+    'School_logo'=>'School logo',
+    'List_Of_Quizzes'=>'List Of Quizzes',
+    'List_Of_Questions'=>'List Of Questions',
+    
 ];

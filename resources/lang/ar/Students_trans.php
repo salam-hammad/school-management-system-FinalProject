@@ -135,12 +135,8 @@ return [
    'School_address'=>'عنوان المدرسه',
    'End_of_first_semester'=>'نهاية الترم الاول',
    'End_of_second_semester'=>'نهاية الترم الاول',
-   'School_logo'=>'شعار المدرسه'
- 
-
-
-
-
-
+   'School_logo'=>'شعار المدرسه',
+   'List_Of_Quizzes'=>'قائمة الاختبارات',
+   'List_Of_Questions'=>'قائمة الأسئلة',
 
 ];

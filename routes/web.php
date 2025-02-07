@@ -20,6 +20,9 @@ use App\Http\Controllers\Subjects\SubjectController;
 use App\Http\Controllers\Quizzes\QuizzController;
 use App\Http\Controllers\Questions\QuestionController;
 use App\Http\Controllers\Students\LibraryController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Exams\ExamController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Livewire\Livewire;
 
@@ -36,19 +39,22 @@ use Livewire\Livewire;
 */
 // 
 
-Auth::routes();
+//Auth::routes();
 
-Route::group(['middleware' => ['guest']], function () {
-    Route::get('/', function () {
-        // return view('auth.login');
-        return view('dashboard');
-        // return view('empty');
+Route::get('/',  [HomeController::class, 'index'])->name('selection');
+Route::get('/dashboard',  [HomeController::class, 'dashboard'])->name('dashboard'); 
 
-    });
+
+Route::group(['namespace' => 'Auth'], function () {
+    Route::get('/login/{type}', [LoginController::class, 'loginForm'])->middleware('guest')->name('login.show');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('/logout/{type}',  [LoginController::class, 'logout'])->name('logout');
 });
-Route::get('/', function () {
-    return view('auth.login');
-});
+//==============================Translate all pages============================
+
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
@@ -58,7 +64,21 @@ Route::group([
     // Route::get('/', function () {
     //     return view('dashboard');
     // });
-    Route::get('/dashboard', action: [HomeController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', action: [HomeController::class, 'index'])->name('dashboard');           // new
+
+// laravel routes off:
+// Auth::routes();
+
+// old login route:
+// Route::group(['middleware' => ['guest']], function () {
+//     Route::get('/', function () {
+//         // return view('auth.login');
+//         return view('dashboard');
+//         // return view('empty');
+
+//     });
+// });
+
 
 
     //==============================Start dashboard page of Grades============================
@@ -282,5 +302,13 @@ Route::group([
         Route::delete('/library/destroy', [LibraryController::class, 'destroy'])->name('library.destroy');
     });
     //==============================End dashboard page of library===========================
+
+
+    //==============================Start dashboard page of settings==========================
+    Route::group(['prefix' => 'settings'], function () {
+        Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+        Route::put('/settings/update', [SettingController::class, 'update'])->name('settings.update');
+    });
+    //==============================End dashboard page of settings===========================
 
 });
