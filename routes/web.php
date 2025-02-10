@@ -39,23 +39,6 @@ use Livewire\Livewire;
 */
 // 
 
-//Auth::routes();
-
-Route::get('/',  [HomeController::class, 'index'])->name('selection');
-Route::get('/dashboard',  [HomeController::class, 'dashboard'])->name('dashboard'); 
-
-
-Route::group(['namespace' => 'Auth'], function () {
-    Route::get('/login/{type}', [LoginController::class, 'loginForm'])->middleware('guest')->name('login.show');
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
-    Route::get('/logout/{type}',  [LoginController::class, 'logout'])->name('logout');
-});
-//==============================Translate all pages============================
-
-// Route::get('/', function () {
-//     return view('auth.login');
-// });
-
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
@@ -78,6 +61,25 @@ Route::group([
 
 //     });
 // });
+
+
+//Auth::routes();
+
+Route::get('/',  [HomeController::class, 'index'])->name('selection');
+Route::get('/dashboard',  [HomeController::class, 'dashboard'])->name('dashboard'); 
+
+
+Route::group(['namespace' => 'Auth'], function () {
+    Route::get('/login/{type}', [LoginController::class, 'loginForm'])->middleware('guest')->name('login.show');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('/logout/{type}',  [LoginController::class, 'logout'])->name('logout');
+});
+//==============================Translate all pages============================
+
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
+
 
 
 
@@ -115,7 +117,7 @@ Route::group([
     //==============================Start dashboard page of Parents============================
     // Route::view('add_parent','livewire.show_Form');
  
-        Route::view('add_parent','livewire.show_Form');
+        Route::view('add_parent','livewire.show_Form')->name('add_parent');
     
         Livewire::setUpdateRoute(function ($handle) {
             return Route::post('/en/livewire/update', $handle);
