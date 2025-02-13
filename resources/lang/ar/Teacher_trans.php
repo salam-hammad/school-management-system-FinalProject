@@ -2,16 +2,18 @@
 
 return [
     'Name_Teacher'=>'اسم المعلم',
-    'Add_Teacher'=>'إضافة معلم',
+    'Add_Teacher'=>'اضافة معلم',
     'Edit_Teacher'=>'تعديل معلم',
     'Delete_Teacher'=>'حذف معلم',
-    'Email'=>'البريد الإلكتروني',
+    'Email'=>'البريد الالكتروني',
     'Password'=>'كلمة المرور',
     'Name_ar'=>'اسم المعلم باللغة العربية',
-    'Name_en'=>'اسم المعلم باللغة الإنجليزية',
+    'Name_en'=>'اسم المعلم باللغة الانجليزية',
     'specialization'=>'التخصص',
     'Gender'=>'النوع',
     'Joining_Date'=>'تاريخ التعين',
     'Address'=>'العنوان',
-
+    'Operations'=>'العمليات',
+    'Number_of_teachers'=>'عدد المعلمين',
+    'Teachers'=>'المعلمين'
 ];

@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'Student_control_panel'=>'لوحة تحكم الطالب',
     'personal_information' => 'المعلومات الشخصية',
     'name' => 'اسم الطالب',
     'name_ar' => 'الاسم باللغة العربية',
@@ -136,7 +136,13 @@ return [
    'End_of_first_semester'=>'نهاية الترم الاول',
    'End_of_second_semester'=>'نهاية الترم الاول',
    'School_logo'=>'شعار المدرسه',
-   'List_Of_Quizzes'=>'قائمة الاختبارات',
-   'List_Of_Questions'=>'قائمة الأسئلة',
+   'Number_of_students'=>'عدد الطلاب',
+   'Students'=>'الطلاب'
+ 
+
+
+
+
+
 
 ];

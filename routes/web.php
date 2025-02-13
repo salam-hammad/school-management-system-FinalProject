@@ -37,36 +37,12 @@ use Livewire\Livewire;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// 
+//
 
-Route::group([
-    'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
-], function () {
-    /** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
-    // Route::get('/', function () {
-    //     return view('dashboard');
-    // });
-    // Route::get('/dashboard', action: [HomeController::class, 'index'])->name('dashboard');           // new
-
-// laravel routes off:
 // Auth::routes();
 
-// old login route:
-// Route::group(['middleware' => ['guest']], function () {
-//     Route::get('/', function () {
-//         // return view('auth.login');
-//         return view('dashboard');
-//         // return view('empty');
-
-//     });
-// });
-
-
-//Auth::routes();
-
 Route::get('/',  [HomeController::class, 'index'])->name('selection');
-Route::get('/dashboard',  [HomeController::class, 'dashboard'])->name('dashboard'); 
+// Route::get('/dashboard',  [HomeController::class, 'dashboard'])->name('dashboard');
 
 
 Route::group(['namespace' => 'Auth'], function () {
@@ -75,12 +51,61 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('/logout/{type}',  [LoginController::class, 'logout'])->name('logout');
 });
 //==============================Translate all pages============================
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
+    ],
+    function () {
 
-// Route::get('/', function () {
-//     return view('auth.login');
-// });
+        //==============================dashboard============================
 
 
+        Route::get('/dashboard',  [HomeController::class, 'dashboard'])->name('dashboard');
+
+        // Auth::routes();
+
+        // Route::group(['middleware' => ['guest']], function () {
+        //     Route::get('/', function () {
+        //         // return view('auth.login');
+        //         return view('dashboard');
+        //         // return view('empty');
+
+        //     });
+        // });
+        // Route::get('/', function () {
+        //     return view('auth.login');
+        // });
+
+        // Route::get('/', [HomeController::class, 'index'])->name('selection');
+        // Route::get('/login', [HomeController::class, 'login'])->name('login');
+        // // Route::post('/dashboard', [HomeController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+        // // Route::get('/en/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+
+        // Route::group(['prefix' => 'login'], function () {
+
+        //     Route::get('/login/{type}', [LoginController::class,'loginForm'])->middleware('guest')->name('login.show');
+        //     Route::post('/login', [LoginController::class,'dashboard'])->name('login');
+        //     Route::get('/logout/{type}',  [LoginController::class,'logout'])->name('logout');
+        // });
+
+
+        // Route::group(['prefix' => '{locale}', 'middleware' => 'setLocale'], function () {
+
+        // //     Route::get('/login/{type}', [LoginController::class,'loginForm'])->middleware('guest')->name('login.show');
+        // //     Route::post('/login', [LoginController::class,'dashboard'])->name('login');
+        // //     Route::get('/logout/{type}',  [LoginController::class,'logout'])->name('logout');
+        // });
+
+
+        // Route::group([
+        //     'prefix' => LaravelLocalization::setLocale(),
+        //     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
+        // ], function () {
+        //     /** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/ 
+        //     // Route::get('/', function () {
+        //     //     return view('dashboard');
+        //     // });
 
 
     //==============================Start dashboard page of Grades============================

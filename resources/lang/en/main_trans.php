@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'Admin_panel_control_panel'=>'Admin panel control panel',
     'Dashboard'=>'Dashboard',
     'Components'=>'Components',
     'Dashboard_page'=>'Dashboard',
@@ -15,11 +15,14 @@ return [
     'List_classes' => 'List Classes',
     'sections'=>'Sections',
     'List_sections'=>'List Sections',
+    'list_Graduate'=>'list Graduate',
     'students'=>'Students',
     'add_student'=>'Add student',
     'list_students'=>'list Students',
+    'add_Promotion'=>'add Promotion',
     'Students_Promotions'=>'Students Promotions',
     'list_Promotions'=>'list Promotions',
+    'add_Graduate'=>'add Graduate',
     'information_student'=>'Information Students',
     'Students_upgrade'=>'Students Upgrade',
     'Graduate_students'=>'Graduate Students',
@@ -38,7 +41,10 @@ return [
     'Copyright' => 'Copyright',
     'Name_Programer' => 'School management software',
     'Study_materials'=>'Study Materials',
-    
+    'Display_data'=>'Display data',
+    'Latest_operations_on_the_system'=>'Latest operations on the system',
+    'Invoices'=>'Invoices',
+    'Profile'=>'Profile'
 
 
 ];

@@ -7,6 +7,7 @@ use App\Http\Traits\AuthTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 class LoginController extends Controller
 {
     /*
@@ -22,13 +23,13 @@ class LoginController extends Controller
 
     // use AuthenticatesUsers;
 
-
     use AuthTrait;
 
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
+
 
     public function loginForm($type)
     {
@@ -37,11 +38,14 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+
         if (Auth::guard($this->chekGuard($request))->attempt(['email' => $request->email, 'password' => $request->password])) {
             return $this->redirect($request);
-            // return $request;
+        } else {
+            return redirect()->back();
         }
     }
+
 
     public function logout(Request $request, $type)
     {

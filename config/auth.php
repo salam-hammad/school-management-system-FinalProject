@@ -88,22 +88,26 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'students' => [
+        'student' => [
             'driver' => 'eloquent',
             'model' => App\Models\Student::class,
         ],
 
-        'teachers' => [
+        'teacher' => [
             'driver' => 'eloquent',
             'model' => App\Models\Teacher::class,
         ],
 
-        'my__parents' => [
+        'parent' => [
             'driver' => 'eloquent',
             'model' => App\Models\My_Parent::class,
         ],
+       
 
-
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
     ],
 
     /*

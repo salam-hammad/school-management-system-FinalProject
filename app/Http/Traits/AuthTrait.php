@@ -8,6 +8,7 @@ trait AuthTrait
 {
     public function chekGuard($request)
     {
+
         if ($request->type == 'student') {
             $guardName = 'student';
         } elseif ($request->type == 'parent') {

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Admin_panel_control_panel'=>'لوحة تحكم الادمن',
     'Dashboard'=>'الرئيسية',
     'Components'=>'العناصر',
     'Dashboard_page'=>'لوحة التحكم',
@@ -15,7 +16,7 @@ return [
     'sections'=>'الاقسام',
     'List_sections'=>'قائمة الاقسام الدراسية',
     'students'=>'الطلاب',
-    'Student_information'=>'معلومات الطلاب',
+    'information_student'=>'معلومات الطلاب',
     'add_student'=>'اضافة طالب جديد',
     'list_students'=>'قائمة الطلاب',
     'Students_Promotions'=>'ترقية الطلاب',
@@ -31,12 +32,18 @@ return [
     'Add_Parent'=>'اضافة ولي امر',
     'Accounts'=>'الحسابات',
     'Attendance'=>'الحضور والغياب',
-    'Quizzes'=>'الاختبارات',
+    'Exams'=>'الامتحانات',
     'library'=>'المكتبة',
     'Onlineclasses'=>'حصص اونلاين',
     'Settings'=>'الاعدادات',
     'Users'=>'المستخدمين',
     'Copyright' => 'جميع الحقوق محفوظة ',
     'Name_Programer' => 'برنامج اداره المدارس',
-    'Study_materials'=>'المواد الدراسيه'
+    'Study_materials'=>'المواد الدراسيه',
+    'Display_data'=>'عرض البيانات',
+    'Latest_operations_on_the_system'=>'اخر العمليات علي النظام',
+    'Invoices'=>'الفواتير',
+    'Profile'=>'الملف الشخصي'
+
+
 ];
