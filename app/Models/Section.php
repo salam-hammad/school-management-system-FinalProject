@@ -13,6 +13,7 @@ class Section extends Model
     protected $fillable=['Name_Section','Grade_id','Class_id'];
     protected $table = 'sections';
     public $timestamps = true;
+    
     // علاقة بين الاقسام والصفوف لجلب اسم الصف في جدول الاقسام
     public function My_classs()
     {
