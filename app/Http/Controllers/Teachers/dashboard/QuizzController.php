@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teachers\dashboard;
 
 use App\Models\Grade;
 use App\Models\Quizze;
+use App\Models\Question;
 use App\Models\Section;
 use App\Models\Subject;
 use App\Models\Classroom;
@@ -57,6 +58,13 @@ class QuizzController extends Controller
         return view('pages.Teachers.dashboard.Quizzes.edit', $data, compact('quizz'));
     }
 
+    public function show($id)
+    {
+        $questions = Question::where('quizze_id',$id)->get();
+        // return $questions;
+        $quizz = Quizze::findorFail($id);
+        return view('pages.Teachers.dashboard.Questions.index',compact('questions','quizz'));
+    }
 
     public function update(Request $request)
     {

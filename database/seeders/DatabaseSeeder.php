@@ -14,7 +14,8 @@ use Database\Seeders\NationalitiesTableSeeder;
 use Database\Seeders\SpecializationsTableSeeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\SettingsTableSeeder;
-
+use Database\Seeders\QuizzesTableSeeder;
+use Database\Seeders\SubjectsTableSeeder;
 class DatabaseSeeder extends Seeder
 {
 

@@ -55,7 +55,7 @@
 
                     </div>
                     <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="submit">{{trans('Students_trans.submit')}}</button>
-                </form>
+                </form><br><br>
                 @isset($Students)
                 <div class="table-responsive">
                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0" data-page-length="50"
