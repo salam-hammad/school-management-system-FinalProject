@@ -39,18 +39,18 @@
                                                 <td>{{ $quizze->subject->name }}</td>
                                                 <td>{{ $quizze->name }}</td>
                                                 <td>
-                                                    {{-- @if ($quizze->degree->count() > 0 && $quizze->id == $quizze->degree[0]->quizze_id)
+                                                    @if ($quizze->degree->count() > 0 && $quizze->id == $quizze->degree[0]->quizze_id)
                                                         {{ $quizze->degree[0]->score }}
                                                     @else
                                                         <a href="{{ route('student_exams.show', $quizze->id) }}"
                                                             class="btn btn-outline-success btn-sm" role="button"
                                                             aria-pressed="true" onclick="alertAbuse()">
                                                             <i class="fas fa-person-booth"></i></a>
-                                                    @endif --}}
-                                                    <a href="{{ route('student_exams.show', $quizze->id) }}"
+                                                    @endif
+                                                    {{-- <a href="{{ route('student_exams.show', $quizze->id) }}"
                                                         class="btn btn-outline-success btn-sm" role="button"
                                                         aria-pressed="true" onclick="alertAbuse()">
-                                                        <i class="fas fa-person-booth"></i></a>
+                                                        <i class="fas fa-person-booth"></i></a> --}}
                                                 </td>
                                             </tr>
                                         @endforeach
