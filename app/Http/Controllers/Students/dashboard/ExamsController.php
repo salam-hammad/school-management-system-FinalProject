@@ -19,6 +19,7 @@ class ExamsController extends Controller
             ->where('section_id', auth()->user()->section_id)
             ->orderBy('id', 'DESC')
             ->get();
+        // return $quizzes;
         return view('pages.Students.dashboard.exams.index', compact('quizzes'));
     }
 

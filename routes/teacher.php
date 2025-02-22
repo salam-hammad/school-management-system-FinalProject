@@ -6,6 +6,8 @@ use App\Http\Controllers\Teachers\dashboard\QuizzController;
 use App\Http\Controllers\Teachers\dashboard\QuestionController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Teachers\dashboard\StudentController;
+use App\Http\Controllers\Teachers\dashboard\ProfileController;
+use App\Http\Controllers\Teachers\dashboard\OnlineZoomClassesController;
 
 Route::group(
     [
@@ -44,7 +46,8 @@ Route::group(
             Route::put('/quizzes/update', [QuizzController::class, 'update'])->name('quizzes.update');
             Route::get('/quizzes/show/{id}', [QuizzController::class, 'show'])->name('quizzes.show');
             Route::delete('/quizzes/destroy/{id}', [QuizzController::class, 'destroy'])->name('quizzes.destroy');
-
+            // Route::get('/Get_classrooms/{id}', [QuizzController::class, 'getClassrooms'])->name('getClassrooms');
+            // Route::get('/Get_Sections/{id}', [QuizzController::class, 'Get_Sections'])->name('Get_Sections');
 
             Route::post('/questions/store', [QuestionController::class, 'store'])->name('questions.store');
             Route::get('/questions/show/{id}', [QuestionController::class, 'show'])->name('questions.show');
@@ -52,11 +55,15 @@ Route::group(
             Route::put('/questions/update/{id}', [QuestionController::class, 'update'])->name('questions.update');
             Route::delete('/questions/destroy/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
 
+            // Route::get('online_zoom_classes', [OnlineZoomClassesController::class,'index'])->name('online_zoom_classes.index');
+            // Route::get('/online_zoom_classes/create',  [OnlineZoomClassesController::class, 'create'])->name('online_zoom_classes.create');
+            // Route::post('/online_zoom_classes/store',  [OnlineZoomClassesController::class, 'store'])->name('online_zoom_classes.store');
+            // Route::get('/indirect', [OnlineZoomClassesController::class,'indirectCreate'])->name('indirect.teacher.create');
+            // Route::post('/indirect', [OnlineZoomClassesController::class,'storeIndirect'])->name('indirect.teacher.store');
+            // Route::delete('/destroy/{id}', [OnlineZoomClassesController::class,'destroy'])->name('indirect.teacher.destroy');
 
-            Route::get('/Get_classrooms/{id}', [QuizzController::class, 'getClassrooms'])->name('getClassrooms');
-            Route::get('/Get_Sections/{id}', [QuizzController::class, 'Get_Sections'])->name('Get_Sections');
+            Route::get('profile', [ProfileController::class, 'index'])->name('profile.show');
+            Route::post('profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
         });
-
-
     }
 );
