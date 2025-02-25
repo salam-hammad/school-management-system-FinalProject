@@ -67,7 +67,7 @@ Route::group(
 
 
             Route::get('student_quizze/{id}', [QuizzController::class, 'student_quizze'])->name('student.quizze');
-            // Route::post('repeat_quizze', [QuizzController::class, 'repeat_quizze'])->name('repeat.quizze');
+            Route::post('repeat_quizze', [QuizzController::class, 'repeat_quizze'])->name('repeat.quizze');
         });
     }
 );

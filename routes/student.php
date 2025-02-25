@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Quizzes\QuizzController;
 use App\Http\Controllers\Students\dashboard\ExamsController;
+use App\Http\Controllers\Students\dashboard\ProfileController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -30,7 +31,8 @@ Route::group(
         //==============================dashboard============================
         Route::get('/student/dashboard', function () {
             return view('pages.Students.dashboard');
-        });
+        })->name('dashboard.Students');
+
 
         // Route::resource('student_exams', \App\Http\Controllers\Students\dashboard\ExamsController::class);
         Route::group(['namespace' => 'App\Http\Controllers\Students\dashboard'], function () {
@@ -46,9 +48,14 @@ Route::group(
             Route::delete('/Quizzes/destroy', [QuizzController::class, 'destroy'])->name('Quizzes.destroy');
         });
 
-        Route::group(['prefix' => 'settings'], function () {
-            Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
-            Route::put('/settings/update', [SettingController::class, 'update'])->name('settings.update');
+        // Route::group(['prefix' => 'settings'], function () {
+        //     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+        //     Route::put('/settings/update', [SettingController::class, 'update'])->name('settings.update');
+        // });
+
+        Route::group(['prefix' => 'profile'], function () {
+            Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+            Route::post('profile-student/{id}', [ProfileController::class, 'update'])->name('profile-student.update');
         });
     }
 );
