@@ -88,17 +88,17 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'student' => [
+        'students' => [
             'driver' => 'eloquent',
             'model' => App\Models\Student::class,
         ],
 
-        'teacher' => [
+        'teachers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Teacher::class,
         ],
 
-        'parent' => [
+        'my__parents' => [
             'driver' => 'eloquent',
             'model' => App\Models\My_Parent::class,
         ],

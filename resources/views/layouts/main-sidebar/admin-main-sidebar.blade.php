@@ -177,6 +177,7 @@
             </a>
             <ul id="Exams-icon" class="collapse" data-parent="#sidebarnav">
                 <li> <a href="{{route('Quizzes.index')}}">{{trans('Students_trans.List_of_tests')}}</a> </li>
+                <li> <a href="">{{trans('Students_trans.List_of_questions')}}</a> </li>
                 {{-- <li> <a href="{{route('questions.index')}}">{{trans('Students_trans.List_of_questions')}}</a> </li> --}}
             </ul>
         </li>
@@ -203,7 +204,7 @@
                 <div class="clearfix"></div>
             </a>
             <ul id="Onlineclasses-icon" class="collapse" data-parent="#sidebarnav">
-                {{-- <li> <a href="{{route('online_classes.index')}}">{{trans('Students_trans.Online_classes')}}</a> </li> --}}
+                <li> <a href="{{route('online_classes.index')}}">{{trans('Students_trans.Online_classes')}}</a> </li>
             </ul>
         </li>
 
@@ -211,23 +212,6 @@
         <!-- Settings-->
         <li>
             <a href="{{route('settings.index')}}"><i class="fa fa-cogs"></i><span class="right-nav-text">{{trans('main_trans.Settings')}} </span></a>
-        </li>
-
-
-
-
-        <!-- Users-->
-        <li>
-            <a href="javascript:void(0);" data-toggle="collapse" data-target="#Users-icon">
-                <div class="pull-left"><i class="fa fa-user"></i><span class="right-nav-text">{{trans('main_trans.Users')}}</span></div>
-                <div class="pull-right"><i class="ti-plus"></i></div>
-                <div class="clearfix"></div>
-            </a>
-            <ul id="Users-icon" class="collapse" data-parent="#sidebarnav">
-                <li> <a href="fontawesome-icon.html">font Awesome</a> </li>
-                <li> <a href="themify-icons.html">Themify icons</a> </li>
-                <li> <a href="weather-icon.html">Weather icons</a> </li>
-            </ul>
         </li>
 
     </ul>
