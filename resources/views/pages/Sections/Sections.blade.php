@@ -71,7 +71,12 @@
                                                                         <?php $i++; ?>
                                                                         <td>{{ $i }}</td>
                                                                         <td>{{ $list_Sections->Name_Section }}</td>
-                                                                        <td>{{ $list_Sections->My_classs->Name_Class }}
+                                                                        <td>
+                                                                            @if ($list_Sections->My_classs)
+                                                                                {{ $list_Sections->My_classs->Name_Class }}
+                                                                            @else
+                                                                                {{ trans('Sections_trans.No_Class') }}
+                                                                            @endif
                                                                         </td>
                                                                         <td>
                                                                             @if ($list_Sections->Status === 1)
@@ -96,8 +101,7 @@
                                                                         </td>
                                                                     </tr>
 
-
-                                                                    <!--تعديل قسم جديد -->
+                                                                    <!-- تعديل قسم جديد -->
                                                                     <div class="modal fade"
                                                                         id="edit{{ $list_Sections->id }}"
                                                                         tabindex="-1" role="dialog"
@@ -122,10 +126,10 @@
                                                                                 <div class="modal-body">
 
                                                                                     <form
-                                                                                        action="{{ route('Sections.update') }}"
+                                                                                        action="{{ route('Sections.update', 'test') }}"
                                                                                         method="POST">
-                                                                                        @method('patch')
-                                                                                        @csrf
+                                                                                        {{ method_field('patch') }}
+                                                                                        {{ csrf_field() }}
                                                                                         <div class="row">
                                                                                             <div class="col">
                                                                                                 <input type="text"
@@ -176,10 +180,18 @@
                                                                                                 class="control-label">{{ trans('Sections_trans.Name_Class') }}</label>
                                                                                             <select name="Class_id"
                                                                                                 class="custom-select">
-                                                                                                <option
-                                                                                                    value="{{ $list_Sections->My_classs->id }}">
-                                                                                                    {{ $list_Sections->My_classs->Name_Class }}
-                                                                                                </option>
+                                                                                                @if ($list_Sections->My_classs)
+                                                                                                    <option
+                                                                                                        value="{{ $list_Sections->My_classs->id }}">
+                                                                                                        {{ $list_Sections->My_classs->Name_Class }}
+                                                                                                    </option>
+                                                                                                @else
+                                                                                                    <option
+                                                                                                        value="">
+                                                                                                        No Class
+                                                                                                        Available
+                                                                                                    </option>
+                                                                                                @endif
                                                                                             </select>
                                                                                         </div>
                                                                                         <br>
@@ -207,7 +219,7 @@
 
                                                                                                 <div class="col">
                                                                                                     <label
-                                                                                                        for="InputName"
+                                                                                                        for="inputName"
                                                                                                         class="control-label">{{ trans('Sections_trans.Name_Teacher') }}</label>
                                                                                                     <select multiple
                                                                                                         name="teacher_id[]"
@@ -229,9 +241,10 @@
                                                                                                         @endforeach
                                                                                                     </select>
                                                                                                 </div>
-
                                                                                             </div>
                                                                                         </div>
+
+
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button"
@@ -270,9 +283,9 @@
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <form
-                                                                                        action="{{ route('Sections.destroy') }}"
+                                                                                        action="{{ route('Sections.destroy', 'test') }}"
                                                                                         method="post">
-                                                                                        @method('delete')
+                                                                                        {{ method_field('Delete') }}
                                                                                         @csrf
                                                                                         {{ trans('Sections_trans.Warning_Section') }}
                                                                                         <input id="id"
@@ -322,7 +335,7 @@
                         <div class="modal-body">
 
                             <form action="{{ route('Sections.store') }}" method="POST">
-                                @csrf
+                                {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col">
                                         <input type="text" name="Name_Section_Ar" class="form-control"
@@ -388,35 +401,32 @@
             </div>
 
         </div>
-    </div>
-</div>
-<!-- row closed -->
-@endsection
-@section('js')
-@toastr_js
-@toastr_render
-<script>
-    $(document).ready(function() {
-        $('select[name="Grade_id"]').on('change', function() {
-            var Grade_id = $(this).val();
-            if (Grade_id) {
-                $.ajax({
-                    url: "{{ URL::to('/Sections/classes') }}/" + Grade_id,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        $('select[name="Class_id"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="Class_id"]').append('<option value="' +
-                                key + '">' + value + '</option>');
-                        });
-                    },
-                });
-            } else {
-                console.log('AJAX load did not work');
-            }
-        });
-    });
-</script>
 
-@endsection
+        <!-- row closed -->
+    @endsection
+    @section('js')
+        <script>
+            $(document).ready(function() {
+                $('select[name="Grade_id"]').on('change', function() {
+                    var Grade_id = $(this).val();
+                    if (Grade_id) {
+                        $.ajax({
+                            url: "{{ URL::to('/Sections/classes') }}/" + Grade_id,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('select[name="Class_id"]').empty();
+                                $.each(data, function(key, value) {
+                                    $('select[name="Class_id"]').append('<option value="' +
+                                        key + '">' + value + '</option>');
+                                });
+                            },
+                        });
+                    } else {
+                        console.log('AJAX load did not work');
+                    }
+                });
+            });
+        </script>
+
+    @endsection

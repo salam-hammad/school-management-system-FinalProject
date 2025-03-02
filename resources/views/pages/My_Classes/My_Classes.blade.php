@@ -260,13 +260,16 @@
                                                     :</label>
 
                                                 <div class="box">
-                                                    <select class="fancyselect" name="Grade_id">
+                                                    <select
+                                                        class="block w-full p-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition ease-in-out duration-150"
+                                                        name="Grade_id">
                                                         @foreach ($Grades as $Grade)
                                                             <option value="{{ $Grade->id }}">{{ $Grade->Name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
+
 
                                             </div>
 
@@ -288,7 +291,7 @@
                                     </div>
 
                                 </div>
-
+                                <br>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-dismiss="modal">{{ trans('Grades_trans.Close') }}</button>
@@ -344,16 +347,11 @@
 
 
 
-</div>
-
-</div>
-
 <!-- row closed -->
 @endsection
 @section('js')
 @toastr_js
 @toastr_render
-
 <script type="text/javascript">
     $(function() {
         $("#btn_delete_all").click(function() {
@@ -369,7 +367,8 @@
         });
     });
 </script>
-
-
-
 @endsection
+
+</div>
+
+</div>

@@ -2,14 +2,12 @@
 @section('css')
     @toastr_css
 @section('title')
-    {{ trans('main_trans.add_Fees') }}
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-    {{ trans('main_trans.add_Fees') }}
-
+    {{ trans('Students_trans.Add_new_fees') }}
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -34,30 +32,29 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="inputEmail4">{{ trans('Fees_trans.name_ar') }}</label>
+                            <label for="inputEmail4">{{ trans('Students_trans.name_ar') }}</label>
                             <input type="text" value="{{ old('title_ar') }}" name="title_ar" class="form-control">
                         </div>
 
                         <div class="form-group col">
-                            <label for="inputEmail4">{{ trans('Fees_trans.name_en') }}</label>
+                            <label for="inputEmail4">{{ trans('Students_trans.name_en') }}</label>
                             <input type="text" value="{{ old('title_en') }}" name="title_en" class="form-control">
                         </div>
 
 
                         <div class="form-group col">
-                            <label for="inputEmail4">{{ trans('Fees_trans.amount') }}</label>
+                            <label for="inputEmail4">{{ trans('Students_trans.Amount') }}</label>
                             <input type="number" value="{{ old('amount') }}" name="amount" class="form-control">
                         </div>
-
                     </div>
 
 
                     <div class="form-row">
 
                         <div class="form-group col">
-                            <label for="inputState">{{ trans('Fees_trans.Grade') }}</label>
+                            <label for="inputState">{{ trans('Students_trans.Academic_stage') }}</label>
                             <select class="custom-select mr-sm-2" name="Grade_id">
-                                <option selected disabled>{{ trans('Fees_trans.Choose') }}...</option>
+                                <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
                                 @foreach ($Grades as $Grade)
                                     <option value="{{ $Grade->id }}">{{ $Grade->Name }}</option>
                                 @endforeach
@@ -65,15 +62,15 @@
                         </div>
 
                         <div class="form-group col">
-                            <label for="inputZip">{{ trans('Fees_trans.classrooms') }}</label>
+                            <label for="inputZip">{{ trans('Students_trans.classrooms') }}</label>
                             <select class="custom-select mr-sm-2" name="Classroom_id">
 
                             </select>
                         </div>
                         <div class="form-group col">
-                            <label for="inputZip">{{ trans('Fees_trans.academic_year') }}</label>
+                            <label for="inputZip">{{ trans('Students_trans.Academic_year') }}</label>
                             <select class="custom-select mr-sm-2" name="year">
-                                <option selected disabled>{{ trans('Fees_trans.Choose') }}...</option>
+                                <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
                                 @php
                                     $current_year = date('Y');
                                 @endphp
@@ -84,24 +81,21 @@
                         </div>
 
                         <div class="form-group col">
-                            <label for="inputZip">{{ trans('Fees_trans.fees_type') }}</label>
+                            <label for="inputZip">{{ trans('Students_trans.Fee_type') }}</label>
                             <select class="custom-select mr-sm-2" name="Fee_type">
-                                <option value="1">{{ trans('Fees_trans.Tuition_Fees') }}</option>
-                                <option value="2">{{ trans('Fees_trans.Bus_Fees') }}</option>
-                                <option value="2">{{ trans('Fees_trans.Costume_Fees') }}</option>
-
+                                <option value="1">{{ trans('Students_trans.Tuition_fee') }}</option>
+                                <option value="2">{{ trans('Students_trans.Bus_fees') }}</option>
                             </select>
                         </div>
-
                     </div>
 
                     <div class="form-group">
-                        <label for="inputAddress">{{ trans('Fees_trans.Notes') }}</label>
+                        <label for="inputAddress">{{ trans('Students_trans.comments') }}</label>
                         <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="4"></textarea>
                     </div>
                     <br>
 
-                    <button type="submit" class="btn btn-primary">{{ trans('Fees_trans.submit') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('Students_trans.submit') }}</button>
 
                 </form>
 
@@ -167,6 +161,4 @@
         });
     });
 </script>
-@toastr_js
-@toastr_render
 @endsection
