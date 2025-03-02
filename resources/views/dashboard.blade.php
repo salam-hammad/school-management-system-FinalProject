@@ -180,12 +180,7 @@
                                                 </a>
                                             </li>
 
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="fee_invoices-tab" data-toggle="tab"
-                                                    href="#fee_invoices" role="tab" aria-controls="fee_invoices"
-                                                    aria-selected="false">{{ trans('main_trans.Invoices') }}
-                                                </a>
-                                            </li>
+
 
                                         </ul>
                                     </div>
@@ -288,50 +283,12 @@
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $parent->Name_Father }}</td>
-                                                            <td>{{ $parent->Email }}</td>
+                                                            <td>{{ $parent->email }}</td>
                                                             <td>{{ $parent->National_ID_Father }}</td>
                                                             <td>{{ $parent->Phone_Father }}</td>
                                                             <td class="text-success">{{ $parent->created_at }}</td>
                                                         @empty
                                                             <td class="alert-danger" colspan="8">
-                                                                {{ trans('Students_trans.No_data_found') }}</td>
-                                                        </tr>
-                                                    @endforelse
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-
-                                    {{-- sections Table --}}
-                                    <div class="tab-pane fade" id="fee_invoices" role="tabpanel"
-                                        aria-labelledby="fee_invoices-tab">
-                                        <div class="table-responsive mt-15">
-                                            <table style="text-align: center"
-                                                class="table center-aligned-table table-hover mb-0">
-                                                <thead>
-                                                    <tr class="table-info text-danger">
-                                                        <th>#</th>
-                                                        <th>{{ trans('Students_trans.Invoice_date') }}</th>
-                                                        <th>{{ trans('Students_trans.name') }}</th>
-                                                        <th>{{ trans('Students_trans.Grade') }}</th>
-                                                        <th>{{ trans('Students_trans.classrooms') }}</th>
-                                                        <th>{{ trans('Students_trans.section') }}</th>
-                                                        <th>{{ trans('Students_trans.Fee_type') }}</th>
-                                                        <th>{{ trans('Students_trans.Amount') }}</th>
-                                                        <th>{{ trans('Students_trans.created_at') }}</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @forelse(\App\Models\Fee_invoice::latest()->take(10)->get() as $section)
-                                                        <tr>
-                                                            <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $section->invoice_date }}</td>
-                                                            <td>{{ $section->My_classs->Name_Class }}</td>
-                                                            <td class="text-success">{{ $section->created_at }}</td>
-                                                        </tr>
-                                                    @empty
-                                                        <tr>
-                                                            <td class="alert-danger" colspan="9">
                                                                 {{ trans('Students_trans.No_data_found') }}</td>
                                                         </tr>
                                                     @endforelse

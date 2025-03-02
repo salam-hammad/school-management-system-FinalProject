@@ -106,8 +106,7 @@
 <!-- row closed -->
 @endsection
 @section('js')
-@toastr_js
-@toastr_render
+
 <script>
     $(document).ready(function() {
         $('select[name="Grade_id"]').on('change', function() {
@@ -133,3 +132,5 @@
 </script>
 
 @endsection
+@toastr_js
+@toastr_render

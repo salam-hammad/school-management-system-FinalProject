@@ -174,6 +174,8 @@ Route::group(
             Route::delete('/Students/destroy', [StudentController::class, 'destroy'])->name('Students.destroy');
             Route::post('Upload_attachment', [StudentController::class, 'Upload_attachment'])->name('Upload_attachment');
             Route::post('Delete_attachment', [StudentController::class, 'Delete_attachment'])->name('Delete_attachment');
+            Route::get('/Get_classrooms/{id}',  [StudentController::class, 'Get_classrooms']);
+            Route::get('/Get_Sections/{id}',  [StudentController::class, 'Get_Sections']);
         });
         Route::get('/Download_attachment/{studentsname}/{filename}', [StudentController::class, 'Download_attachment'])->name('Download_attachment');
 
@@ -294,7 +296,10 @@ Route::group(
             Route::get('/edit/{id}', [QuizzController::class, 'edit'])->name('Quizzes.edit');
             Route::put('/Quizzes/update', [QuizzController::class, 'update'])->name('Quizzes.update');
             Route::delete('/Quizzes/destroy', [QuizzController::class, 'destroy'])->name('Quizzes.destroy');
+       
         });
+
+        
         //==============================End dashboard page of Quizzes===========================
 
 

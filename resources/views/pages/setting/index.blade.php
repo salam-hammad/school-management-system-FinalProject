@@ -1,6 +1,17 @@
 @extends('layouts.master')
 @section('css')
     @toastr_css
+    <style>
+        .custom-select,
+        .form-control {
+            height: auto !important;
+            min-height: 45px;
+            padding: 10px;
+            line-height: 1.5;
+            white-space: normal;
+        }
+    </style>
+
 @section('title')
     {{ trans('main_trans.Settings') }}
 @stop
