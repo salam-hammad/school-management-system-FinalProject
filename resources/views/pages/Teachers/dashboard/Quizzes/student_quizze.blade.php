@@ -2,13 +2,13 @@
 @section('css')
     @toastr_css
 @section('title')
-    قائمة الطلاب المختبره
+    {{ trans('Students_trans.List_of_tested_students') }}
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-    قائمة الطلاب المختبره
+    {{ trans('Students_trans.List_of_tested_students') }}
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -27,12 +27,12 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>اسم الطالب</th>
-                                            <th>اخر سؤال</th>
-                                            <th>الدرجة</th>
-                                            <th>تلاعب</th>
-                                            <th>تاريخ اجراء الاختبار</th>
-                                            <th>العمليات</th>
+                                            <th>{{ trans('Students_trans.name') }}</th>
+                                            <th>{{ trans('Students_trans.Last_question') }}</th>
+                                            <th>{{ trans('Students_trans.Degree') }}</th>
+                                            <th>{{ trans('Students_trans.manipulation') }}</th>
+                                            <th>{{ trans('Students_trans.Test_date') }}</th>
+                                            <th>{{ trans('Students_trans.Processes') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,16 +43,18 @@
                                                 <td>{{ $degree->question_id }}</td>
                                                 <td>{{ $degree->score }}</td>
                                                 @if ($degree->abuse == 0)
-                                                    <td style="color: green">لا يوجد تلاعب</td>
+                                                    <td style="color: green">
+                                                        {{ trans('Teacher_trans.No_manipulation') }}</td>
                                                 @else
-                                                    <td style="color: red"> يوجد تلاعب</td>
+                                                    <td style="color: red">
+                                                        {{ trans('Teacher_trans.There_is_manipulation') }}</td>
                                                 @endif
                                                 <td>{{ $degree->date }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-info btn-sm"
                                                         data-toggle="modal"
                                                         data-target="#repeat_quizze{{ $degree->quizze_id }}"
-                                                        title="إعادة">
+                                                        title="إعادة">
                                                         <i class="fas fa-repeat"></i></button>
                                                 </td>
                                             </tr>
@@ -68,8 +70,9 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 style="font-family: 'Cairo', sans-serif;"
-                                                                    class="modal-title" id="exampleModalLabel">فتح إعادة
-                                                                    الاختبار للطالب</h5>
+                                                                    class="modal-title" id="exampleModalLabel">
+                                                                    {{ trans('Teacher_trans.re-test') }}
+                                                                </h5>
                                                                 <button type="button" class="close"
                                                                     data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
