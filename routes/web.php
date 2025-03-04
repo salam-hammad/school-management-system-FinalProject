@@ -296,10 +296,9 @@ Route::group(
             Route::get('/edit/{id}', [QuizzController::class, 'edit'])->name('Quizzes.edit');
             Route::put('/Quizzes/update', [QuizzController::class, 'update'])->name('Quizzes.update');
             Route::delete('/Quizzes/destroy', [QuizzController::class, 'destroy'])->name('Quizzes.destroy');
-       
         });
 
-        
+
         //==============================End dashboard page of Quizzes===========================
 
 

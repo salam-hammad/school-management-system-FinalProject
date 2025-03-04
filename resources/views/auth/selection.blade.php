@@ -8,7 +8,7 @@
     <meta name="description" content="Webmin - Bootstrap 4 & Angular 5 Admin Dashboard Template" />
     <meta name="author" content="potenzaglobalsolutions.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>برنامج مورا سوفت لادارة المدارس</title>
+    <title>{{ trans('main_trans.Main_title') }}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="images/favicon.ico" />
@@ -20,9 +20,6 @@
     <!-- css -->
     <link href="{{ URL::asset('assets/css/rtl.css') }}" rel="stylesheet">
 
-
-
-
 </head>
 
 <body>
@@ -30,7 +27,7 @@
     <div class="wrapper">
 
         <section class="height-100vh d-flex align-items-center page-section-ptb login"
-                 style="background-image: url('{{ asset('assets/images/sativa.png')}}');">
+            style="background-image: url('{{ asset('assets/images/sativa.png') }}');">
             <div class="container">
                 <div class="row justify-content-center no-gutters vertical-align">
 
@@ -38,17 +35,26 @@
                         <div class="login-fancy pb-40 clearfix">
                             <h3 style="font-family: 'Cairo', sans-serif" class="mb-30">حدد طريقة الدخول</h3>
                             <div class="form-inline">
-                                <a class="btn btn-default col-lg-3" title="طالب" href="{{route('login.show','student')}}">
-                                    <img alt="user-img" width="100px;" src="{{URL::asset('assets/images/student.png')}}">
+
+                                <a class="btn btn-default col-lg-3" title="طالب"
+                                    href="{{ route('login.show', 'student') }}">
+                                    <img alt="user-img" width="100px;"
+                                        src="{{ URL::asset('assets/images/student.png') }}">
                                 </a>
-                                <a class="btn btn-default col-lg-3" title="ولي امر" href="{{route('login.show','parent')}}">
-                                    <img alt="user-img" width="100px;" src="{{URL::asset('assets/images/parent.png')}}">
+                                <a class="btn btn-default col-lg-3" title="ولي امر"
+                                    href="{{ route('login.show', 'parent') }}">
+                                    <img alt="user-img" width="100px;"
+                                        src="{{ URL::asset('assets/images/parent.png') }}">
                                 </a>
-                                <a class="btn btn-default col-lg-3" title="معلم" href="{{route('login.show','teacher')}}">
-                                    <img alt="user-img" width="100px;" src="{{URL::asset('assets/images/teacher.png')}}">
+                                <a class="btn btn-default col-lg-3" title="معلم"
+                                    href="{{ route('login.show', 'teacher') }}">
+                                    <img alt="user-img" width="100px;"
+                                        src="{{ URL::asset('assets/images/teacher.png') }}">
                                 </a>
-                                <a class="btn btn-default col-lg-3" title="ادمن" href="{{route('login.show','admin')}}">
-                                    <img alt="user-img" width="100px;" src="{{URL::asset('assets/images/admin.png')}}">
+                                <a class="btn btn-default col-lg-3" title="ادمن"
+                                    href="{{ route('login.show', 'admin') }}">
+                                    <img alt="user-img" width="100px;"
+                                        src="{{ URL::asset('assets/images/admin.png') }}">
                                 </a>
                             </div>
 
@@ -69,7 +75,6 @@
     <!-- plugin_path -->
     <script>
         var plugin_path = 'js/';
-
     </script>
 
 

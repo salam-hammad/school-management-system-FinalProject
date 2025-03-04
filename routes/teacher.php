@@ -55,12 +55,12 @@ Route::group(
             Route::put('/questions/update/{id}', [QuestionController::class, 'update'])->name('questions.update');
             Route::delete('/questions/destroy/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
 
-            // Route::get('online_zoom_classes', [OnlineZoomClassesController::class,'index'])->name('online_zoom_classes.index');
-            // Route::get('/online_zoom_classes/create',  [OnlineZoomClassesController::class, 'create'])->name('online_zoom_classes.create');
-            // Route::post('/online_zoom_classes/store',  [OnlineZoomClassesController::class, 'store'])->name('online_zoom_classes.store');
-            // Route::get('/indirect', [OnlineZoomClassesController::class,'indirectCreate'])->name('indirect.teacher.create');
-            // Route::post('/indirect', [OnlineZoomClassesController::class,'storeIndirect'])->name('indirect.teacher.store');
-            // Route::delete('/destroy/{id}', [OnlineZoomClassesController::class,'destroy'])->name('indirect.teacher.destroy');
+            Route::get('online_zoom_classes', [OnlineZoomClassesController::class,'index'])->name('online_zoom_classes.index');
+            Route::get('/online_zoom_classes/create',  [OnlineZoomClassesController::class, 'create'])->name('online_zoom_classes.create');
+            Route::post('/online_zoom_classes/store',  [OnlineZoomClassesController::class, 'store'])->name('online_zoom_classes.store');
+            Route::get('/indirect', [OnlineZoomClassesController::class,'indirectCreate'])->name('indirect.teacher.create');
+            Route::post('/indirect', [OnlineZoomClassesController::class,'storeIndirect'])->name('indirect.teacher.store');
+            Route::delete('/destroy/{id}', [OnlineZoomClassesController::class,'destroy'])->name('indirect.teacher.destroy');
 
             Route::get('profile', [ProfileController::class, 'index'])->name('profile.show');
             Route::post('profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
