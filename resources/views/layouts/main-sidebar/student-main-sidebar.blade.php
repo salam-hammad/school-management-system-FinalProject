@@ -14,6 +14,34 @@
         <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.Programname')}} </li>
 
 
+        <!-- المواد الدراسية-->
+        <li>
+            <a href=""><i class="fas fa-book-open"></i><span
+                    class="right-nav-text">المواد الدراسية</span></a>
+
+            {{-- <a href="{{route('student_subject.index')}}"><i class="fas fa-book-open"></i><span
+                    class="right-nav-text">الامتحانات</span></a> --}}
+        </li>
+
+        <!-- الحصص الأونلاين-->
+        <li>
+            <a href=""><i class="fas fa-book-open"></i><span
+                    class="right-nav-text">الحصص الأونلاين</span></a>
+
+            {{-- <a href="{{route('student_exams.index')}}"><i class="fas fa-book-open"></i><span
+                    class="right-nav-text">الامتحانات</span></a>                     --}}
+        </li>
+
+        <!--  المكتبة-->
+        <li>
+            <a href=""><i class="fas fa-book-open"></i><span
+                    class="right-nav-text">المكتبة</span></a>
+
+            {{-- <a href="{{route('student_exams.index')}}"><i class="fas fa-book-open"></i><span
+                    class="right-nav-text">المكتبة</span></a>                     --}}
+        </li>
+        
+        
         <!-- الامتحانات-->
         <li>
             <a href="{{route('student_exams.index')}}"><i class="fas fa-book-open"></i><span

@@ -68,4 +68,13 @@ class Student extends Authenticatable
     {
         return $this->hasMany('App\Models\Attendance', 'student_id');
     }
+
+    // علاقة بين الطلاب والمواد الدراسية بناءً على المعلم
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'registrations')
+            ->withPivot('teacher_id')
+            ->with('teacher'); // إحضار المعلم المسؤول عن المادة
+    }
+    
 }
