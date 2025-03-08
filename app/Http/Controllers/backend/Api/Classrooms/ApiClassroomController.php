@@ -8,9 +8,6 @@ use App\Models\Classroom;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Classrooms\StoreClassrooms;
 use App\Http\Requests\Classrooms\UpdateClassrooms;
-use App\Http\Requests\Classrooms\DeleteClassrooms;
-use App\Http\Requests\Classrooms\DeleteAllClassrooms;
-use App\Http\Requests\Classrooms\FilterClassrooms;
 
 class ApiClassroomController extends Controller
 {
@@ -36,9 +33,9 @@ class ApiClassroomController extends Controller
      */
     public function store(StoreClassrooms $request)
     {
-        $List_Classes = $request->List_Classes;
         try {
             $validated = $request->validated();
+            $List_Classes = $request->List_Classes;
             $createdClasses = [];
 
             foreach ($List_Classes as $List_Class) {
@@ -69,8 +66,15 @@ class ApiClassroomController extends Controller
     public function update(UpdateClassrooms $request, $id)
     {
         try {
-            $Classrooms = Classroom::findOrFail($id);
-            $Classrooms->update([
+            $Classroom = Classroom::find($id);
+            if (!$Classroom) {
+                return response()->json([
+                    'status_code' => 404,
+                    'status_message' => 'Classroom not found | لم يتم العثور على الفصل الدراسي',
+                ]);
+            }
+
+            $Classroom->update([
                 'Name_Class' => ['ar' => $request->Name, 'en' => $request->Name_en],
                 'Grade_id' => $request->Grade_id,
             ]);
@@ -78,7 +82,7 @@ class ApiClassroomController extends Controller
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'Classroom updated successfully | تم تحديث الفصل الدراسي بنجاح',
-                'data' => $Classrooms,
+                'data' => $Classroom,
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -92,16 +96,23 @@ class ApiClassroomController extends Controller
     /**
      * حذف فصل دراسي محدد.
      */
-    public function destroy(DeleteClassrooms $request, $id)
+    public function destroy($id)
     {
         try {
-            $Classrooms = Classroom::findOrFail($id);
-            $Classrooms->delete();
-    
+            $Classroom = Classroom::find($id);
+            if (!$Classroom) {
+                return response()->json([
+                    'status_code' => 404,
+                    'status_message' => 'Classroom not found | لم يتم العثور على الفصل الدراسي',
+                ]);
+            }
+
+            $Classroom->delete();
+
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'Classroom deleted successfully | تم حذف الفصل الدراسي بنجاح',
-                'data' => $Classrooms,
+                'data' => $Classroom,
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -111,20 +122,47 @@ class ApiClassroomController extends Controller
             ]);
         }
     }
-    
+
     /**
-     * حذف عدة فصول دراسية.
+     * حذف عدة فصول دراسية دفعة واحدة.
      */
-    public function delete_all(DeleteAllClassrooms $request)
+    public function delete_all(Request $request)
     {
         try {
-            $delete_all_id = explode(",", $request->delete_all_id);
-            $deletedClassrooms = Classroom::whereIn('id', $delete_all_id)->delete();
-
+            // التحقق من إرسال delete_all_id في الطلب
+            if (!$request->has('delete_all_id')) {
+                return response()->json([
+                    'status_code' => 400,
+                    'status_message' => 'Missing delete_all_id parameter | يجب تحديد قائمة الفصول لحذفها',
+                ]);
+            }
+    
+            $delete_all_id = $request->input('delete_all_id', []);
+    
+            if (!is_array($delete_all_id)) {
+                return response()->json([
+                    'status_code' => 400,
+                    'status_message' => 'Invalid format. delete_all_id must be an array | يجب إرسال القائمة كمصفوفة',
+                ]);
+            }
+    
+            // التحقق من وجود المعرفات في قاعدة البيانات
+            $existingClassrooms = Classroom::withTrashed()->whereIn('id', $delete_all_id)->get();
+    
+            if ($existingClassrooms->isEmpty()) {
+                return response()->json([
+                    'status_code' => 404,
+                    'status_message' => 'No classrooms found for deletion | لم يتم العثور على الفصول المراد حذفها',
+                ]);
+            }
+    
+            // تنفيذ الحذف النهائي
+            $deletedCount = Classroom::whereIn('id', $delete_all_id)->forceDelete();
+    
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'Classrooms deleted successfully | تم حذف الفصول الدراسية بنجاح',
-                'data' => $deletedClassrooms,
+                'deleted_count' => $deletedCount,
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -134,14 +172,33 @@ class ApiClassroomController extends Controller
             ]);
         }
     }
+    
 
     /**
-     * تصفية الفصول الدراسية حسب المرحلة.
+     * تصفية الفصول الدراسية حسب المرحلة الدراسية.
      */
-    public function Filter_Classes(FilterClassrooms $request)
+    public function Filter_Classes(Request $request)
     {
         try {
+            // التحقق من وجود `Grade_id` في الطلب
+            if (!$request->has('Grade_id')) {
+                return response()->json([
+                    'status_code' => 400,
+                    'status_message' => 'Missing Grade_id parameter | يجب تحديد المرحلة الدراسية',
+                ]);
+            }
+    
+            // تنفيذ الاستعلام بناءً على `Grade_id`
             $Search = Classroom::where('Grade_id', $request->Grade_id)->get();
+    
+            // التحقق مما إذا كان هناك فصول تم العثور عليها
+            if ($Search->isEmpty()) {
+                return response()->json([
+                    'status_code' => 404,
+                    'status_message' => 'No classrooms found for this Grade | لا توجد فصول دراسية لهذه المرحلة',
+                ]);
+            }
+    
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'Filtered Classrooms | تم تصفية الفصول الدراسية بنجاح',
@@ -155,4 +212,4 @@ class ApiClassroomController extends Controller
             ]);
         }
     }
-}
+}    

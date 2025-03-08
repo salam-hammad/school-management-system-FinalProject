@@ -23,10 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // *************************************** Routes for Classroom API ***************************************
+// Route for store,update
 Route::apiResource('classrooms', ApiClassroomController::class);
+
+// Route for delete
+Route::delete('classrooms/{id}', [ApiClassroomController::class, 'destroy']);
 
 // Route for delete_all
 Route::delete('classrooms/delete-all', [ApiClassroomController::class, 'delete_all']);
 
 // Route for Filter_Classes
-Route::get('classrooms/filter', [ApiClassroomController::class, 'Filter_Classes']);
+Route::get('/classrooms/filter', [ApiClassroomController::class, 'Filter_Classes']);
