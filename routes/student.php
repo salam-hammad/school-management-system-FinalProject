@@ -3,9 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\Quizzes\QuizzController;
-use App\Http\Controllers\Students\dashboard\ExamsController;
-use App\Http\Controllers\Students\dashboard\ProfileController;
+use App\Http\Controllers\backend\Quizzes\QuizzController;
+use App\Http\Controllers\backend\Students\dashboard\ExamsController;
+use App\Http\Controllers\backend\Students\dashboard\StudentRegistrationController;
+use App\Http\Controllers\backend\Students\dashboard\ProfileController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -53,6 +54,10 @@ Route::group(
         //     Route::put('/settings/update', [SettingController::class, 'update'])->name('settings.update');
         // });
 
+        //============================== عرض المواد الدراسية ============================
+        Route::get('/student/dashboard/subjects', [StudentRegistrationController::class, 'index'])->name('student.subjects.index');
+        Route::get('/auto-register-student/{id}', [StudentRegistrationController::class, 'autoRegisterStudent']);
+        
         Route::group(['prefix' => 'profile'], function () {
             Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
             Route::post('profile-student/{id}', [ProfileController::class, 'update'])->name('profile-student.update');

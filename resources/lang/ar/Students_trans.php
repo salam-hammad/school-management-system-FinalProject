@@ -171,7 +171,8 @@ return [
     'manipulation'=>'تلاعب',
     'Test_date'=>'تاريخ اجراء الاختبار',
     'Search_information'=>'معلومات البحث',
-  'End_date' => 'تاريخ النهايه'
+     'End_date' => 'تاريخ النهايه',
+     'Subject_List' => 'قائمة المواد الدراسية',
 
 
 

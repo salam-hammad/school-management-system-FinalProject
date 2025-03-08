@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\Api\Classrooms\ApiClassroomController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// *************************************** Routes for Classroom API ***************************************
+Route::apiResource('classrooms', ApiClassroomController::class);
+
+// Route for delete_all
+Route::delete('classrooms/delete-all', [ApiClassroomController::class, 'delete_all']);
+
+// Route for Filter_Classes
+Route::get('classrooms/filter', [ApiClassroomController::class, 'Filter_Classes']);

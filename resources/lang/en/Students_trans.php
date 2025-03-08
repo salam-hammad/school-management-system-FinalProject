@@ -170,5 +170,7 @@ return [
     'Last_question'=>'Last question',
     'manipulation'=>'manipulation',
     'Test_date'=>'Test date',
-    'End_date'=>'End date'
+    'End_date'=>'End date',
+    'Subject_List' => 'Subject List',
+
 ];
