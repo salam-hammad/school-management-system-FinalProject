@@ -10,6 +10,7 @@ use App\Http\Controllers\backend\Api\Sections\ApiSectionController;
 use App\Http\Controllers\backend\Api\Subjects\ApiSubjectController;
 use App\Http\Controllers\backend\Api\Students\Attendances\ApiAttendanceController;
 use App\Http\Controllers\backend\Api\Students\Fees\ApiFeesController;
+use App\Http\Controllers\backend\Api\Students\FeesInvoices\ApiFeesInvoicesController;
 
 
 /*
@@ -69,11 +70,11 @@ Route::delete('/subjects/{id}', [ApiSubjectController::class, 'destroy']);
 
 // *************************************** Start Routes for Attendance API [Student Dashboard] ************************************
 Route::prefix('attendances')->group(function () {
-    Route::get('/', [ApiAttendanceController::class, 'index']); // عرض جميع سجلات الحضور
-    Route::post('/', [ApiAttendanceController::class, 'store']); // إضافة سجل حضور جديد
-    Route::get('/{id}', [ApiAttendanceController::class, 'show']); // عرض تفاصيل سجل حضور محدد
-    Route::put('/{id}', [ApiAttendanceController::class, 'update']); // تحديث سجل حضور محدد
-    Route::delete('/{id}', [ApiAttendanceController::class, 'destroy']); // حذف سجل حضور محدد
+    Route::get('/', [ApiAttendanceController::class, 'index']); 
+    Route::post('/', [ApiAttendanceController::class, 'store']); 
+    Route::get('/{id}', [ApiAttendanceController::class, 'show']); 
+    Route::put('/{id}', [ApiAttendanceController::class, 'update']);  
+    Route::delete('/{id}', [ApiAttendanceController::class, 'destroy']);  
 });
 // *************************************** End Routes for Attendance API [Student Dashboard] **************************************
 
@@ -87,3 +88,13 @@ Route::prefix('fees')->group(function () {
     Route::delete('/{id}', [ApiFeesController::class, 'destroy']); 
 });
 // *************************************** End Routes for Fees API [Student Dashboard] **************************************
+
+// *************************************** Start Routes for Fees Invoices API [Student Dashboard] ************************************
+Route::prefix('fees-invoices')->group(function () {
+    Route::get('/', [ApiFeesInvoicesController::class, 'index']);   
+    Route::post('/', [ApiFeesInvoicesController::class, 'store']);   
+    Route::get('/{id}', [ApiFeesInvoicesController::class, 'show']);  
+    Route::put('/{id}', [ApiFeesInvoicesController::class, 'update']); 
+    Route::delete('/{id}', [ApiFeesInvoicesController::class, 'destroy']); 
+});
+// *************************************** End Routes for Fees Invoices API [Student Dashboard] **************************************

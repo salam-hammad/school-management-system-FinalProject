@@ -9,6 +9,19 @@ class Fee_invoice extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'amount',
+        'Grade_id',
+        'Classroom_id',
+        'year',
+        'description',
+        'Fee_type',
+        'student_id',
+        'fee_id',
+        'invoice_date',
+    ];
+
     public function grade()
     {
         return $this->belongsTo('App\Models\Grade', 'Grade_id');
@@ -33,5 +46,4 @@ class Fee_invoice extends Model
     {
         return $this->belongsTo('App\Models\Fee', 'fee_id');
     }
-    
 }
