@@ -11,18 +11,27 @@ class DeleteFees extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true; // تأكد من أن المستخدم لديه الصلاحية لحذف الرسوم
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'id' => 'required|exists:fees,id', // يجب أن يكون الـ ID موجودًا في جدول الرسوم
+        ];
+    }
+
+    /**
+     * Custom error messages
+     */
+    public function messages()
+    {
+        return [
+            'id.required' => 'يجب تحديد الرسوم الدراسية.',
+            'id.exists' => 'الرسوم الدراسية غير موجودة في النظام.',
         ];
     }
 }
