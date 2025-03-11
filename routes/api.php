@@ -8,7 +8,7 @@ use App\Http\Controllers\backend\Api\Quizzes\ApiQuizzController;
 use App\Http\Controllers\backend\Api\Questions\ApiQuestionController;
 use App\Http\Controllers\backend\Api\Sections\ApiSectionController;
 use App\Http\Controllers\backend\Api\Subjects\ApiSubjectController;
-
+use App\Http\Controllers\backend\Api\Students\Attendances\ApiAttendanceController;
 
 
 /*
@@ -45,8 +45,6 @@ Route::delete('/grades/{id}', [ApiGradeController::class, 'destroy']);
 // ***************************************End Routes for Grades API **************************************
 
 
-
-
 // ***************************************Start Routes for Quizz API ************************************
 Route::apiResource('/quizzes', ApiQuizzController::class);
 Route::delete('/quizzes/{id}', [ApiQuizzController::class, 'destroy']);
@@ -67,3 +65,13 @@ Route::delete('/sections/{id}', [ApiSectionController::class, 'destroy']);
 Route::apiResource('/subjects', ApiSubjectController::class);
 Route::delete('/subjects/{id}', [ApiSubjectController::class, 'destroy']);
 // ***************************************End Routes for subjects API **************************************
+
+// *************************************** Start Routes for Attendance API ************************************
+Route::prefix('attendances')->group(function () {
+    Route::get('/', [ApiAttendanceController::class, 'index']); // عرض جميع سجلات الحضور
+    Route::post('/', [ApiAttendanceController::class, 'store']); // إضافة سجل حضور جديد
+    Route::get('/{id}', [ApiAttendanceController::class, 'show']); // عرض تفاصيل سجل حضور محدد
+    Route::put('/{id}', [ApiAttendanceController::class, 'update']); // تحديث سجل حضور محدد
+    Route::delete('/{id}', [ApiAttendanceController::class, 'destroy']); // حذف سجل حضور محدد
+});
+// *************************************** End Routes for Attendance API **************************************

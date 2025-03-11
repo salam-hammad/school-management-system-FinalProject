@@ -30,4 +30,22 @@ class StoreSections extends FormRequest
             'teacher_id.*' => 'exists:teachers,id',
         ];
     }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'Name_Section_Ar.required' => 'الاسم العربي للقسم مطلوب.',
+            'Name_Section_En.required' => 'الاسم الإنجليزي للقسم مطلوب.',
+            'Grade_id.required' => 'يجب تحديد الصف الدراسي.',
+            'Grade_id.exists' => 'الصف الدراسي المحدد غير صالح.',
+            'Class_id.required' => 'يجب تحديد الفصل الدراسي.',
+            'Class_id.exists' => 'الفصل الدراسي المحدد غير صالح.',
+            'teacher_id.*.exists' => 'المعلم المحدد غير صالح.',
+        ];
+    }
 }

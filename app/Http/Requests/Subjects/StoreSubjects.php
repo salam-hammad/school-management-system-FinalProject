@@ -16,8 +16,6 @@ class StoreSubjects extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
@@ -27,6 +25,18 @@ class StoreSubjects extends FormRequest
             'Grade_id' => 'required|exists:grades,id',
             'Classroom_id' => 'nullable|exists:classrooms,id',
             'Teacher_id' => 'required|exists:teachers,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'Name_Ar.required' => 'يجب إدخال اسم المادة الدراسية باللغة العربية.',
+            'Name_En.required' => 'يجب إدخال اسم المادة الدراسية باللغة الإنجليزية.',
+            'Grade_id.required' => 'يجب تحديد المرحلة الدراسية.',
+            'Grade_id.exists' => 'المرحلة الدراسية غير موجودة.',
+            'Teacher_id.required' => 'يجب تحديد المعلم للمادة.',
+            'Teacher_id.exists' => 'المعلم غير موجود.',
         ];
     }
 }

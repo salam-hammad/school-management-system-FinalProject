@@ -5,15 +5,18 @@ namespace App\Http\Controllers\backend\Api\Subjects;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Subjects\StoreSubject;
-use App\Http\Requests\Subjects\DeleteSubject;
-use App\Http\Requests\Subjects\UpdateSubject;
+use App\Http\Requests\Subjects\StoreSubjects;
+use App\Http\Requests\Subjects\UpdateSubjects;
+use App\Http\Requests\Subjects\DeleteSubjects;
 
 class ApiSubjectController extends Controller
 {
+    /**
+     * عرض جميع المواد الدراسية مع التصفح.
+     */
     public function index()
     {
-        $subjects = Subject::with('teacher')->get();
+        $subjects = Subject::paginate(10);
         return response()->json([
             'status_code' => 200,
             'status_message' => 'List of Subjects | قائمة المواد الدراسية',
@@ -21,15 +24,17 @@ class ApiSubjectController extends Controller
         ]);
     }
 
-
-    public function store(StoreSubject $request)
+    /**
+     * إنشاء مادة دراسية جديدة.
+     */
+    public function store(StoreSubjects $request)
     {
         try {
             $validated = $request->validated();
             $subject = new Subject();
-            $subject->name = ['ar' => $request->Name_Ar, 'en' => $request->Name_En];
+            $subject->name = ['en' => $request->Name_En, 'ar' => $request->Name_Ar];
             $subject->grade_id = $request->Grade_id;
-            $subject->classroom_id = $request->Classroom_id ?? null; // تأكد من عدم تركه فارغًا
+            $subject->classroom_id = $request->Classroom_id ?? null;
             $subject->teacher_id = $request->Teacher_id;
             $subject->save();
 
@@ -50,7 +55,7 @@ class ApiSubjectController extends Controller
     /**
      * تحديث مادة دراسية محددة.
      */
-    public function update(UpdateSubject $request, $id)
+    public function update(UpdateSubjects $request, $id)
     {
         try {
             $subject = Subject::find($id);
@@ -84,7 +89,7 @@ class ApiSubjectController extends Controller
     /**
      * حذف مادة دراسية محددة.
      */
-    public function destroy(DeleteSubject $request)
+    public function destroy(DeleteSubjects $request)
     {
         try {
             $subject = Subject::find($request->id);
