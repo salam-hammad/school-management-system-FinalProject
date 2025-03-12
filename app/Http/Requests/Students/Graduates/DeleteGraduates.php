@@ -11,7 +11,7 @@ class DeleteGraduates extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class DeleteGraduates extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id' => 'required|exists:students,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'id.required' => 'يجب تحديد الطالب.',
+            'id.exists' => 'الطالب المحدد غير موجود.',
         ];
     }
 }

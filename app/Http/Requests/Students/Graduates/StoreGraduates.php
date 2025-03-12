@@ -11,7 +11,7 @@ class StoreGraduates extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class StoreGraduates extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'Grade_id' => 'required|exists:grades,id',
+            'Classroom_id' => 'required|exists:classrooms,id',
+            'section_id' => 'required|exists:sections,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'Grade_id.required' => 'يجب تحديد المرحلة الدراسية.',
+            'Grade_id.exists' => 'المرحلة الدراسية المحددة غير موجودة.',
+            'Classroom_id.required' => 'يجب تحديد الفصل الدراسي.',
+            'Classroom_id.exists' => 'الفصل الدراسي المحدد غير موجود.',
+            'section_id.required' => 'يجب تحديد القسم.',
+            'section_id.exists' => 'القسم المحدد غير موجود.',
         ];
     }
 }

@@ -11,7 +11,7 @@ use App\Http\Controllers\backend\Api\Subjects\ApiSubjectController;
 use App\Http\Controllers\backend\Api\Students\Attendances\ApiAttendanceController;
 use App\Http\Controllers\backend\Api\Students\Fees\ApiFeesController;
 use App\Http\Controllers\backend\Api\Students\FeesInvoices\ApiFeesInvoicesController;
-
+use App\Http\Controllers\backend\Api\Students\Graduates\ApiGraduatedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,3 +98,20 @@ Route::prefix('fees-invoices')->group(function () {
     Route::delete('/{id}', [ApiFeesInvoicesController::class, 'destroy']); 
 });
 // *************************************** End Routes for Fees Invoices API [Student Dashboard] **************************************
+
+
+// *************************************** Start Routes for Graduates API [Student Dashboard] ************************************
+Route::prefix('graduates')->group(function () {
+    // عرض جميع الطلاب الخريجين (المحذوفين بشكل مؤقت)
+    Route::get('/', [ApiGraduatedController::class, 'index']);
+    // عرض بيانات المراحل الدراسية (لإنشاء خريجين)
+    Route::get('/create', [ApiGraduatedController::class, 'create']);
+    // حذف الطلاب بشكل مؤقت (Soft Delete)
+    Route::post('/soft-delete', [ApiGraduatedController::class, 'SoftDelete']);
+    // استعادة طالب محذوف
+    Route::post('/restore', [ApiGraduatedController::class, 'ReturnData']);
+    // حذف طالب بشكل نهائي (Force Delete)
+    Route::delete('/destroy', [ApiGraduatedController::class, 'destroy']);
+});
+// *************************************** End Routes for Graduates API [Student Dashboard] **************************************
+
