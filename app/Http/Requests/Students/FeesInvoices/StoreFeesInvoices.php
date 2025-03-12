@@ -7,54 +7,57 @@ use Illuminate\Validation\Rule;
 
 class StoreFeesInvoices extends FormRequest
 {
-
     /**
-     * Determine if the user is authorized to make this request.
+     * تحديد صلاحية المستخدم لتنفيذ الطلب.
      */
     public function authorize(): bool
     {
-        return true; // تأكد من أن المستخدم لديه الصلاحية لإنشاء فاتورة الرسوم
+        return true; // السماح لجميع المستخدمين المخوّلين بتنفيذ العملية
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * قواعد التحقق من البيانات المدخلة.
      */
-
-     public function rules(): array
-     {
-         return [
-             'title.en' => 'required|string',
-             'title.ar' => 'required|string',
-             'amount' => 'required|numeric',
-             'Grade_id' => 'required|integer',
-             'Classroom_id' => 'required|integer',
-             'year' => 'required|string',
-             'description' => 'nullable|string',
-             'Fee_type' => 'required|string',
-             'student_id' => 'required|integer',  // تأكد من وجود هذه القاعدة
-             'fee_id' => 'required|integer',
-             'section_id' => 'required|integer',
-         ];
-     }
-    
+    public function rules(): array
+    {
+        return [
+            'invoice_date' => 'required|date', 
+            'student_id' => 'required|exists:students,id', 
+            'Grade_id' => 'required|exists:grades,id',
+            'Classroom_id' => 'required|exists:classrooms,id',
+            'fee_id' => 'required|exists:fees,id',
+            'amount' => 'required|numeric|min:0',
+            'description' => 'nullable|string|max:255',
+        ];
+    }
 
     /**
-     * Custom error messages
+     * رسائل الأخطاء المخصصة.
      */
     public function messages()
     {
         return [
-            'title.en.required' => 'يجب إدخال عنوان الفاتورة باللغة الإنجليزية.',
-            'title.ar.required' => 'يجب إدخال عنوان الفاتورة باللغة العربية.',
-            'amount.required' => 'يجب إدخال المبلغ.',
-            'amount.numeric' => 'يجب أن يكون المبلغ رقمًا.',
-            'Grade_id.required' => 'يجب تحديد المرحلة الدراسية.',
-            'Classroom_id.required' => 'يجب تحديد الصف الدراسي.',
-            'year.required' => 'يجب إدخال السنة الدراسية.',
-            'Fee_type.required' => 'يجب تحديد نوع الرسوم.',
+            'invoice_date.required' => 'يجب إدخال تاريخ الفاتورة.',
+            'invoice_date.date' => 'تنسيق تاريخ الفاتورة غير صالح.',
+
             'student_id.required' => 'يجب تحديد الطالب.',
-            'fee_id.required' => 'يجب تحديد الرسوم.',
-            'section_id.required' => 'يجب تحديد القسم.', // إضافة رسالة لـ section_id
+            'student_id.exists' => 'الطالب غير موجود في النظام.',
+
+            'Grade_id.required' => 'يجب تحديد المرحلة الدراسية.',
+            'Grade_id.exists' => 'المرحلة الدراسية غير موجودة.',
+
+            'Classroom_id.required' => 'يجب تحديد الصف الدراسي.',
+            'Classroom_id.exists' => 'الصف الدراسي غير موجود.',
+
+            'fee_id.required' => 'يجب تحديد نوع الرسوم.',
+            'fee_id.exists' => 'الرسوم غير موجودة في النظام.',
+
+            'amount.required' => 'يجب إدخال المبلغ.',
+            'amount.numeric' => 'يجب أن يكون المبلغ رقماً.',
+            'amount.min' => 'يجب ألا يكون المبلغ أقل من 0.',
+
+            'description.string' => 'يجب أن يكون الوصف نصاً.',
+            'description.max' => 'يجب ألا يتجاوز الوصف 255 حرفاً.',
         ];
     }
 }

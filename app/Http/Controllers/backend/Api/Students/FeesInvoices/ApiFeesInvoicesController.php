@@ -5,9 +5,10 @@ namespace App\Http\Controllers\backend\Api\Students\FeesInvoices;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Fee_invoice;
-use App\Http\Requests\Students\Fees\StoreFees;
-use App\Http\Requests\Students\Fees\UpdateFees;
-use App\Http\Requests\Students\Fees\DeleteFees;
+use App\Http\Requests\Students\FeesInvoices\StoreFeesInvoices;
+use App\Http\Requests\Students\FeesInvoices\UpdateFeesInvoices;
+use App\Http\Requests\Students\FeesInvoices\DeleteFeesInvoices;
+
 class ApiFeesInvoicesController extends Controller
 {
     /**
@@ -26,47 +27,40 @@ class ApiFeesInvoicesController extends Controller
     /**
      * إنشاء فاتورة رسوم جديدة.
      */
-    public function store(StoreFees $request)
+    public function store(StoreFeesInvoices $request)
     {
         try {
-            // التحقق من البيانات المرسلة
+            // التحقق من صحة البيانات
             $validatedData = $request->validated();
-    
-            // تحقق إضافي لوجود student_id
-            if (!isset($validatedData['student_id'])) {
-                return response()->json([
-                    'status_code' => 400,
-                    'status_message' => 'Student ID is required | يجب تحديد الطالب',
-                ], 400);
-            }
     
             // إنشاء فاتورة جديدة
             $feeInvoice = Fee_invoice::create([
-                'title' => ['en' => $validatedData['title']['en'], 'ar' => $validatedData['title']['ar']],
-                'amount' => $validatedData['amount'],
+                'invoice_date' => $validatedData['invoice_date'],
+                'student_id' => $validatedData['student_id'],
                 'Grade_id' => $validatedData['Grade_id'],
                 'Classroom_id' => $validatedData['Classroom_id'],
-                'year' => $validatedData['year'],
-                'description' => $validatedData['description'],
-                'Fee_type' => $validatedData['Fee_type'],
-                'student_id' => $validatedData['student_id'],
                 'fee_id' => $validatedData['fee_id'],
-                'invoice_date' => now(),
+                'amount' => $validatedData['amount'],
+                'description' => $validatedData['description'] ?? null, // الوصف اختياري
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
     
             return response()->json([
                 'status_code' => 200,
-                'status_message' => 'Fee invoice created successfully',
+                'status_message' => 'تم إنشاء فاتورة الرسوم بنجاح',
                 'data' => $feeInvoice
             ], 200);
+    
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'status_message' => 'Error creating fee invoice | حدث خطأ أثناء إنشاء فاتورة الرسوم',
+                'status_message' => 'حدث خطأ أثناء إنشاء فاتورة الرسوم',
                 'error' => $e->getMessage()
             ], 500);
         }
     }
+    
     /**
      * عرض فاتورة رسوم محددة.
      */
@@ -90,48 +84,48 @@ class ApiFeesInvoicesController extends Controller
     /**
      * تحديث فاتورة رسوم محددة.
      */
-    public function update(UpdateFees $request, string $id)
+    public function update(UpdateFeesInvoices $request, string $id)
     {
         try {
             $feeInvoice = Fee_invoice::find($id);
             if (!$feeInvoice) {
                 return response()->json([
                     'status_code' => 404,
-                    'status_message' => 'Fee Invoice not found | لم يتم العثور على فاتورة الرسوم',
-                ]);
+                    'status_message' => 'لم يتم العثور على فاتورة الرسوم',
+                ], 404);
             }
-
+            $validatedData = $request->validated();
             $feeInvoice->update([
-                'title' => ['en' => $request->title['en'], 'ar' => $request->title['ar']],
-                'amount' => $request->amount,
-                'Grade_id' => $request->Grade_id,
-                'Classroom_id' => $request->Classroom_id,
-                'year' => $request->year,
-                'description' => $request->description,
-                'Fee_type' => $request->Fee_type,
-                'student_id' => $request->student_id,
-                'fee_id' => $request->fee_id,
-                'section_id' => $request->section_id,
+                'invoice_date' => $validatedData['invoice_date'] ?? $feeInvoice->invoice_date,
+                'student_id' => $validatedData['student_id'] ?? $feeInvoice->student_id,
+                'Grade_id' => $validatedData['Grade_id'] ?? $feeInvoice->Grade_id,
+                'Classroom_id' => $validatedData['Classroom_id'] ?? $feeInvoice->Classroom_id,
+                'fee_id' => $validatedData['fee_id'] ?? $feeInvoice->fee_id,
+                'amount' => $validatedData['amount'] ?? $feeInvoice->amount,
+                'description' => $validatedData['description'] ?? $feeInvoice->description,
+                'updated_at' => now(),
             ]);
-
+    
             return response()->json([
                 'status_code' => 200,
-                'status_message' => 'Fee Invoice updated successfully | تم تحديث فاتورة الرسوم بنجاح',
+                'status_message' => 'تم تحديث فاتورة الرسوم بنجاح',
                 'data' => $feeInvoice,
-            ]);
+            ], 200);
+    
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'status_message' => 'Error updating fee invoice | حدث خطأ أثناء تحديث فاتورة الرسوم',
+                'status_message' => 'حدث خطأ أثناء تحديث فاتورة الرسوم',
                 'error' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
+    
 
     /**
      * حذف فاتورة رسوم محددة.
      */
-    public function destroy(DeleteFees $request, string $id)
+    public function destroy($id)
     {
         try {
             $feeInvoice = Fee_invoice::find($id);
