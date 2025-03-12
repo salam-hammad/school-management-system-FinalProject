@@ -12,7 +12,7 @@ use App\Http\Controllers\backend\Api\Students\Attendances\ApiAttendanceControlle
 use App\Http\Controllers\backend\Api\Students\Fees\ApiFeesController;
 use App\Http\Controllers\backend\Api\Students\FeesInvoices\ApiFeesInvoicesController;
 use App\Http\Controllers\backend\Api\Students\Graduates\ApiGraduatedController;
-
+use App\Http\Controllers\backend\Api\Students\Libraries\ApiLibraryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -115,3 +115,13 @@ Route::prefix('graduates')->group(function () {
 });
 // *************************************** End Routes for Graduates API [Student Dashboard] **************************************
 
+
+// *************************************** Start Routes for Libraries API [Student Dashboard] ************************************
+Route::prefix('library')->group(function () {
+    Route::get('/', [ApiLibraryController::class, 'index']);
+    Route::post('/', [ApiLibraryController::class, 'store']);
+    Route::put('/{id}', [ApiLibraryController::class, 'update']);
+    Route::delete('/{id}', [ApiLibraryController::class, 'destroy']);
+    Route::get('/download/{filename}', [ApiLibraryController::class, 'downloadAttachment']);
+});
+// *************************************** End Routes for Libraries API [Student Dashboard] **************************************
