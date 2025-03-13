@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quizze;
 use Illuminate\Support\Facades\Auth;
-
 class ExamsController extends Controller
 {
     /**

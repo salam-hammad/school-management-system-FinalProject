@@ -11,7 +11,7 @@ class StoreExams extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,24 @@ class StoreExams extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'subject_id' => 'required|exists:subjects,id',
+            'grade_id' => 'required|exists:grades,id',
+            'classroom_id' => 'required|exists:classrooms,id',
+            'section_id' => 'required|exists:sections,id',
+            'teacher_id' => 'required|exists:teachers,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'يجب إدخال اسم الامتحان.',
+            'subject_id.required' => 'يجب تحديد المادة.',
+            'grade_id.required' => 'يجب تحديد المرحلة الدراسية.',
+            'classroom_id.required' => 'يجب تحديد الفصل الدراسي.',
+            'section_id.required' => 'يجب تحديد القسم.',
+            'teacher_id.required' => 'يجب تحديد المعلم.',
         ];
     }
 }

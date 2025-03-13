@@ -21,6 +21,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
+
 //==============================Translate all pages============================
 Route::group(
     [
@@ -34,9 +35,8 @@ Route::group(
             return view('pages.Students.dashboard');
         })->name('dashboard.Students');
 
-
         // Route::resource('student_exams', \App\Http\Controllers\Students\dashboard\ExamsController::class);
-        Route::group(['namespace' => 'App\Http\Controllers\Students\dashboard'], function () {
+        Route::group(['namespace' => 'App\Http\Controllers\backend\Students\dashboard'], function () {
             Route::resource('student_exams', ExamsController::class);
         });
 

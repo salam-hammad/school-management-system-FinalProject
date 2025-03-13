@@ -13,6 +13,10 @@ use App\Http\Controllers\backend\Api\Students\Fees\ApiFeesController;
 use App\Http\Controllers\backend\Api\Students\FeesInvoices\ApiFeesInvoicesController;
 use App\Http\Controllers\backend\Api\Students\Graduates\ApiGraduatedController;
 use App\Http\Controllers\backend\Api\Students\Libraries\ApiLibraryController;
+use App\Http\Controllers\backend\Api\Students\dashboard\Exams\ApiExamController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -125,3 +129,17 @@ Route::prefix('library')->group(function () {
     Route::get('/download/{filename}', [ApiLibraryController::class, 'downloadAttachment']);
 });
 // *************************************** End Routes for Libraries API [Student Dashboard] **************************************
+
+// *************************************** Start Routes for Student Dashboard Exam API ************************************
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('students/dashboard/exams')->group(function () {
+        Route::get('/', [ApiExamController::class, 'index'])->name('exams.index');
+        Route::get('/{quizze_id}', [ApiExamController::class, 'show'])->name('exams.show');
+        Route::post('/', [ApiExamController::class, 'store'])->name('exams.store');
+        Route::put('/{quizze_id}', [ApiExamController::class, 'update'])->name('exams.update');
+        Route::delete('/{quizze_id}', [ApiExamController::class, 'destroy'])->name('exams.destroy');
+    });
+});
+
+// *************************************** End Routes for Student Dashboard Exam API**************************************
+
