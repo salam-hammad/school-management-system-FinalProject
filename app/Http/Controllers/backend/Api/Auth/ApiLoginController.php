@@ -14,35 +14,27 @@ class ApiLoginController extends Controller
      */
     public function login(Request $request)
     {
-        // التحقق من صحة المدخلات
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required'
         ]);
-
-        // محاولة تسجيل الدخول
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json([
-                'status_code' => 401,
-                'message' => 'Unauthorized | بيانات تسجيل الدخول غير صحيحة',
-            ], 401);
+    
+        $user = \App\Models\User::where('email', $request->email)->first();
+    
+        if (!$user || !\Illuminate\Support\Facades\Hash::check($request->password, $user->password)) {
+            return response()->json(['error' => 'Invalid credentials'], 401);
         }
-
-        // جلب المستخدم
-        $user = Auth::user();
-
-        // إنشاء Access Token باستخدام `Sanctum` أو `Passport`
-        $token = $user->createToken('API Token')->plainTextToken;
-
-        // إرجاع التوكين للعميل
+    
+        // إنشاء التوكن باستخدام `Sanctum`
+        $token = $user->createToken('auth_token')->plainTextToken;
+    
         return response()->json([
-            'status_code' => 200,
-            'message' => 'Login successful | تسجيل الدخول ناجح',
+            'message' => 'Login successful',
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'user' => $user,
-        ]);
+        ], 200);
     }
+    
 
     /**
      * تسجيل الخروج من API

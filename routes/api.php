@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\Api\Auth\ApiLoginController;
+use App\Http\Controllers\backend\Api\Auth\ApiRegisterController;
 use App\Http\Controllers\backend\Api\Classrooms\ApiClassroomController;
 use App\Http\Controllers\backend\Api\Grades\ApiGradeController;
 use App\Http\Controllers\backend\Api\Quizzes\ApiQuizzController;
@@ -143,3 +145,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // *************************************** End Routes for Student Dashboard Exam API**************************************
 
+
+// تسجيل الدخول
+Route::post('/login', [ApiLoginController::class, 'login']);
+// تسجيل الخروج
+Route::post('/logout', [ApiLoginController::class, 'logout'])->middleware('auth:sanctum');
+// تسجيل مستخدم جديد
+Route::post('/register', [ApiRegisterController::class, 'register']);
