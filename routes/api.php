@@ -15,6 +15,10 @@ use App\Http\Controllers\backend\Api\Students\Fees\ApiFeesController;
 use App\Http\Controllers\backend\Api\Students\FeesInvoices\ApiFeesInvoicesController;
 use App\Http\Controllers\backend\Api\Students\Graduates\ApiGraduatedController;
 use App\Http\Controllers\backend\Api\Students\Libraries\ApiLibraryController;
+use App\Http\Controllers\backend\Api\Students\OnlineClasses\ApiOnlineClasseController;
+use App\Http\Controllers\backend\Api\Students\Payments\ApiPaymentController;
+use App\Http\Controllers\backend\Api\Students\ProcessingFees\ApiProcessingFeeController;
+
 use App\Http\Controllers\backend\Api\Students\dashboard\Exams\ApiExamController;
 
 
@@ -121,6 +125,16 @@ Route::prefix('graduates')->group(function () {
 });
 // *************************************** End Routes for Graduates API [Student Dashboard] **************************************
 
+// *************************************** Start Routes for OnlineClasse API [Student Dashboard] ************************************
+Route::prefix( 'online-classes')->group(function () {
+    Route::get('/', [ApiOnlineClasseController::class, 'index']); // عرض جميع الحصص
+    Route::post('/', [ApiOnlineClasseController::class, 'store']); // إنشاء حصة جديدة
+    Route::get('/{id}', [ApiOnlineClasseController::class, 'show']); // عرض حصة محددة
+    Route::put('/{id}', [ApiOnlineClasseController::class, 'update']); // تحديث بيانات الحصة
+    Route::delete('/{id}', [ApiOnlineClasseController::class, 'destroy']); // حذف الحصة
+});
+// *************************************** End Routes for OnlineClasse API [Student Dashboard] **************************************
+
 
 // *************************************** Start Routes for Libraries API [Student Dashboard] ************************************
 Route::prefix('library')->group(function () {
@@ -131,6 +145,29 @@ Route::prefix('library')->group(function () {
     Route::get('/download/{filename}', [ApiLibraryController::class, 'downloadAttachment']);
 });
 // *************************************** End Routes for Libraries API [Student Dashboard] **************************************
+
+
+// *************************************** Start Routes for Payments API [Student Dashboard] ************************************
+Route::prefix('payments')->group(function () {
+    Route::get('/', [ApiPaymentController::class, 'index']); // عرض جميع المدفوعات
+    Route::post('/store', [ApiPaymentController::class, 'store']); // إنشاء مدفوع جديد
+    Route::put('/update/{id}', [ApiPaymentController::class, 'update']); // تحديث مدفوع معين
+    Route::delete('/delete/{id}', [ApiPaymentController::class, 'destroy']); // حذف مدفوع معين
+});
+// *************************************** End Routes for Payments API [Student Dashboard] **************************************
+
+
+// *************************************** Start Routes for ProcessingFees API [Student Dashboard] ************************************
+Route::prefix('processing-fees')->group(function () {
+    Route::get('/', [ApiProcessingFeeController::class, 'index']); // جلب جميع رسوم المعالجة
+    Route::post('/store', [ApiProcessingFeeController::class, 'store']); // إنشاء رسوم معالجة جديدة
+    Route::put('/update/{id}', [ApiProcessingFeeController::class, 'update']); // تحديث رسوم معالجة
+    Route::delete('/delete/{id}', [ApiProcessingFeeController::class, 'destroy']); // حذف رسوم معالجة
+});
+// *************************************** End Routes for ProcessingFees API [Student Dashboard] **************************************
+
+
+
 
 // *************************************** Start Routes for Student Dashboard Exam API ************************************
 Route::middleware('auth:sanctum')->group(function () {
@@ -144,6 +181,9 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 // *************************************** End Routes for Student Dashboard Exam API**************************************
+
+
+
 
 
 // تسجيل الدخول

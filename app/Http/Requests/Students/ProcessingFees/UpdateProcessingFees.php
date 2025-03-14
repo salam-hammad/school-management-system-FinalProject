@@ -11,18 +11,15 @@ class UpdateProcessingFees extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'student_id'  => 'required|exists:students,id',
+            'amount'      => 'required|numeric|min:0.01',
+            'description' => 'nullable|string|max:500',
         ];
     }
 }

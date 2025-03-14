@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class FundAccount extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'student_id',
+        'amount',
+        'description',
+        'date' 
+    ];
 }
