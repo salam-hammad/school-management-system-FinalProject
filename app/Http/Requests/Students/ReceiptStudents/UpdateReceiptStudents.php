@@ -11,18 +11,29 @@ class UpdateReceiptStudents extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'student_id'  => 'required|exists:students,id',
+            'Debit'       => 'required|numeric|min:0.01',
+            'description' => 'required|string|max:500',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'student_id.required' => 'الطالب مطلوب.',
+            'student_id.exists'   => 'الطالب غير موجود في النظام.',
+            'Debit.required'      => 'المبلغ مطلوب.',
+            'Debit.numeric'       => 'المبلغ يجب أن يكون رقمًا.',
+            'Debit.min'           => 'المبلغ يجب أن يكون أكبر من 0.',
+            'description.required' => 'الوصف مطلوب.',
+            'description.string'   => 'الوصف يجب أن يكون نصًا.',
+            'description.max'      => 'الوصف لا يجب أن يتجاوز 500 حرف.',
         ];
     }
 }

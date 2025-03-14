@@ -32,6 +32,21 @@ class ApiExamController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
+        // ✅ التأكد من استرجاع `name` بالترجمة الصحيحة
+        $quizzes->transform(function ($quiz) {
+            return [
+                'id' => $quiz->id,
+                'name' => $quiz->getTranslation('name', app()->getLocale()) ?: 'No translation available',
+                'subject_id' => $quiz->subject_id,
+                'grade_id' => $quiz->grade_id,
+                'classroom_id' => $quiz->classroom_id,
+                'section_id' => $quiz->section_id,
+                'teacher_id' => $quiz->teacher_id,
+                'created_at' => $quiz->created_at,
+                'updated_at' => $quiz->updated_at,
+            ];
+        });
+
         return response()->json([
             'status_code' => 200,
             'status_message' => 'List of Exams | قائمة الامتحانات',
@@ -46,10 +61,21 @@ class ApiExamController extends Controller
     {
         try {
             $quizze = Quizze::findOrFail($quizze_id);
+
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'Exam details | تفاصيل الامتحان',
-                'data' => $quizze,
+                'data' => [
+                    'id' => $quizze->id,
+                    'name' => $quizze->getTranslation('name', app()->getLocale()) ?: 'No translation available',
+                    'subject_id' => $quizze->subject_id,
+                    'grade_id' => $quizze->grade_id,
+                    'classroom_id' => $quizze->classroom_id,
+                    'section_id' => $quizze->section_id,
+                    'teacher_id' => $quizze->teacher_id,
+                    'created_at' => $quizze->created_at,
+                    'updated_at' => $quizze->updated_at,
+                ],
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -67,7 +93,16 @@ class ApiExamController extends Controller
     {
         try {
             $validated = $request->validated();
-            $quizze = Quizze::create($validated);
+
+            // ✅ التأكد من أن `name` يتم حفظه بشكل صحيح كترجمة
+            $quizze = new Quizze();
+            $quizze->setTranslation('name', app()->getLocale(), $validated['name']);
+            $quizze->subject_id = $validated['subject_id'];
+            $quizze->grade_id = $validated['grade_id'];
+            $quizze->classroom_id = $validated['classroom_id'];
+            $quizze->section_id = $validated['section_id'];
+            $quizze->teacher_id = $validated['teacher_id'];
+            $quizze->save();
 
             return response()->json([
                 'status_code' => 200,
@@ -90,7 +125,16 @@ class ApiExamController extends Controller
     {
         try {
             $quizze = Quizze::findOrFail($quizze_id);
-            $quizze->update($request->validated());
+            
+            // ✅ تحديث `name` بالطريقة الصحيحة
+            $quizze->setTranslation('name', app()->getLocale(), $request->input('name'));
+            $quizze->update([
+                'subject_id' => $request->input('subject_id'),
+                'grade_id' => $request->input('grade_id'),
+                'classroom_id' => $request->input('classroom_id'),
+                'section_id' => $request->input('section_id'),
+                'teacher_id' => $request->input('teacher_id'),
+            ]);
 
             return response()->json([
                 'status_code' => 200,

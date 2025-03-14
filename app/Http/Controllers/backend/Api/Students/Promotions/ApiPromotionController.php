@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Grade;
 use App\Models\Student;
-use App\Models\Promotions;
+use App\Models\Promotion;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Students\Promotions\StorePromotions;
 
@@ -20,11 +20,12 @@ class ApiPromotionController extends Controller
 
     public function create()
     {
-        return response()->json(['status_code' => 200, 'data' => Promotions::all()]);
+        return response()->json(['status_code' => 200, 'data' => Promotion::all()]);
     }
 
     public function store(StorePromotions $request)
     {
+        // dd($request->all());
         DB::beginTransaction();
         try {
             $students = Student::where('Grade_id', $request->Grade_id)
@@ -45,7 +46,7 @@ class ApiPromotionController extends Controller
                     'academic_year' => $request->academic_year_new,
                 ]);
 
-                Promotions::updateOrCreate([
+                Promotion::updateOrCreate([
                     'student_id' => $student->id,
                     'from_grade' => $request->Grade_id,
                     'from_Classroom' => $request->Classroom_id,
@@ -70,7 +71,7 @@ class ApiPromotionController extends Controller
         DB::beginTransaction();
         try {
             if ($request->page_id == 1) {
-                $promotions = Promotions::all();
+                $promotions = Promotion::all();
                 foreach ($promotions as $promotion) {
                     Student::where('id', $promotion->student_id)
                         ->update([
@@ -80,9 +81,9 @@ class ApiPromotionController extends Controller
                             'academic_year' => $promotion->academic_year,
                         ]);
                 }
-                Promotions::truncate();
+                Promotion::truncate();
             } else {
-                $promotion = Promotions::findOrFail($request->id);
+                $promotion = Promotion::findOrFail($request->id);
                 Student::where('id', $promotion->student_id)
                     ->update([
                         'Grade_id' => $promotion->from_grade,

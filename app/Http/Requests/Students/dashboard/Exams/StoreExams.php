@@ -28,6 +28,8 @@ class StoreExams extends FormRequest
             'classroom_id' => 'required|exists:classrooms,id',
             'section_id' => 'required|exists:sections,id',
             'teacher_id' => 'required|exists:teachers,id',
+            'total_marks' => 'required|numeric|min:1',
+            'date' => 'required|date_format:Y-m-d',
         ];
     }
 
@@ -40,6 +42,10 @@ class StoreExams extends FormRequest
             'classroom_id.required' => 'يجب تحديد الفصل الدراسي.',
             'section_id.required' => 'يجب تحديد القسم.',
             'teacher_id.required' => 'يجب تحديد المعلم.',
+            'total_marks.required' => 'يجب إدخال العلامة الكلية.',
+            'total_marks.numeric' => 'يجب أن تكون العلامة الكلية رقمية.',
+            'date.required' => 'يجب إدخال تاريخ الامتحان.',
+            'date.date_format' => 'يجب أن يكون تنسيق التاريخ بصيغة YYYY-MM-DD.',
         ];
     }
 }

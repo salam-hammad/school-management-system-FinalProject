@@ -8,9 +8,11 @@ use Spatie\Translatable\HasTranslations;
 
 class Quizze extends Model
 {
-    use HasFactory;
-    use HasTranslations;
-    public $translatable = ['name'];
+    use HasFactory, HasTranslations;
+
+    public $translatable = ['name']; 
+
+    protected $fillable = ['name', 'subject_id', 'grade_id', 'classroom_id', 'section_id', 'teacher_id'];
 
     public function teacher()
     {

@@ -6,21 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Students\Libraries\StoreLibraries;
 use App\Http\Requests\Students\Libraries\UpdateLibraries;
-use App\Models\Library;
 use App\Repository\LibraryRepositoryInterface;
+use App\Models\Library;
+use Illuminate\Support\Facades\Storage;
 
 class ApiLibraryController extends Controller
 {
-    protected $library;
-
-    public function __construct(LibraryRepositoryInterface $library)
-    {
-        $this->library = $library;
-    }
-
-    /**
-     * عرض جميع الكتب في المكتبة.
-     */
     public function index()
     {
         $books = Library::all();
@@ -32,72 +23,91 @@ class ApiLibraryController extends Controller
     }
 
     /**
-     * إنشاء كتاب جديد في المكتبة.
+     * إضافة كتاب جديد.
      */
     public function store(StoreLibraries $request)
     {
         try {
+            $validated = $request->validated();
+
+            $book = new Library();
+            $book->title = $validated['title'];
+            $book->Grade_id = $validated['Grade_id'];
+            $book->classroom_id = $validated['Classroom_id'];
+            $book->section_id = $validated['section_id'];
+            $book->teacher_id = 1;
+
             if ($request->hasFile('file_name')) {
                 $file = $request->file('file_name');
-                $filePath = $file->store('library_files', 'public'); // حفظ الملف في مجلد storage/app/public/library_files
-            } else {
-                return response()->json([
-                    'status_code' => 400,
-                    'status_message' => 'File is required',
-                ], 400);
+                $filePath = $file->store('library', 'public');
+                $book->file_name = $filePath;
             }
-    
-            $book = $this->library->store([
-                'title' => $request->title,
-                'file_name' => $filePath, // حفظ المسار بدلاً من النص
-                'Grade_id' => $request->Grade_id,
-                'Classroom_id' => $request->Classroom_id,
-                'section_id' => $request->section_id,
-            ]);
-    
+
+            $book->save();
+
             return response()->json([
                 'status_code' => 200,
-                'status_message' => 'Book created successfully',
+                'status_message' => 'Book added successfully | تم إضافة الكتاب بنجاح',
                 'data' => $book,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'status_message' => 'Error creating book',
+                'status_message' => 'Error adding book | حدث خطأ أثناء إضافة الكتاب',
                 'error' => $e->getMessage(),
             ]);
         }
     }
-    
 
     /**
-     * تحديث كتاب محدد في المكتبة.
+     * تحديث بيانات كتاب محدد.
      */
-    public function update(UpdateLibraries $request, $id)
+    public function update(Request $request, $id)
     {
-        try {
-            $book = $this->library->update($request);
-            return response()->json([
-                'status_code' => 200,
-                'status_message' => 'Book updated successfully | تم تحديث الكتاب بنجاح',
-                'data' => $book,
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status_code' => 500,
-                'status_message' => 'Error updating book | حدث خطأ أثناء تحديث الكتاب',
-                'error' => $e->getMessage(),
-            ]);
+        $library = Library::findOrFail($id);
+
+        // تحديث القيم الأخرى
+        $library->title = $request->title;
+        $library->Grade_id = $request->Grade_id;
+        $library->Classroom_id = $request->Classroom_id;
+        $library->section_id = $request->section_id;
+        $library->teacher_id = $request->teacher_id;
+
+        // التحقق من وجود ملف جديد
+        if ($request->hasFile('file_name')) {
+            // حذف الملف القديم إذا كان موجودًا
+            Storage::delete($library->file_name);
+
+            // حفظ الملف الجديد
+            $path = $request->file('file_name')->store('library_files');
+            $library->file_name = $path;
         }
+
+        $library->save();
+
+        return response()->json(['message' => 'Library updated successfully', 'data' => $library]);
     }
 
     /**
-     * حذف كتاب محدد من المكتبة.
+     * حذف كتاب محدد.
      */
     public function destroy($id)
     {
         try {
-            $this->library->destroy($id);
+            $book = Library::find($id);
+            if (!$book) {
+                return response()->json([
+                    'status_code' => 404,
+                    'status_message' => 'Book not found | لم يتم العثور على الكتاب',
+                ]);
+            }
+
+            if ($book->file_name) {
+                Storage::disk('public')->delete($book->file_name);
+            }
+
+            $book->delete();
+
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'Book deleted successfully | تم حذف الكتاب بنجاح',
@@ -114,16 +124,16 @@ class ApiLibraryController extends Controller
     /**
      * تحميل مرفق الكتاب.
      */
-    public function downloadAttachment($filename)
-    {
-        try {
-            return $this->library->download($filename);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status_code' => 500,
-                'status_message' => 'Error downloading attachment | حدث خطأ أثناء تحميل المرفق',
-                'error' => $e->getMessage(),
-            ]);
-        }
-    }
+    // public function downloadAttachment($filename)
+    // {
+    //     try {
+    //         return $this->library->download($filename);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'status_code' => 500,
+    //             'status_message' => 'Error downloading attachment | حدث خطأ أثناء تحميل المرفق',
+    //             'error' => $e->getMessage(),
+    //         ]);
+    //     }
+    // }
 }

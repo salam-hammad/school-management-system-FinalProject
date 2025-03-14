@@ -18,7 +18,10 @@ use App\Http\Controllers\backend\Api\Students\Libraries\ApiLibraryController;
 use App\Http\Controllers\backend\Api\Students\OnlineClasses\ApiOnlineClasseController;
 use App\Http\Controllers\backend\Api\Students\Payments\ApiPaymentController;
 use App\Http\Controllers\backend\Api\Students\ProcessingFees\ApiProcessingFeeController;
+use App\Http\Controllers\backend\Api\Students\Promotions\ApiPromotionController;
+use App\Http\Controllers\backend\Api\Students\ReceiptStudents\ApiReceiptStudentController;
 
+use App\Http\Controllers\backend\Api\Students\dashboard\StudentAuthController;
 use App\Http\Controllers\backend\Api\Students\dashboard\Exams\ApiExamController;
 
 
@@ -37,6 +40,15 @@ use App\Http\Controllers\backend\Api\Students\dashboard\Exams\ApiExamController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// For Admin :
+// تسجيل الدخول
+Route::post('/login', [ApiLoginController::class, 'login']);
+// تسجيل الخروج
+Route::post('/logout', [ApiLoginController::class, 'logout'])->middleware('auth:sanctum');
+// تسجيل مستخدم جديد
+Route::post('/register', [ApiRegisterController::class, 'register']);
+
 
 
 // ***************************************Start Routes for Classroom API ************************************
@@ -139,7 +151,7 @@ Route::prefix( 'online-classes')->group(function () {
 // *************************************** Start Routes for Libraries API [Student Dashboard] ************************************
 Route::prefix('library')->group(function () {
     Route::get('/', [ApiLibraryController::class, 'index']);
-    Route::post('/', [ApiLibraryController::class, 'store']);
+    Route::post('/store', [ApiLibraryController::class, 'store']);
     Route::put('/{id}', [ApiLibraryController::class, 'update']);
     Route::delete('/{id}', [ApiLibraryController::class, 'destroy']);
     Route::get('/download/{filename}', [ApiLibraryController::class, 'downloadAttachment']);
@@ -167,6 +179,30 @@ Route::prefix('processing-fees')->group(function () {
 // *************************************** End Routes for ProcessingFees API [Student Dashboard] **************************************
 
 
+// *************************************** Start Routes for Promotions API [Student Dashboard] ************************************
+Route::prefix('promotions')->group(function () {
+    Route::get('/', [ApiPromotionController::class, 'index']); // عرض جميع الترقيات
+    Route::post('/store', [ApiPromotionController::class, 'store']); // إضافة ترقية جديدة
+    Route::delete('/delete/{id}', [ApiPromotionController::class, 'destroy']); // حذف ترقية معينة
+});
+// *************************************** End Routes for Promotions API [Student Dashboard] **************************************
+
+
+// *************************************** Start Routes for Receipt Students API [Student Dashboard] ************************************
+Route::prefix('receipt-students')->group(function () {
+    Route::get('/', [ApiReceiptStudentController::class, 'index']); // عرض جميع سندات القبض
+    Route::get('/{id}', [ApiReceiptStudentController::class, 'show']); // عرض سند قبض محدد
+    Route::post('/store', [ApiReceiptStudentController::class, 'store']); // إنشاء سند قبض جديد
+    Route::put('/{id}', [ApiReceiptStudentController::class, 'update']); // تحديث سند قبض
+    Route::delete('/{id}', [ApiReceiptStudentController::class, 'destroy']); // حذف سند قبض
+});
+// *************************************** End Routes for Receipt Students API [Student Dashboard] **************************************
+
+
+
+Route::post('/student/login', [StudentAuthController::class, 'login']);
+Route::post('/student/logout', [StudentAuthController::class, 'logout'])->middleware('auth:sanctum');
+
 
 
 // *************************************** Start Routes for Student Dashboard Exam API ************************************
@@ -174,9 +210,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('students/dashboard/exams')->group(function () {
         Route::get('/', [ApiExamController::class, 'index'])->name('exams.index');
         Route::get('/{quizze_id}', [ApiExamController::class, 'show'])->name('exams.show');
-        Route::post('/', [ApiExamController::class, 'store'])->name('exams.store');
-        Route::put('/{quizze_id}', [ApiExamController::class, 'update'])->name('exams.update');
-        Route::delete('/{quizze_id}', [ApiExamController::class, 'destroy'])->name('exams.destroy');
+        Route::post('/store', [ApiExamController::class, 'store'])->name('exams.store');
+        Route::put('update/{quizze_id}', [ApiExamController::class, 'update'])->name('exams.update');
+        Route::delete('delete/{quizze_id}', [ApiExamController::class, 'destroy'])->name('exams.destroy');
     });
 });
 
@@ -186,9 +222,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-// تسجيل الدخول
-Route::post('/login', [ApiLoginController::class, 'login']);
-// تسجيل الخروج
-Route::post('/logout', [ApiLoginController::class, 'logout'])->middleware('auth:sanctum');
-// تسجيل مستخدم جديد
-Route::post('/register', [ApiRegisterController::class, 'register']);
+
