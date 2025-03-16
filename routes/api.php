@@ -24,6 +24,8 @@ use App\Http\Controllers\backend\Api\Students\ReceiptStudents\ApiReceiptStudentC
 use App\Http\Controllers\backend\Api\Students\dashboard\StudentAuthController;
 use App\Http\Controllers\backend\Api\Students\dashboard\Exams\ApiExamController;
 use App\Http\Controllers\backend\Api\Students\dashboard\Profiles\ApiProfileController;
+use App\Http\Controllers\backend\Api\Students\dashboard\StudentRegistrations\ApiStudentRegistrationController;
+
 
 
 
@@ -228,3 +230,14 @@ Route::prefix('students/profile')->group(function () {
 // *************************************** End Routes for Profile Student Dashboard **************************************
 
 
+// *************************************** Start Routes for Student Dashboard Registrations API ************************************
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('students/dashboard/registrations')->group(function () {
+        Route::get('/', [ApiStudentRegistrationController::class, 'index'])->name('registrations.index');
+        Route::get('/{id}', [ApiStudentRegistrationController::class, 'show'])->name('registrations.show');
+        Route::post('/store', [ApiStudentRegistrationController::class, 'store'])->name('registrations.store');
+        Route::put('/update/{id}', [ApiStudentRegistrationController::class, 'update'])->name('registrations.update');
+        Route::delete('/delete/{id}', [ApiStudentRegistrationController::class, 'destroy'])->name('registrations.destroy');
+        });
+});
+// *************************************** End Routes for Student Dashboard Registrations API ************************************

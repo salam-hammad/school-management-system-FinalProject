@@ -11,7 +11,7 @@ class UpdateStudentRegistrations extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class UpdateStudentRegistrations extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'student_id' => 'sometimes|required|exists:students,id',
+            'subject_id' => 'sometimes|required|exists:subjects,id',
+            'teacher_id' => 'sometimes|required|exists:teachers,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'student_id.required' => 'يجب تحديد الطالب.',
+            'student_id.exists' => 'الطالب المحدد غير موجود.',
+            'subject_id.required' => 'يجب تحديد المادة الدراسية.',
+            'subject_id.exists' => 'المادة الدراسية المحددة غير موجودة.',
+            'teacher_id.required' => 'يجب تحديد المعلم.',
+            'teacher_id.exists' => 'المعلم المحدد غير موجود.',
         ];
     }
 }

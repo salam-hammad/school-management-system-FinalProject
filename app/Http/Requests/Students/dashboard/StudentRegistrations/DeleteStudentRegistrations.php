@@ -11,7 +11,7 @@ class DeleteStudentRegistrations extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class DeleteStudentRegistrations extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id' => 'required|exists:registrations,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'id.required' => 'يجب تحديد التسجيل.',
+            'id.exists' => 'التسجيل المحدد غير موجود.',
         ];
     }
 }
