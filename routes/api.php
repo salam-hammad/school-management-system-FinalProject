@@ -23,6 +23,7 @@ use App\Http\Controllers\backend\Api\Students\ReceiptStudents\ApiReceiptStudentC
 
 use App\Http\Controllers\backend\Api\Students\dashboard\StudentAuthController;
 use App\Http\Controllers\backend\Api\Students\dashboard\Exams\ApiExamController;
+use App\Http\Controllers\backend\Api\Students\dashboard\Profiles\ApiProfileController;
 
 
 
@@ -219,7 +220,11 @@ Route::middleware('auth:sanctum')->group(function () {
 // *************************************** End Routes for Student Dashboard Exam API**************************************
 
 
-
-
+// *************************************** Start Routes for Profile Student Dashboard  ************************************
+Route::prefix('students/profile')->group(function () {
+    Route::get('/{id}', [ApiProfileController::class, 'show']);
+    Route::put('update/{id}', [ApiProfileController::class, 'update']);
+});
+// *************************************** End Routes for Profile Student Dashboard **************************************
 
 

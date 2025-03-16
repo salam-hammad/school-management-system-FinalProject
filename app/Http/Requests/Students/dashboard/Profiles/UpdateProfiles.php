@@ -11,18 +11,27 @@ class UpdateProfiles extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:students,email,' . $this->route('id'),
+            'phone' => 'nullable|string|max:15',
+            'password' => 'nullable|string|min:6',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'الاسم مطلوب',
+            'email.required' => 'البريد الإلكتروني مطلوب',
+            'email.email' => 'يجب أن يكون البريد الإلكتروني صالحاً',
+            'email.unique' => 'البريد الإلكتروني مستخدم بالفعل',
+            'password.min' => 'كلمة المرور يجب أن تكون على الأقل 6 أحرف',
         ];
     }
 }
