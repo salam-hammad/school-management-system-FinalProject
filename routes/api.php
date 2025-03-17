@@ -272,7 +272,7 @@ Route::middleware('auth:sanctum')->prefix('teacher')->group(function () {
 // *************************************** Start Routes for Student Quizzes API [Teacher Dashboard] ************************************
 Route::middleware(['auth:sanctum'])->prefix('teacher')->group(function () {
     Route::get('/quizzes', [TeacherApiQuizzController::class, 'index']); // جلب جميع الاختبارات
-    Route::post('/quizzes', [TeacherApiQuizzController::class, 'store']); // إنشاء اختبار جديد
+    Route::post('/quizzes/store', [TeacherApiQuizzController::class, 'store']); // إنشاء اختبار جديد
     Route::get('/quizze/{id}', [TeacherApiQuizzController::class, 'show']);
     Route::put('/quizzes/update/{id}', [TeacherApiQuizzController::class, 'update']); // تحديث اختبار
     Route::delete('/quizzes/{id}', [TeacherApiQuizzController::class, 'destroy']); // حذف اختبار
@@ -284,15 +284,15 @@ Route::middleware(['auth:sanctum'])->prefix('teacher')->group(function () {
 // *************************************** End Routes for Student Quizzes API [Teacher Dashboard] ************************************
 
 
-
-// Route::middleware(['auth:sanctum'])->prefix('questions')->group(function () {
-//     Route::get('/', [TeacherApiQuestionController::class, 'index']); // جلب جميع الأسئلة
-//     Route::post('/', [TeacherApiQuestionController::class, 'store']); // إنشاء سؤال جديد
-//     Route::get('/show/{id}', [TeacherApiQuestionController::class, 'show']); // جلب تفاصيل سؤال معين
-//     Route::put('/update/{id}', [TeacherApiQuestionController::class, 'update']); // تحديث سؤال معين
-//     Route::delete('/delete/{id}', [TeacherApiQuestionController::class, 'destroy']); // حذف سؤال معين
-// });
-
+// *************************************** Start Routes for Student Questions API [Teacher Dashboard] ************************************
+Route::middleware(['auth:sanctum'])->prefix('teacher')->group(function () {
+    Route::get('/questions', [TeacherApiQuestionController::class, 'index']); // جلب جميع الأسئلة
+    Route::post('/questions/store', [TeacherApiQuestionController::class, 'store']); // إنشاء سؤال جديد
+    Route::get('/show/{id}', [TeacherApiQuestionController::class, 'show']); // جلب تفاصيل سؤال معين
+    Route::put('/update/{id}', [TeacherApiQuestionController::class, 'update']); // تحديث سؤال معين
+    Route::delete('/delete/{id}', [TeacherApiQuestionController::class, 'destroy']); // حذف سؤال معين
+});
+// *************************************** End Routes for Student Questions API [Teacher Dashboard] ************************************
 
 
 // Route::middleware(['auth:sanctum'])->prefix('profile')->group(function () {
