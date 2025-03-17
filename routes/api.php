@@ -33,6 +33,9 @@ use App\Http\Controllers\backend\Api\Teachers\dashboard\ProfileApiController;
 use App\Http\Controllers\backend\Api\Teachers\ApiTeacherController;
 use App\Http\Controllers\backend\Api\Teachers\dashboard\TeacherApiQuestionController;
 
+use App\Http\Controllers\backend\Api\Parents\dashboard\ParentAuthController;
+use App\Http\Controllers\backend\Api\Parents\dashboard\ApiChildrenController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -295,7 +298,33 @@ Route::middleware(['auth:sanctum'])->prefix('teacher')->group(function () {
 // *************************************** End Routes for Student Questions API [Teacher Dashboard] ************************************
 
 
-// Route::middleware(['auth:sanctum'])->prefix('profile')->group(function () {
-//     Route::get('/', [ProfileApiController::class, 'index']);  // جلب المعلومات الشخصية
-//     Route::put('/', [ProfileApiController::class, 'update']); // تحديث المعلومات الشخصية
+// *************************************** Start Routes for Student Questions API [Teacher Dashboard] ************************************
+Route::middleware(['auth:sanctum'])->prefix('teacher')->group(function () {
+    Route::get('/profile', [ProfileApiController::class, 'index']);  // جلب المعلومات الشخصية
+    Route::put('/profile/update', [ProfileApiController::class, 'update']); // تحديث المعلومات الشخصية
+});
+// *************************************** End Routes for Student Questions API [Teacher Dashboard] ************************************
+
+
+// *************************************** Start Routes for Parent Dashboard API ************************************
+Route::prefix('parent')->group(function () {
+    Route::post('/login', [ParentAuthController::class, 'login']);
+    Route::middleware('auth:sanctum')->post('logout', [ParentAuthController::class, 'logout']);
+});
+
+
+
+// *************************************** Start Routes for Children API [Parent Dashboard] ************************************
+// Route::middleware(['auth:sanctum'])->prefix('children')->group(function () {
+//     Route::get('/', [ApiChildrenController::class, 'index']);
+//     Route::get('/{id}/results', [ApiChildrenController::class, 'results']);
+//     Route::get('/attendances', [ApiChildrenController::class, 'attendances']);
+//     Route::post('/attendance-search', [ApiChildrenController::class, 'attendanceSearch']);
+//     Route::get('/fees', [ApiChildrenController::class, 'fees']);
+//     Route::get('/{id}/receipts', [ApiChildrenController::class, 'receiptStudent']);
+//     Route::get('/profile', [ApiChildrenController::class, 'profile']);
+//     Route::put('/profile/{id}', [ApiChildrenController::class, 'updateProfile']);
 // });
+Route::get('/children', [ApiChildrenController::class, 'index']);
+
+// *************************************** End Routes for Children API [Parent Dashboard] ************************************
