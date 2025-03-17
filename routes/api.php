@@ -27,6 +27,11 @@ use App\Http\Controllers\backend\Api\Students\dashboard\Profiles\ApiProfileContr
 use App\Http\Controllers\backend\Api\Students\dashboard\StudentRegistrations\ApiStudentRegistrationController;
 
 use App\Http\Controllers\backend\Api\Teachers\dashboard\TeacherAuthController;
+use App\Http\Controllers\backend\Api\Teachers\dashboard\ApiStudentController;
+use App\Http\Controllers\backend\Api\Teachers\dashboard\TeacherApiQuizzController;
+use App\Http\Controllers\backend\Api\Teachers\dashboard\ProfileApiController;
+use App\Http\Controllers\backend\Api\Teachers\ApiTeacherController;
+use App\Http\Controllers\backend\Api\Teachers\dashboard\TeacherApiQuestionController;
 
 
 /*
@@ -250,3 +255,47 @@ Route::post('/teacher/login', [TeacherAuthController::class, 'login']);
 Route::post('/teacher/logout', [TeacherAuthController::class, 'logout'])->middleware('auth:sanctum');
 
 
+
+
+// *************************************** Start Routes for Student API [Teacher Dashboard] ************************************
+Route::middleware('auth:sanctum')->prefix('teacher')->group(function () {
+    // جلب قائمة الطلاب الذين يدرسهم المعلم
+    Route::get('/students', [ApiStudentController::class, 'index']);
+    Route::get('/sections', [ApiStudentController::class, 'sections']);         // ✅ جلب الأقسام
+    Route::post('/attendance', [ApiStudentController::class, 'attendance']);    // ✅ تسجيل الحضور
+    Route::get('/attendance-report', [ApiStudentController::class, 'attendanceReport']); // ✅ تقرير الحضور
+    Route::post('/attendance-search', [ApiStudentController::class, 'attendanceSearch']); // ✅ البحث عن الحضور
+});
+// *************************************** End Routes for Student API [Teacher Dashboard] ************************************
+
+
+// *************************************** Start Routes for Student Quizzes API [Teacher Dashboard] ************************************
+Route::middleware(['auth:sanctum'])->prefix('teacher')->group(function () {
+    Route::get('/quizzes', [TeacherApiQuizzController::class, 'index']); // جلب جميع الاختبارات
+    Route::post('/quizzes', [TeacherApiQuizzController::class, 'store']); // إنشاء اختبار جديد
+    Route::get('/quizze/{id}', [TeacherApiQuizzController::class, 'show']);
+    Route::put('/quizzes/update/{id}', [TeacherApiQuizzController::class, 'update']); // تحديث اختبار
+    Route::delete('/quizzes/{id}', [TeacherApiQuizzController::class, 'destroy']); // حذف اختبار
+    // جلب الطلاب الذين قاموا بحل الاختبار
+    Route::get('/quizzes/{quizze_id}/students', [TeacherApiQuizzController::class, 'student_quizze']);
+    // إعادة فتح الاختبار للطالب
+    Route::post('/quizzes/repeat', [TeacherApiQuizzController::class, 'repeat_quizze']);
+});
+// *************************************** End Routes for Student Quizzes API [Teacher Dashboard] ************************************
+
+
+
+// Route::middleware(['auth:sanctum'])->prefix('questions')->group(function () {
+//     Route::get('/', [TeacherApiQuestionController::class, 'index']); // جلب جميع الأسئلة
+//     Route::post('/', [TeacherApiQuestionController::class, 'store']); // إنشاء سؤال جديد
+//     Route::get('/show/{id}', [TeacherApiQuestionController::class, 'show']); // جلب تفاصيل سؤال معين
+//     Route::put('/update/{id}', [TeacherApiQuestionController::class, 'update']); // تحديث سؤال معين
+//     Route::delete('/delete/{id}', [TeacherApiQuestionController::class, 'destroy']); // حذف سؤال معين
+// });
+
+
+
+// Route::middleware(['auth:sanctum'])->prefix('profile')->group(function () {
+//     Route::get('/', [ProfileApiController::class, 'index']);  // جلب المعلومات الشخصية
+//     Route::put('/', [ProfileApiController::class, 'update']); // تحديث المعلومات الشخصية
+// });
