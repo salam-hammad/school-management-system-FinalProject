@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens; // أضف هذا الاستيراد
 
 class Teacher extends Authenticatable
 {
-    use HasTranslations;
+    use HasTranslations, HasApiTokens; // أضف HasApiTokens هنا
+    
     public $translatable = ['Name'];
     protected $guarded = [];
 

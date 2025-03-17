@@ -26,7 +26,7 @@ use App\Http\Controllers\backend\Api\Students\dashboard\Exams\ApiExamController;
 use App\Http\Controllers\backend\Api\Students\dashboard\Profiles\ApiProfileController;
 use App\Http\Controllers\backend\Api\Students\dashboard\StudentRegistrations\ApiStudentRegistrationController;
 
-
+use App\Http\Controllers\backend\Api\Teachers\dashboard\TeacherAuthController;
 
 
 /*
@@ -51,6 +51,8 @@ Route::post('/login', [ApiLoginController::class, 'login']);
 Route::post('/logout', [ApiLoginController::class, 'logout'])->middleware('auth:sanctum');
 // تسجيل مستخدم جديد
 Route::post('/register', [ApiRegisterController::class, 'register']);
+
+
 
 
 
@@ -95,32 +97,32 @@ Route::delete('/subjects/{id}', [ApiSubjectController::class, 'destroy']);
 
 // *************************************** Start Routes for Attendance API [Student Dashboard] ************************************
 Route::prefix('attendances')->group(function () {
-    Route::get('/', [ApiAttendanceController::class, 'index']); 
-    Route::post('/', [ApiAttendanceController::class, 'store']); 
-    Route::get('/{id}', [ApiAttendanceController::class, 'show']); 
-    Route::put('/{id}', [ApiAttendanceController::class, 'update']);  
-    Route::delete('/{id}', [ApiAttendanceController::class, 'destroy']);  
+    Route::get('/', [ApiAttendanceController::class, 'index']);
+    Route::post('/', [ApiAttendanceController::class, 'store']);
+    Route::get('/{id}', [ApiAttendanceController::class, 'show']);
+    Route::put('/{id}', [ApiAttendanceController::class, 'update']);
+    Route::delete('/{id}', [ApiAttendanceController::class, 'destroy']);
 });
 // *************************************** End Routes for Attendance API [Student Dashboard] **************************************
 
 
 // *************************************** Start Routes for Fees API [Student Dashboard]************************************
 Route::prefix('fees')->group(function () {
-    Route::get('/', [ApiFeesController::class, 'index']);   
-    Route::post('/', [ApiFeesController::class, 'store']);   
-    Route::get('/{id}', [ApiFeesController::class, 'show']);  
-    Route::put('/{id}', [ApiFeesController::class, 'update']); 
-    Route::delete('/{id}', [ApiFeesController::class, 'destroy']); 
+    Route::get('/', [ApiFeesController::class, 'index']);
+    Route::post('/', [ApiFeesController::class, 'store']);
+    Route::get('/{id}', [ApiFeesController::class, 'show']);
+    Route::put('/{id}', [ApiFeesController::class, 'update']);
+    Route::delete('/{id}', [ApiFeesController::class, 'destroy']);
 });
 // *************************************** End Routes for Fees API [Student Dashboard] **************************************
 
 // *************************************** Start Routes for Fees Invoices API [Student Dashboard] ************************************
 Route::prefix('fees-invoices')->group(function () {
-    Route::get('/', [ApiFeesInvoicesController::class, 'index']);   
-    Route::post('/', [ApiFeesInvoicesController::class, 'store']);   
-    Route::get('/{id}', [ApiFeesInvoicesController::class, 'show']);  
-    Route::put('/{id}', [ApiFeesInvoicesController::class, 'update']); 
-    Route::delete('/{id}', [ApiFeesInvoicesController::class, 'destroy']); 
+    Route::get('/', [ApiFeesInvoicesController::class, 'index']);
+    Route::post('/', [ApiFeesInvoicesController::class, 'store']);
+    Route::get('/{id}', [ApiFeesInvoicesController::class, 'show']);
+    Route::put('/{id}', [ApiFeesInvoicesController::class, 'update']);
+    Route::delete('/{id}', [ApiFeesInvoicesController::class, 'destroy']);
 });
 // *************************************** End Routes for Fees Invoices API [Student Dashboard] **************************************
 
@@ -141,7 +143,7 @@ Route::prefix('graduates')->group(function () {
 // *************************************** End Routes for Graduates API [Student Dashboard] **************************************
 
 // *************************************** Start Routes for OnlineClasse API [Student Dashboard] ************************************
-Route::prefix( 'online-classes')->group(function () {
+Route::prefix('online-classes')->group(function () {
     Route::get('/', [ApiOnlineClasseController::class, 'index']); // عرض جميع الحصص
     Route::post('/', [ApiOnlineClasseController::class, 'store']); // إنشاء حصة جديدة
     Route::get('/{id}', [ApiOnlineClasseController::class, 'show']); // عرض حصة محددة
@@ -202,10 +204,9 @@ Route::prefix('receipt-students')->group(function () {
 // *************************************** End Routes for Receipt Students API [Student Dashboard] **************************************
 
 
-
+// *************************************** Start Routes for Student Dashboard API ************************************
 Route::post('/student/login', [StudentAuthController::class, 'login']);
 Route::post('/student/logout', [StudentAuthController::class, 'logout'])->middleware('auth:sanctum');
-
 
 
 // *************************************** Start Routes for Student Dashboard Exam API ************************************
@@ -238,6 +239,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/store', [ApiStudentRegistrationController::class, 'store'])->name('registrations.store');
         Route::put('/update/{id}', [ApiStudentRegistrationController::class, 'update'])->name('registrations.update');
         Route::delete('/delete/{id}', [ApiStudentRegistrationController::class, 'destroy'])->name('registrations.destroy');
-        });
+    });
 });
 // *************************************** End Routes for Student Dashboard Registrations API ************************************
+
+
+
+// *************************************** Start Routes for Teacher Dashboard API ************************************
+Route::post('/teacher/login', [TeacherAuthController::class, 'login']);
+Route::post('/teacher/logout', [TeacherAuthController::class, 'logout'])->middleware('auth:sanctum');
+
+
