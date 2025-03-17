@@ -44,8 +44,7 @@ Route::post('/' . LaravelLocalization::setLocale() . '/livewire/update', $handle
 
 // Livewire::setUpdateRoute(function ($handle) {
 //     return Route::post('/en/livewire/update', $handle);
-// });
-
+// });
 
 Route::get('/',  [HomeController::class, 'index'])->name('selection');
 // Route::get('/dashboard',  [HomeController::class, 'dashboard'])->name('dashboard');

@@ -9,6 +9,14 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'answers',
+        'right_answer',
+        'score',
+        'quizze_id'
+    ];
+
     public function quizze()
     {
         return $this->belongsTo('App\Models\Quizze');
