@@ -315,16 +315,14 @@ Route::prefix('parent')->group(function () {
 
 
 // *************************************** Start Routes for Children API [Parent Dashboard] ************************************
-// Route::middleware(['auth:sanctum'])->prefix('children')->group(function () {
-//     Route::get('/', [ApiChildrenController::class, 'index']);
-//     Route::get('/{id}/results', [ApiChildrenController::class, 'results']);
-//     Route::get('/attendances', [ApiChildrenController::class, 'attendances']);
-//     Route::post('/attendance-search', [ApiChildrenController::class, 'attendanceSearch']);
-//     Route::get('/fees', [ApiChildrenController::class, 'fees']);
-//     Route::get('/{id}/receipts', [ApiChildrenController::class, 'receiptStudent']);
-//     Route::get('/profile', [ApiChildrenController::class, 'profile']);
-//     Route::put('/profile/{id}', [ApiChildrenController::class, 'updateProfile']);
-// });
-Route::get('/children', [ApiChildrenController::class, 'index']);
-
+Route::middleware(['auth:sanctum'])->prefix('children')->group(function () {
+    Route::get('/', [ApiChildrenController::class, 'index']);
+    Route::get('/{id}/results', [ApiChildrenController::class, 'results']);
+    Route::get('/attendances', [ApiChildrenController::class, 'attendances']);
+    Route::post('/attendance-search', [ApiChildrenController::class, 'attendanceSearch']);
+    Route::get('/fees', [ApiChildrenController::class, 'fees']);
+    Route::get('/{id}/receipts', [ApiChildrenController::class, 'receiptStudent']);
+    Route::get('/profile', [ApiChildrenController::class, 'profile']);
+    Route::put('/profile/{id}', [ApiChildrenController::class, 'updateProfile']);
+});
 // *************************************** End Routes for Children API [Parent Dashboard] ************************************
