@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers\backend\Students;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Grade;
+use Illuminate\Http\Request;
 use App\Models\online_classe;
+use App\Http\Controllers\Controller;
 use App\Http\Traits\MeetingZoomTrait;
-use MacsiDigital\Zoom\Facades\Zoom;
 
 class OnlineClasseController extends Controller
 {
     use MeetingZoomTrait;
     public function index()
     {
-        // $online_classes = online_classe::where('created_by', auth()->user()->email)->get();
-        // return view('pages.online_classes.index', compact('online_classes'));
-        $online_classes = online_classe::all();
+        $online_classes = online_classe::where('created_by', auth()->user()->email)->get();
         return view('pages.online_classes.index', compact('online_classes'));
     }
 
