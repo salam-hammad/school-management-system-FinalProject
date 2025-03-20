@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @section('title')
-    {{ trans('main_trans.Main_title') }}
+{{ trans('main_trans.Main_title') }}
 @stop
 
 <head>
@@ -43,7 +43,8 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <h4 class="mb-0" style="font-family: 'Cairo', sans-serif">{{ trans('main_trans.Welcome') }}:
-                            {{ auth()->user()->name }}</h4><br>
+                            {{ auth()->user()->name }}
+                        </h4><br>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right">
@@ -155,7 +156,8 @@
                                 <div class="d-block d-md-flex justify-content-between">
                                     <div class="d-block w-100">
                                         <h5 style="font-family: 'Cairo', sans-serif" class="card-title">
-                                            {{ trans('main_trans.Latest_operations_on_the_system') }}</h5>
+                                            {{ trans('main_trans.Latest_operations_on_the_system') }}
+                                        </h5>
                                     </div>
                                     <div class="d-block d-md-flex nav-tabs-custom">
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -207,19 +209,20 @@
                                                 </thead>
                                                 <tbody>
                                                     @forelse(\App\Models\Student::latest()->take(5)->get() as $student)
-                                                        <tr>
-                                                            <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $student->name }}</td>
-                                                            <td>{{ $student->email }}</td>
-                                                            <td>{{ $student->gender->Name }}</td>
-                                                            <td>{{ $student->grade->Name }}</td>
-                                                            <td>{{ $student->classroom->Name_Class }}</td>
-                                                            <td>{{ $student->section->Name_Section }}</td>
-                                                            <td class="text-success">{{ $student->created_at }}</td>
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $student->name }}</td>
+                                                        <td>{{ $student->email }}</td>
+                                                        <td>{{ $student->gender->Name }}</td>
+                                                        <td>{{ $student->grade->Name }}</td>
+                                                        <td>{{ $student->classroom->Name_Class }}</td>
+                                                        <td>{{ $student->section->Name_Section }}</td>
+                                                        <td class="text-success">{{ $student->created_at }}</td>
                                                         @empty
-                                                            <td class="alert-danger" colspan="8">
-                                                                {{ trans('Students_trans.No_data_found') }}</td>
-                                                        </tr>
+                                                        <td class="alert-danger" colspan="8">
+                                                            {{ trans('Students_trans.No_data_found') }}
+                                                        </td>
+                                                    </tr>
                                                     @endforelse
                                                 </tbody>
                                             </table>
@@ -244,19 +247,20 @@
                                                 </thead>
 
                                                 @forelse(\App\Models\Teacher::latest()->take(5)->get() as $teacher)
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $teacher->Name }}</td>
-                                                            <td>{{ $teacher->genders->Name }}</td>
-                                                            <td>{{ $teacher->Joining_Date }}</td>
-                                                            <td>{{ $teacher->specializations->Name }}</td>
-                                                            <td class="text-success">{{ $teacher->created_at }}</td>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $teacher->Name }}</td>
+                                                        <td>{{ $teacher->genders->Name }}</td>
+                                                        <td>{{ $teacher->Joining_Date }}</td>
+                                                        <td>{{ $teacher->specializations->Name }}</td>
+                                                        <td class="text-success">{{ $teacher->created_at }}</td>
                                                         @empty
-                                                            <td class="alert-danger" colspan="8">
-                                                                {{ trans('Students_trans.No_data_found') }}</td>
-                                                        </tr>
-                                                    </tbody>
+                                                        <td class="alert-danger" colspan="8">
+                                                            {{ trans('Students_trans.No_data_found') }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
                                                 @endforelse
                                             </table>
                                         </div>
@@ -280,17 +284,18 @@
                                                 </thead>
                                                 <tbody>
                                                     @forelse(\App\Models\My_Parent::latest()->take(5)->get() as $parent)
-                                                        <tr>
-                                                            <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $parent->Name_Father }}</td>
-                                                            <td>{{ $parent->email }}</td>
-                                                            <td>{{ $parent->National_ID_Father }}</td>
-                                                            <td>{{ $parent->Phone_Father }}</td>
-                                                            <td class="text-success">{{ $parent->created_at }}</td>
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $parent->Name_Father }}</td>
+                                                        <td>{{ $parent->email }}</td>
+                                                        <td>{{ $parent->National_ID_Father }}</td>
+                                                        <td>{{ $parent->Phone_Father }}</td>
+                                                        <td class="text-success">{{ $parent->created_at }}</td>
                                                         @empty
-                                                            <td class="alert-danger" colspan="8">
-                                                                {{ trans('Students_trans.No_data_found') }}</td>
-                                                        </tr>
+                                                        <td class="alert-danger" colspan="8">
+                                                            {{ trans('Students_trans.No_data_found') }}
+                                                        </td>
+                                                    </tr>
                                                     @endforelse
                                                 </tbody>
                                             </table>

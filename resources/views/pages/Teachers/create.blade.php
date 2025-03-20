@@ -32,7 +32,7 @@
                     <div class="col-xs-12">
                         <div class="col-md-12">
                             <br>
-                            <form action="{{route('Teachers.store')}}" method="post"> 
+                            <form action="{{route('Teachers.store')}}" method="post">
                              @csrf
                             <div class="form-row">
                                 <div class="col">
@@ -131,6 +131,4 @@
     <!-- row closed -->
 @endsection
 @section('js')
-    @toastr_js
-    @toastr_render
 @endsection

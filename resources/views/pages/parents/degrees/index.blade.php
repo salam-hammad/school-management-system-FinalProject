@@ -1,13 +1,13 @@
 @extends('layouts.master')
 @section('css')
 @section('title')
-    {{ trans('Students_trans.List_of_test_results') }}
+{{ trans('Students_trans.List_of_test_results') }}
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-    {{ trans('Students_trans.List_of_test_results') }}
+{{ trans('Students_trans.List_of_test_results') }}
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -22,7 +22,8 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
-                                    data-page-length="50" style="text-align: center">
+                                    data-page-length="50"
+                                    style="text-align: center">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -33,14 +34,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($degrees as $degree)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $degree->student->name }}</td>
-                                                <td>{{ $degree->quizze->name }}</td>
-                                                <td>{{ $degree->score }}</td>
-                                                <td>{{ $degree->date }}</td>
-                                            </tr>
+                                        @foreach($degrees as $degree)
+                                        <tr>
+                                            <td>{{ $loop->iteration}}</td>
+                                            <td>{{$degree->student->name}}</td>
+                                            <td>{{$degree->quizze->name}}</td>
+                                            <td>{{$degree->score}}</td>
+                                            <td>{{$degree->date}}</td>
+                                        </tr>
                                         @endforeach
                                 </table>
                             </div>

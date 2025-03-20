@@ -2,57 +2,54 @@
 @section('css')
     @toastr_css
 @section('title')
-    معالجات الرسوم الدراسية
+{{trans('Students_trans.Tuition_fee_processors')}}
 @stop
 @endsection
 @section('page-header')
-<!-- breadcrumb -->
+    <!-- breadcrumb -->
 @section('PageTitle')
-    معالجات الرسوم الدراسية
+{{trans('Students_trans.Tuition_fee_processors')}}
 @stop
 <!-- breadcrumb -->
 @endsection
 @section('content')
-<!-- row -->
-<div class="row">
-    <div class="col-md-12 mb-30">
-        <div class="card card-statistics h-100">
-            <div class="card-body">
-                <div class="col-xl-12 mb-30">
-                    <div class="card card-statistics h-100">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
-                                    data-page-length="50" style="text-align: center">
-                                    <thead>
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-12 mb-30">
+            <div class="card card-statistics h-100">
+                <div class="card-body">
+                    <div class="col-xl-12 mb-30">
+                        <div class="card card-statistics h-100">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
+                                           data-page-length="50"
+                                           style="text-align: center">
+                                        <thead>
                                         <tr class="alert-success">
                                             <th>#</th>
-                                            <th>الاسم</th>
-                                            <th>المبلغ</th>
-                                            <th>البيان</th>
-                                            <th>العمليات</th>
+                                            <th>{{trans('Students_trans.Name')}}</th>
+                                            <th>{{trans('Students_trans.Amount')}}</th>
+                                            <th>{{trans('Students_trans.Statement')}}</th>
+                                            <th>{{trans('Students_trans.Operations')}}</th>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($ProcessingFees as $ProcessingFee)
+                                        </thead>
+                                        <tbody>
+                                        @foreach($ProcessingFees as $ProcessingFee)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $ProcessingFee->student->name }}</td>
-                                                <td>{{ number_format($ProcessingFee->amount, 2) }}</td>
-                                                <td>{{ $ProcessingFee->description }}</td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{$ProcessingFee->student->name}}</td>
+                                            <td>{{ number_format($ProcessingFee->amount, 2) }}</td>
+                                            <td>{{$ProcessingFee->description}}</td>
                                                 <td>
-                                                    <a href="{{ route('ProcessingFee.edit', $ProcessingFee->id) }}"
-                                                        class="btn btn-info btn-sm" role="button"
-                                                        aria-pressed="true"><i class="fa fa-edit"></i></a>
-                                                    <button type="button" class="btn btn-danger btn-sm"
-                                                        data-toggle="modal"
-                                                        data-target="#Delete_receipt{{ $ProcessingFee->id }}"><i
-                                                            class="fa fa-trash"></i></button>
+                                                    <a href="{{route('ProcessingFee.edit',$ProcessingFee->id)}}" class="btn btn-info btn-sm" role="button" aria-pressed="true"><i class="fa fa-edit"></i></a>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Delete_receipt{{$ProcessingFee->id}}" ><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
-                                            @include('pages.ProcessingFee.Delete')
+                                        @include('pages.ProcessingFee.Delete')
                                         @endforeach
-                                </table>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -60,10 +57,9 @@
             </div>
         </div>
     </div>
-</div>
-<!-- row closed -->
+    <!-- row closed -->
 @endsection
 @section('js')
-@toastr_js
-@toastr_render
+    @toastr_js
+    @toastr_render
 @endsection

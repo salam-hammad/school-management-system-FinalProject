@@ -2,44 +2,44 @@
 @section('css')
     @toastr_css
 @section('title')
-    {{ trans('Students_trans.Student_attendance_list') }}
+{{ trans( 'Students_trans.Student_attendance_list')}}   
 @stop
 @endsection
 @section('page-header')
-<!-- breadcrumb -->
+    <!-- breadcrumb -->
 @section('PageTitle')
-    {{ trans('Students_trans.Student_attendance_list') }}
+{{ trans( 'Students_trans.Student_attendance_list')}}   
 @stop
 <!-- breadcrumb -->
 @endsection
 @section('content')
-<!-- row -->
+    <!-- row -->
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-@if (session('status'))
-    <div class="alert alert-danger">
-        <ul>
-            <li>{{ session('status') }}</li>
-        </ul>
-    </div>
-@endif
+    @if (session('status'))
+        <div class="alert alert-danger">
+            <ul>
+                <li>{{ session('status') }}</li>
+            </ul>
+        </div>
+    @endif
 
-<h5 style="font-family: 'Cairo', sans-serif;color: red"> {{ trans('Students_trans.date') }}: {{ date('Y-m-d') }}</h5>
-<form method="post" action="{{ route('attendance') }}" autocomplete="off">
+    <h5 style="font-family: 'Cairo', sans-serif;color: red"> {{ trans('Students_trans.date') }}: {{ date('Y-m-d') }}</h5>
+    <form method="post" action="{{ route('attendance') }}" autocomplete="off">
 
-    @csrf
-    <table id="datatable" class="table  table-hover table-sm table-bordered p-0" data-page-length="50"
-        style="text-align: center">
-        <thead>
+        @csrf
+        <table id="datatable" class="table  table-hover table-sm table-bordered p-0" data-page-length="50"
+               style="text-align: center">
+            <thead>
             <tr>
                 <th class="alert-success">#</th>
                 <th class="alert-success">{{ trans('Students_trans.name') }}</th>
@@ -50,8 +50,8 @@
                 <th class="alert-success">{{ trans('Students_trans.section') }}</th>
                 <th class="alert-success">{{ trans('Students_trans.Presence_and_Absence') }}</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @foreach ($students as $student)
                 <tr>
                     <td>{{ $loop->index + 1 }}</td>
@@ -64,17 +64,21 @@
                     <td>
                         <label class="block text-gray-500 font-semibold sm:border-r sm:pr-4">
                             <input name="attendences[{{ $student->id }}]"
-                                @foreach ($student->attendance()->where('attendence_date', date('Y-m-d'))->get() as $attendance)
-                                   {{ $attendance->attendence_status == 1 ? 'checked' : '' }} @endforeach
-                                class="leading-tight" type="radio" value="presence">
+                                   @foreach($student->attendance()->where('attendence_date',date('Y-m-d'))->get() as $attendance)
+                                   {{ $attendance->attendence_status == 1 ? 'checked' : '' }}
+                                   @endforeach
+                                   class="leading-tight" type="radio"
+                                   value="presence">
                             <span class="text-success">{{ trans('Students_trans.presence') }}</span>
                         </label>
 
                         <label class="ml-4 block text-gray-500 font-semibold">
                             <input name="attendences[{{ $student->id }}]"
-                                @foreach ($student->attendance()->where('attendence_date', date('Y-m-d'))->get() as $attendance)
-                                   {{ $attendance->attendence_status == 0 ? 'checked' : '' }} @endforeach
-                                class="leading-tight" type="radio" value="absent">
+                                   @foreach($student->attendance()->where('attendence_date',date('Y-m-d'))->get() as $attendance)
+                                   {{ $attendance->attendence_status == 0 ? 'checked' : '' }}
+                                   @endforeach
+                                   class="leading-tight" type="radio"
+                                   value="absent">
                             <span class="text-danger">{{ trans('Students_trans.absence') }}</span>
                         </label>
 
@@ -85,15 +89,15 @@
 
                 </tr>
             @endforeach
-        </tbody>
-    </table>
-    <P>
-        <button class="btn btn-success" type="submit">{{ trans('Students_trans.submit') }}</button>
-    </P>
-</form><br>
-<!-- row closed -->
+            </tbody>
+        </table>
+        <P>
+            <button class="btn btn-success" type="submit">{{ trans('Students_trans.submit') }}</button>
+        </P>
+    </form><br>
+    <!-- row closed -->
 @endsection
 @section('js')
-@toastr_js
-@toastr_render
+    @toastr_js
+    @toastr_render
 @endsection

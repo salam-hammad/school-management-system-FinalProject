@@ -47,9 +47,9 @@ login-->
                         <div class="login-fancy">
                             <div class="flex flex-col items-center justify-center text-center">
                                 <h3 class="text-4xl font-bold text-white mb-6 drop-shadow-lg">!Welcome back</h3>
-                                <p class="mb-20 text-white">School Management System</p>
+                                <p class="mb-20 text-white">School Management System</p> 
                             </div>
-
+                            
                             <ul class="list-unstyled  pos-bot pb-30">
                                 <li class="list-inline-item"><a class="text-white" href="#"> Terms of Use</a>
                                 </li>

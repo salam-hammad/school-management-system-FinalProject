@@ -2,64 +2,66 @@
 @section('css')
     @toastr_css
 @section('title')
-    {{ trans('Students_trans.List_of_questions') }}
+{{trans('Students_trans.List_of_questions')}}
 @stop
 @endsection
 @section('page-header')
-<!-- breadcrumb -->
+    <!-- breadcrumb -->
 @section('PageTitle')
-    {{ trans('Students_trans.List_of_questions') }}
+{{trans('Students_trans.List_of_questions')}}
 @stop
 <!-- breadcrumb -->
 @endsection
 @section('content')
-<!-- row -->
-<div class="row">
-    <div class="col-md-12 mb-30">
-        <div class="card card-statistics h-100">
-            <div class="card-body">
-                <div class="col-xl-12 mb-30">
-                    <div class="card card-statistics h-100">
-                        <div class="card-body">
-                            <a href="{{ route('Questions.create') }}" class="btn btn-success btn-sm" role="button"
-                                aria-pressed="true">{{ trans('Students_trans.Add_a_new_question') }}</a><br><br>
-                            <div class="table-responsive">
-                                <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
-                                    data-page-length="50" style="text-align: center">
-                                    <thead>
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-12 mb-30">
+            <div class="card card-statistics h-100">
+                <div class="card-body">
+                    <div class="col-xl-12 mb-30">
+                        <div class="card card-statistics h-100">
+                            <div class="card-body">
+                                <a href="{{route('Questions.create')}}" class="btn btn-success btn-sm" role="button"
+                                   aria-pressed="true">{{trans('Students_trans.Add_a_new_question')}}</a><br><br>
+                                <div class="table-responsive">
+                                    <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
+                                           data-page-length="50"
+                                           style="text-align: center">
+                                        <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">{{ trans('Students_trans.question') }}</th>
-                                            <th scope="col">{{ trans('Students_trans.Answers') }}</th>
-                                            <th scope="col">{{ trans('Students_trans.the_right_answer') }}</th>
-                                            <th scope="col">{{ trans('Students_trans.Degree') }}</th>
-                                            <th scope="col">{{ trans('Students_trans.Test_name') }}</th>
-                                            <th scope="col">{{ trans('Students_trans.Operations') }}</th>
+                                            <th scope="col">{{trans('Students_trans.question')}}</th>
+                                            <th scope="col">{{trans('Students_trans.Answers')}}</th>
+                                            <th scope="col">{{trans('Students_trans.the_right_answer')}}</th>
+                                            <th scope="col">{{trans('Students_trans.Degree')}}</th>
+                                            <th scope="col">{{trans('Students_trans.Test_name')}}</th>
+                                            <th scope="col">{{trans('Students_trans.Operations')}}</th>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($questions as $question)
+                                        </thead>
+                                        <tbody>
+                                        @foreach($questions as $question)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $question->title }}</td>
-                                                <td>{{ $question->answers }}</td>
-                                                <td>{{ $question->right_answer }}</td>
-                                                <td>{{ $question->score }}</td>
-                                                <td>{{ $question->quizze->name }}</td>
+                                                <td>{{ $loop->iteration}}</td>
+                                                <td>{{$question->title}}</td>
+                                                <td>{{$question->answers}}</td>
+                                                <td>{{$question->right_answer}}</td>
+                                                <td>{{$question->score}}</td>
+                                                <td>{{$question->quizze->name}}</td>
                                                 <td>
-                                                    <a href="{{ route('Questions.edit', $question->id) }}"
-                                                        class="btn btn-info btn-sm" role="button"
-                                                        aria-pressed="true"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{route('Questions.edit',$question->id)}}"
+                                                       class="btn btn-info btn-sm" role="button" aria-pressed="true"><i
+                                                            class="fa fa-edit"></i></a>
                                                     <button type="button" class="btn btn-danger btn-sm"
-                                                        data-toggle="modal"
-                                                        data-target="#delete_exam{{ $question->id }}" title="حذف"><i
+                                                            data-toggle="modal"
+                                                            data-target="#delete_exam{{ $question->id }}" title="حذف"><i
                                                             class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
 
-                                            @include('pages.Questions.destroy')
+                                        @include('pages.Questions.destroy')
                                         @endforeach
-                                </table>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -67,10 +69,9 @@
             </div>
         </div>
     </div>
-</div>
-<!-- row closed -->
+    <!-- row closed -->
 @endsection
 @section('js')
-@toastr_js
-@toastr_render
+    @toastr_js
+    @toastr_render
 @endsection
