@@ -59,7 +59,7 @@ trait MeetingZoomTrait
             'duration' => $request->duration,
             'timezone' => 'Asia/Jerusalem',
             'password' => $request->password ?? '123456',
-            'settings' => [
+           'settings' => [
                 'join_before_host'   => false,  // Participants CANNOT join before the host starts the meeting
                 'host_video'         => true,   // Host video will be ON when the meeting starts
                 'participant_video'  => true,   // Participant video will be ON when they join
@@ -100,4 +100,5 @@ trait MeetingZoomTrait
 
         return $response->json()['access_token'];
     }
+
 }
