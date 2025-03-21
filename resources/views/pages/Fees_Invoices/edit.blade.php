@@ -2,13 +2,13 @@
 @section('css')
     @toastr_css
 @section('title')
-{{ trans('Students_trans.Adjustment_of_tuition_fees') }}
+    تعديل رسوم دراسية
 @stop
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
 @section('PageTitle')
-{{ trans('Students_trans.Adjustment_of_tuition_fees') }}
+    تعديل رسوم دراسية
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -34,14 +34,14 @@
                         @csrf
                         <div class="form-row">
                             <div class="form-group col">
-                                <label for="inputEmail4"> {{ trans('Students_trans.name') }}</label>
+                                <label for="inputEmail4">اسم الطالب</label>
                                 <input type="text" value="{{$fee_invoices->student->name}}" readonly name="title_ar" class="form-control">
                                 <input type="hidden" value="{{$fee_invoices->id}}" name="id" class="form-control">
                             </div>
 
 
                             <div class="form-group col">
-                                <label for="inputEmail4"> {{ trans('Students_trans.Amount') }}</label>
+                                <label for="inputEmail4">المبلغ</label>
                                 <input type="number" value="{{$fee_invoices->amount}}" name="amount" class="form-control">
                             </div>
 
@@ -51,7 +51,7 @@
                         <div class="form-row">
 
                             <div class="form-group col">
-                                <label for="inputZip"> {{ trans('Students_trans.Fee_type') }}</label>
+                                <label for="inputZip">نوع الرسوم</label>
                                 <select class="custom-select mr-sm-2" name="fee_id">
                                     @foreach($fees as $fee)
                                         <option value="{{$fee->id}}" {{$fee->id == $fee_invoices->fee_id ? 'selected':"" }}>{{$fee->title}}</option>
@@ -62,12 +62,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputAddress"> {{ trans('Students_trans.comments') }}</label>
+                            <label for="inputAddress">ملاحظات</label>
                             <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="4">{{$fee_invoices->description}}</textarea>
                         </div>
                         <br>
 
-                        <button type="submit" class="btn btn-primary"> {{ trans('Students_trans.submit') }}</button>
+                        <button type="submit" class="btn btn-primary">تاكيد</button>
 
                     </form>
 

@@ -1,14 +1,14 @@
 @extends('layouts.master')
 @section('css')
-@toastr_css
+    @toastr_css
 @section('title')
-{{ trans('Students_trans.List_of_tested_students') }}
+    {{ trans('Students_trans.List_of_tested_students') }}
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-{{ trans('Students_trans.List_of_tested_students') }}
+    {{ trans('Students_trans.List_of_tested_students') }}
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -28,7 +28,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>{{ trans('Students_trans.name') }}</th>
-                                            <th>{{ trans('Students_trans.Last_question')}}</th>
+                                            <th>{{ trans('Students_trans.Last_question') }}</th>
                                             <th>{{ trans('Students_trans.Degree') }}</th>
                                             <th>{{ trans('Students_trans.manipulation') }}</th>
                                             <th>{{ trans('Students_trans.Test_date') }}</th>
@@ -37,63 +37,66 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($degrees as $degree)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $degree->student->name }}</td>
-                                            <td>{{ $degree->question_id }}</td>
-                                            <td>{{ $degree->score }}</td>
-                                            @if ($degree->abuse == 0)
-                                            <td style="color: green">{{ trans('Teacher_trans.No_manipulation') }}</td>
-                                            @else
-                                            <td style="color: red"> {{ trans('Teacher_trans.There_is_manipulation') }}</td>
-                                            @endif
-                                            <td>{{ $degree->date }}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-info btn-sm"
-                                                    data-toggle="modal"
-                                                    data-target="#repeat_quizze{{ $degree->quizze_id }}"
-                                                    title="إعادة">
-                                                    <i class="fas fa-repeat"></i></button>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $degree->student->name }}</td>
+                                                <td>{{ $degree->question_id }}</td>
+                                                <td>{{ $degree->score }}</td>
+                                                @if ($degree->abuse == 0)
+                                                    <td style="color: green">
+                                                        {{ trans('Teacher_trans.No_manipulation') }}</td>
+                                                @else
+                                                    <td style="color: red">
+                                                        {{ trans('Teacher_trans.There_is_manipulation') }}</td>
+                                                @endif
+                                                <td>{{ $degree->date }}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info btn-sm"
+                                                        data-toggle="modal"
+                                                        data-target="#repeat_quizze{{ $degree->quizze_id }}"
+                                                        title="إعادة">
+                                                        <i class="fas fa-repeat"></i></button>
+                                                </td>
+                                            </tr>
 
-                                        <div class="modal fade" id="repeat_quizze{{ $degree->quizze_id }}"
-                                            tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <form action="{{ route('repeat.quizze', $degree->quizze_id) }}"
-                                                    method="post">
-                                                    {{ method_field('post') }}
-                                                    {{ csrf_field() }}
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 style="font-family: 'Cairo', sans-serif;"
-                                                                class="modal-title" id="exampleModalLabel">{{ trans('Teacher_trans.re-test') }}
-                                                            </h5>
-                                                            <button type="button" class="close"
-                                                                data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h6>{{ $degree->student->name }}</h6>
-                                                            <input type="hidden" name="student_id"
-                                                                value="{{ $degree->student_id }}">
-                                                            <input type="hidden" name="quizze_id"
-                                                                value="{{ $degree->quizze_id }}">
-                                                        </div>
-                                                        <div class="modal-footer">
+                                            <div class="modal fade" id="repeat_quizze{{ $degree->quizze_id }}"
+                                                tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <form action="{{ route('repeat.quizze', $degree->quizze_id) }}"
+                                                        method="post">
+                                                        {{ method_field('post') }}
+                                                        {{ csrf_field() }}
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 style="font-family: 'Cairo', sans-serif;"
+                                                                    class="modal-title" id="exampleModalLabel">
+                                                                    {{ trans('Teacher_trans.re-test') }}
+                                                                </h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h6>{{ $degree->student->name }}</h6>
+                                                                <input type="hidden" name="student_id"
+                                                                    value="{{ $degree->student_id }}">
+                                                                <input type="hidden" name="quizze_id"
+                                                                    value="{{ $degree->quizze_id }}">
+                                                            </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">{{ trans('My_Classes_trans.Close') }}</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-info">{{ trans('My_Classes_trans.submit') }}</button>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">{{ trans('My_Classes_trans.Close') }}</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-info">{{ trans('My_Classes_trans.submit') }}</button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
                                         @endforeach
                                 </table>
                             </div>

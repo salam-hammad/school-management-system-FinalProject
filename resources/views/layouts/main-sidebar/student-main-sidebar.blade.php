@@ -2,15 +2,17 @@
     <ul class="nav navbar-nav side-menu" id="sidebarnav">
         <!-- menu item Dashboard-->
         <li>
-            <a href="{{ url('/dashboard') }}">
+            {{-- <a href="{{ url('/dashboard') }}"> --}}
+            <a href="{{ route('dashboard.Students') }}">
                 <div class="pull-left"><i class="ti-home"></i><span
-                        class="right-nav-text">{{trans('main_trans.Dashboard')}}</span>
+                        class="right-nav-text">{{ trans('main_trans.Dashboard') }}</span>
                 </div>
-                <div class="clearfix"></rans
+                <div class="clearfix"></div>
             </a>
         </li>
         <!-- menu title -->
-        <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.Programname')}} </li>
+        <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{ trans('main_trans.Programname') }} </li>
+
 
 
         <!-- المواد الدراسية -->
@@ -28,15 +30,16 @@
             </ul>
         </li>
 
-             <!-- الحصص الأونلاين-->
-             <li>
+        <!-- الحصص الأونلاين-->
+        <li>
             <a href=""><i class="fas fa-book-open"></i><span class="right-nav-text">الحصص الأونلاين</span></a>
 
             {{-- <a href="{{route('student_exams.index')}}"><i class="fas fa-book-open"></i><span
                     class="right-nav-text">الامتحانات</span></a>                     --}}
         </li>
-           <!--  المكتبة-->
-           <li>
+
+        <!--  المكتبة-->
+        <li>
             <a href=""><i class="fas fa-book-open"></i><span class="right-nav-text">المكتبة</span></a>
 
             {{-- <a href="{{route('student_exams.index')}}"><i class="fas fa-book-open"></i><span
@@ -46,15 +49,15 @@
 
         <!-- الامتحانات-->
         <li>
-            <a href="{{route('student_exams.index')}}"><i class="fas fa-book-open"></i><span
+            <a href="{{ route('student_exams.index') }}"><i class="fas fa-book-open"></i><span
                     class="right-nav-text">الامتحانات</span></a>
         </li>
 
 
         <!-- Settings-->
         <li>
-            <a href="{{route('settings.index')}}"><i class="fas fa-id-card-alt"></i><span
-                    class="right-nav-text">الملف الشخصي</span></a>
+            <a href="{{ route('profile.index') }}"><i class="fas fa-id-card-alt"></i><span class="right-nav-text">الملف
+                    الشخصي</span></a>
         </li>
 
     </ul>

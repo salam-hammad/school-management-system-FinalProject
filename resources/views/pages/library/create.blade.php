@@ -1,14 +1,14 @@
 @extends('layouts.master')
 @section('css')
-@toastr_css
+    @toastr_css
 @section('title')
-{{trans('Students_trans.Add_a_new_book')}}
+    {{ trans('Students_trans.Add_a_new_book') }}
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-{{trans('Students_trans.Add_a_new_book')}}
+    {{ trans('Students_trans.Add_a_new_book') }}
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -19,23 +19,23 @@
         <div class="card card-statistics h-100">
             <div class="card-body">
 
-                @if(session()->has('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>{{ session()->get('error') }}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                @if (session()->has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ session()->get('error') }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 @endif
                 <div class="col-xs-12">
                     <div class="col-md-12">
                         <br>
-                        <form action="{{route('library.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('library.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
 
                                 <div class="col">
-                                    <label for="title">{{trans('Students_trans.Books_name')}}</label>
+                                    <label for="title">{{ trans('Students_trans.Books_name') }}</label>
                                     <input type="text" name="title" class="form-control">
                                 </div>
 
@@ -45,11 +45,12 @@
                             <div class="form-row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="Grade_id">{{trans('Students_trans.Grade')}} : <span class="text-danger">*</span></label>
+                                        <label for="Grade_id">{{ trans('Students_trans.Grade') }} : <span
+                                                class="text-danger">*</span></label>
                                         <select class="custom-select mr-sm-2" name="Grade_id">
-                                            <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
-                                            @foreach($grades as $grade)
-                                            <option value="{{ $grade->id }}">{{ $grade->Name }}</option>
+                                            <option selected disabled>{{ trans('Parent_trans.Choose') }}...</option>
+                                            @foreach ($grades as $grade)
+                                                <option value="{{ $grade->id }}">{{ $grade->Name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -57,7 +58,8 @@
 
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="Classroom_id">{{trans('Students_trans.classrooms')}} : <span class="text-danger">*</span></label>
+                                        <label for="Classroom_id">{{ trans('Students_trans.classrooms') }} : <span
+                                                class="text-danger">*</span></label>
                                         <select class="custom-select mr-sm-2" name="Classroom_id">
 
                                         </select>
@@ -66,7 +68,7 @@
 
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="section_id">{{trans('Students_trans.section')}} : </label>
+                                        <label for="section_id">{{ trans('Students_trans.section') }} : </label>
                                         <select class="custom-select mr-sm-2" name="section_id">
 
                                         </select>
@@ -80,13 +82,15 @@
                             <div class="form-row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="academic_year">{{trans('Students_trans.Attachments')}} : <span class="text-danger">*</span></label>
+                                        <label for="academic_year">{{ trans('Students_trans.Attachments') }} : <span
+                                                class="text-danger">*</span></label>
                                         <input type="file" accept="application/pdf" name="file_name" required>
                                     </div>
                                 </div>
                             </div>
 
-                            <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="submit">{{trans('Students_trans.submit_data')}}</button>
+                            <button class="btn btn-success btn-sm nextBtn btn-lg pull-right"
+                                type="submit">{{ trans('Students_trans.submit_data') }}</button>
                         </form>
                     </div>
                 </div>
@@ -105,16 +109,15 @@
             var Grade_id = $(this).val();
             if (Grade_id) {
                 $.ajax({
-                    url: "{{ route('getClassrooms', ':id') }}".replace(':id', Grade_id),
+                    url: "{{ URL::to('classes') }}/" + Grade_id,
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
-                        $('select[name="Classroom_id"]').empty();
-                        $('select[name="Classroom_id"]').append('<option selected disabled >اختر...</option>');
+                        $('select[name="Class_id"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="Classroom_id"]').append('<option value="' + key + '">' + value + '</option>');
+                            $('select[name="Class_id"]').append('<option value="' +
+                                key + '">' + value + '</option>');
                         });
-
                     },
                 });
             } else {
@@ -123,29 +126,4 @@
         });
     });
 </script>
-
-<script>
-    $(document).ready(function() {
-        $('select[name="Classroom_id"]').on('change', function() {
-            var Classroom_id = $(this).val();
-            if (Classroom_id) {
-                $.ajax({
-                    url: "{{ route('Get_Sections', ':id') }}".replace(':id', Classroom_id),
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        $('select[name="section_id"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="section_id"]').append('<option value="' + key + '">' + value + '</option>');
-                        });
-
-                    },
-                });
-            } else {
-                console.log('AJAX load did not work');
-            }
-        });
-    });
-</script>
-
 @endsection

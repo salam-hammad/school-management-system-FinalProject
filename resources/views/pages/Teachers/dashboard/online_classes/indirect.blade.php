@@ -2,13 +2,13 @@
 @section('css')
     @toastr_css
 @section('title')
-{{trans('Students_trans.Online_class')}}
+    {{ trans('Students_trans.Online_class') }}
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-{{trans('Students_trans.Online_class')}}
+    {{ trans('Students_trans.Online_class') }}
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -69,7 +69,8 @@
 
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label> {{ trans('Students_trans.Meeting_number') }}: : <span class="text-danger">*</span></label>
+                                <label> {{ trans('Students_trans.Meeting_number') }}: : <span
+                                        class="text-danger">*</span></label>
                                 <input class="form-control" name="meeting_id" type="number">
                             </div>
                         </div>
@@ -77,27 +78,31 @@
 
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label>{{trans('Students_trans.Class_title')}}: <span class="text-danger">*</span></label>
+                                <label>{{ trans('Students_trans.Class_title') }}: <span
+                                        class="text-danger">*</span></label>
                                 <input class="form-control" name="topic" type="text">
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label> {{trans('Students_trans.Class_time')}}: <span class="text-danger">*</span></label>
+                                <label> {{ trans('Students_trans.Class_time') }}: <span
+                                        class="text-danger">*</span></label>
                                 <input class="form-control" type="datetime-local" name="start_time">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label>{{trans('Students_trans.Class_duration')}} : <span class="text-danger">*</span></label>
+                                <label>{{ trans('Students_trans.Class_duration') }} : <span
+                                        class="text-danger">*</span></label>
                                 <input class="form-control" name="duration" type="number">
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label>{{ trans('Students_trans.Meeting_password') }}: <span class="text-danger">*</span></label>
+                                <label>{{ trans('Students_trans.Meeting_password') }}: <span
+                                        class="text-danger">*</span></label>
                                 <input class="form-control" name="password" type="text">
                             </div>
                         </div>
@@ -109,14 +114,16 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label> {{ trans('Students_trans.Link_to_start') }}: : <span class="text-danger">*</span></label>
+                                <label> {{ trans('Students_trans.Link_to_start') }}: : <span
+                                        class="text-danger">*</span></label>
                                 <input class="form-control" name="start_url" type="text">
                             </div>
                         </div>
 
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label>{{ trans('Students_trans.Login_link_for_students') }}: <span class="text-danger">*</span></label>
+                                <label>{{ trans('Students_trans.Login_link_for_students') }}: <span
+                                        class="text-danger">*</span></label>
                                 <input class="form-control" name="join_url" type="text">
                             </div>
                         </div>

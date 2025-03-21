@@ -1,14 +1,14 @@
 @extends('layouts.master')
 @section('css')
-@toastr_css
+    @toastr_css
 @section('title')
-{{trans('main_trans.Profile')}}
+    {{ trans('main_trans.Profile') }}
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-{{trans('main_trans.Profile')}}
+    {{ trans('main_trans.Profile') }}
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -22,11 +22,10 @@
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="{{URL::asset('assets/images/teacher.png')}}"
-                            alt="avatar"
+                        <img src="{{ URL::asset('assets/images/teacher.png') }}" alt="avatar"
                             class="rounded-circle img-fluid" style="width: 245px;">
-                        <h5 style="font-family: Cairo" class="my-3">{{$information->Name}}</h5>
-                        <p class="text-muted mb-1">{{$information->email}}</p>
+                        <h5 style="font-family: Cairo" class="my-3">{{ $information->Name }}</h5>
+                        <p class="text-muted mb-1">{{ $information->email }}</p>
                         <p class="text-muted mb-4">{{ trans('Parent_trans.Guardian') }}</p>
                     </div>
                 </div>
@@ -34,7 +33,7 @@
             <div class="col-lg-8">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form action="{{route('profile.update.parent',$information->id)}}" method="post">
+                        <form action="{{ route('profile.update.parent', $information->id) }}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-3">
@@ -72,11 +71,13 @@
                                     </p><br><br>
                                     <input type="checkbox" class="form-check-input" onclick="myFunction()"
                                         id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">{{ trans('main_trans.Show_password') }}</< /label>
+                                    <label class="form-check-label"
+                                        for="exampleCheck1">{{ trans('main_trans.Show_password') }}</< /label>
                                 </div>
                             </div>
                             <hr>
-                            <button type="submit" class="btn btn-success">{{ trans('main_trans.Modify_data') }}</button>
+                            <button type="submit"
+                                class="btn btn-success">{{ trans('main_trans.Modify_data') }}</button>
                         </form>
                     </div>
                 </div>

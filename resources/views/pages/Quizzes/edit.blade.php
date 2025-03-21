@@ -30,7 +30,7 @@
                     <div class="col-xs-12">
                         <div class="col-md-12">
                             <br>
-                            <form action="{{route('Quizzes.update','test')}}" method="post">
+                            <form action="{{route('Quizzes2.update','test')}}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-row">

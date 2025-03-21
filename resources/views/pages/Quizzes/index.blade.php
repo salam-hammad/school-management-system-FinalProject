@@ -21,7 +21,7 @@
                     <div class="col-xl-12 mb-30">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
-                                <a href="{{route('Quizzes.create')}}" class="btn btn-success btn-sm" role="button"
+                                <a href="{{route('Quizzes2.create')}}" class="btn btn-success btn-sm" role="button"
                                    aria-pressed="true">{{trans('Students_trans.Add_a_new_test')}}</a><br><br>
                                 <div class="table-responsive">
                                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
@@ -43,12 +43,12 @@
                                             <tr>
                                                 <td>{{ $loop->iteration}}</td>
                                                 <td>{{$quizze->name}}</td>
-                                                <td>{{$quizze->teacher->Name}}</td>
+                                                <td>{{ $quizze->teacher ? $quizze->teacher->Name : 'لم يتم تعيين معلم' }}</td>
                                                 <td>{{$quizze->grade->Name}}</td>
                                                 <td>{{$quizze->classroom->Name_Class}}</td>
                                                 <td>{{$quizze->section->Name_Section}}</td>
                                                 <td>
-                                                    <a href="{{route('Quizzes.edit',$quizze->id)}}"
+                                                    <a href="{{route('Quizzes2.edit',$quizze->id)}}"
                                                        class="btn btn-info btn-sm" role="button" aria-pressed="true"><i
                                                             class="fa fa-edit"></i></a>
                                                     <button type="button" class="btn btn-danger btn-sm"
@@ -61,7 +61,7 @@
                                             <div class="modal fade" id="delete_exam{{$quizze->id}}" tabindex="-1"
                                                  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
-                                                    <form action="{{route('Quizzes.destroy','test')}}" method="post">
+                                                    <form action="{{route('Quizzes2.destroy', $quizze->id)}}" method="post"> <!-- تم تعديل المسار هنا -->
                                                         {{method_field('delete')}}
                                                         {{csrf_field()}}
                                                         <div class="modal-content">

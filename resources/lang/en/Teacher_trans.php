@@ -20,6 +20,6 @@ return [
     'marke'=>'Questions must be separated by a punctuation mark',
     'No_manipulation'=>'No manipulation',
     'There_is_manipulation'=>'There is manipulation',
-    're-test'=>'Open re-test for student'
+    're-test'=>'Open re-test for student',
 
 ];

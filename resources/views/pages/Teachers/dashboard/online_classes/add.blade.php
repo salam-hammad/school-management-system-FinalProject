@@ -2,13 +2,13 @@
 @section('css')
     @toastr_css
 @section('title')
-{{trans('Students_trans.Add_a_new_share')}}
+    {{ trans('Students_trans.Add_a_new_share') }}
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-{{trans('Students_trans.Add_a_new_share')}}
+    {{ trans('Students_trans.Add_a_new_share') }}
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -69,20 +69,23 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label> {{trans('Students_trans.Class_title')}} : <span class="text-danger">*</span></label>
+                                <label> {{ trans('Students_trans.Class_title') }} : <span
+                                        class="text-danger">*</span></label>
                                 <input class="form-control" name="topic" type="text">
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>  {{trans('Students_trans.Class_time')}}  : <span class="text-danger">*</span></label>
+                                <label> {{ trans('Students_trans.Class_time') }} : <span
+                                        class="text-danger">*</span></label>
                                 <input class="form-control" type="datetime-local" name="start_time">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>  {{trans('Students_trans.Class_duration')}} : <span class="text-danger">*</span></label>
+                                <label> {{ trans('Students_trans.Class_duration') }} : <span
+                                        class="text-danger">*</span></label>
                                 <input class="form-control" name="duration" type="text">
                             </div>
                         </div>
@@ -112,9 +115,12 @@
                     dataType: "json",
                     success: function(data) {
                         $('select[name="Classroom_id"]').empty();
-                        $('select[name="Classroom_id"]').append('<option selected disabled >اختر...</option>');
+                        $('select[name="Classroom_id"]').append(
+                            '<option selected disabled >اختر...</option>');
                         $.each(data, function(key, value) {
-                            $('select[name="Classroom_id"]').append('<option value="' + key + '">' + value + '</option>');
+                            $('select[name="Classroom_id"]').append(
+                                '<option value="' + key + '">' + value +
+                                '</option>');
                         });
 
                     },
@@ -138,7 +144,9 @@
                     success: function(data) {
                         $('select[name="section_id"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="section_id"]').append('<option value="' + key + '">' + value + '</option>');
+                            $('select[name="section_id"]').append(
+                                '<option value="' + key + '">' + value +
+                                '</option>');
                         });
 
                     },

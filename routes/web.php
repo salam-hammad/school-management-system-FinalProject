@@ -39,7 +39,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // Auth::routes();
 
-Livewire::setUpdateRoute(fn($handle) => 
+Livewire::setUpdateRoute(fn($handle) =>
 Route::post('/' . LaravelLocalization::setLocale() . '/livewire/update', $handle));
 
 // Livewire::setUpdateRoute(function ($handle) {
@@ -148,7 +148,7 @@ Route::group(
 
         //==============================Start dashboard page of parent===========================
         Route::view('add_parent', 'livewire.show_Form')->name('add_parent');
-/*
+        /*
         Livewire::setUpdateRoute(function ($handle) {
             return Route::post('/en/livewire/update', $handle);
         });
@@ -289,17 +289,16 @@ Route::group(
         });
         //==============================End dashboard page of Subjects==========================
 
-        //==============================Start dashboard page of Quizzes=========================
-        Route::group(['prefix' => 'Quizzes'], function () {
-            Route::get('/Quizzes', [QuizzController::class, 'index'])->name('Quizzes.index');
-            Route::get('/Quizzes/create',  [QuizzController::class, 'create'])->name('Quizzes.create');
-            Route::post('/Quizzes/store', [QuizzController::class, 'store'])->name('Quizzes.store');
-            Route::get('/edit/{id}', [QuizzController::class, 'edit'])->name('Quizzes.edit');
-            Route::put('/Quizzes/update', [QuizzController::class, 'update'])->name('Quizzes.update');
-            Route::delete('/Quizzes/destroy', [QuizzController::class, 'destroy'])->name('Quizzes.destroy');
+        //==============================Start dashboard page of Quizzes2=========================
+        Route::group(['prefix' => 'Quizzes2'], function () {
+            Route::get('/Quizzes', [QuizzController::class, 'index'])->name('Quizzes2.index');
+            Route::get('/Quizzes/create',  [QuizzController::class, 'create'])->name('Quizzes2.create');
+            Route::post('/Quizzes/store', [QuizzController::class, 'store'])->name('Quizzes2.store');
+            Route::get('/edit/{id}', [QuizzController::class, 'edit'])->name('Quizzes2.edit');
+            Route::put('/Quizzes/update', [QuizzController::class, 'update'])->name('Quizzes2.update');
+            Route::delete('/Quizzes/destroy/{id}', [QuizzController::class, 'destroy'])->name('Quizzes2.destroy'); // تم تعديل المسار هنا
         });
-        //==============================End dashboard page of Quizzes===========================
-
+        //==============================End dashboard page of Quizzes2===========================
 
         //==============================Start dashboard page of questions=======================
         Route::group(['prefix' => 'Questions'], function () {

@@ -171,8 +171,6 @@ return [
     'manipulation'=>'manipulation',
     'Test_date'=>'Test date',
     'End_date'=>'End date',
-    'Study_material'=>'Study material',
-    'Test_score'=>'Test score',
-    'Take_a_test'=>'Take a test',
-    'cancel_graduation?'=>'Are you sure you want to cancel the graduation?'
+    'Subject_List' => 'Subject List',
+
 ];
