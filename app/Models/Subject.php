@@ -41,4 +41,10 @@ class Subject extends Model
         return $this->belongsToMany(Student::class, 'registrations', 'subject_id', 'student_id')
             ->withPivot('teacher_id');
     }
+
+    // علاقة بين المواد الدراسية والكتب الدراسية
+    public function books()
+    {
+        return $this->hasMany('App\Models\Library', 'subject_id');
+    }
 }

@@ -38,13 +38,47 @@
                     class="right-nav-text">الامتحانات</span></a>                     --}}
         </li>
 
-        <!--  المكتبة-->
-        <li>
-            <a href=""><i class="fas fa-book-open"></i><span class="right-nav-text">المكتبة</span></a>
 
-            {{-- <a href="{{route('student_exams.index')}}"><i class="fas fa-book-open"></i><span
-                    class="right-nav-text">المكتبة</span></a>                     --}}
+<!-- المكتبة -->
+<li>
+    <a href="javascript:void(0);" data-toggle="collapse" data-target="#library-menu">
+        <div class="pull-left">
+            <i class="fas fa-book-open"></i>
+            <span class="right-nav-text">المكتبة</span>
+        </div>
+        <div class="pull-right">
+            <i class="ti-plus"></i>
+        </div>
+        <div class="clearfix"></div>
+    </a>
+    <ul id="library-menu" class="collapse" data-parent="#sidebarnav">
+        <!-- قائمة الكتب المدرسية -->
+        <li>
+            <a href="{{ route('student.library.index') }}">
+                <i class="fas fa-book"></i>
+                <span class="right-nav-text">قائمة الكتب المدرسية</span>
+            </a>
         </li>
+
+        <!-- الكتب المحملة -->
+        <li>
+            <a href="{{ route('student.library.downloaded') }}">
+                <i class="fas fa-download"></i>
+                <span class="right-nav-text">الكتب المحملة</span>
+            </a>
+        </li>
+
+        <!-- البحث في المكتبة -->
+        <li>
+            <a href="{{ route('student.library.search') }}">
+                <i class="fas fa-search"></i>
+                <span class="right-nav-text">بحث في المكتبة</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
+
 
 
         <!-- الامتحانات-->
