@@ -32,6 +32,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>عنوان الكتاب</th>
+                                            <th>اسم المادة</th>
                                             <th>الملف</th>
                                             <th>العمليات</th>
                                         </tr>
@@ -40,10 +41,11 @@
                                         @foreach($books as $book)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $book['title'] }}</td>
-                                                <td>{{ $book['file_name'] }}</td>
+                                                <td>{{ $book->title }}</td>
+                                                <td>{{ $book->subject_name }}</td>
+                                                <td>{{ $book->file_name }}</td>
                                                 <td>
-                                                    <a href="{{ route('student.library.download', $book['file_name']) }}" class="btn btn-primary btn-sm">
+                                                    <a href="{{ route('student.library.download', $book->file_name) }}" class="btn btn-primary btn-sm">
                                                         <i class="fas fa-download"></i> تحميل
                                                     </a>
                                                 </td>

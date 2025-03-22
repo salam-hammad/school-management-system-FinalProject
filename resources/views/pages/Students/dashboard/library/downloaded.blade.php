@@ -37,7 +37,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $book->title }}</td>
                                     <td>
-                                        <a href="{{ $book->download_link }}" class="btn btn-success btn-sm">
+                                        <a href="{{ route('student.library.download', $book->file_name) }}" class="btn btn-success btn-sm">
                                             <i class="fas fa-download"></i> {{ trans('Students_trans.Download') }}
                                         </a>
                                     </td>

@@ -42,9 +42,10 @@ class Subject extends Model
             ->withPivot('teacher_id');
     }
 
-    // علاقة بين المواد الدراسية والكتب الدراسية
-    public function books()
+    // علاقة الطالب بالمواد الدراسية
+    public function subjects()
     {
-        return $this->hasMany('App\Models\Library', 'subject_id');
+        return $this->belongsToMany(Subject::class, 'registrations', 'student_id', 'subject_id')
+            ->withPivot('teacher_id');
     }
 }

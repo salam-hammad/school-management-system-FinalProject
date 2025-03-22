@@ -28,7 +28,7 @@
                     <button type="submit" class="btn btn-primary">{{ trans('Students_trans.Search') }}</button>
                 </form>
 
-                @if(isset($books))
+                @if(isset($searchResults))
                     <div class="table-responsive">
                         <table id="datatable" class="table table-hover table-sm table-bordered p-0" 
                             data-page-length="50" style="text-align: center">
@@ -41,7 +41,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($books as $book)
+                                @foreach ($searchResults as $book)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $book->title }}</td>

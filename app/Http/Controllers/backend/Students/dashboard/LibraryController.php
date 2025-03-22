@@ -31,7 +31,10 @@ class LibraryController extends Controller
                     ->where('section_id', $student->section_id)
                     ->orderBy('id', 'DESC')
                     ->get();
-                $books = array_merge($books, $subjectBooks->toArray());
+                foreach ($subjectBooks as $book) {
+                    $book->subject_name = $subject->getTranslation('name', 'ar'); // إضافة اسم المادة بالعربية
+                    $books[] = $book;
+                }
             }
 
             // عرض الصفحة مع البيانات
