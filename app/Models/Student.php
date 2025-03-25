@@ -104,4 +104,22 @@ class Student extends Authenticatable
             ->withPivot('teacher_id')
             ->with(['teacher']); // جلب بيانات المعلم المسؤول عن المادة
     }
+
+
+    public function onlineClasses()
+    {
+        return $this->hasManyThrough(
+            online_classe::class,
+            Subject::class,
+            'id',          // Foreign key on subjects table
+            'id',          // Foreign key on online_classes table
+            'id',          // Local key on students table
+            'id'           // Local key on subjects table
+        )->whereHas('subjects', function($query) {
+            $query->whereHas('students', function($q) {
+                $q->where('students.id', $this->id);
+            });
+        });
+    }
 }
+

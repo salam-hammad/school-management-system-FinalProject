@@ -168,13 +168,19 @@ return [
     'Return_the_student' => 'ارجاع الطالب',
     'List_of_tested_students' => 'قائمة الطلاب المختبره',
     'Last_question' => 'اخر سؤال',
-    'manipulation'=>'تلاعب',
-    'Test_date'=>'تاريخ اجراء الاختبار',
-    'Search_information'=>'معلومات البحث',
-     'End_date' => 'تاريخ النهايه',
-     'Subject_List' => 'قائمة المواد الدراسية',
-
-
+    'manipulation' => 'تلاعب',
+    'Test_date' => 'تاريخ اجراء الاختبار',
+    'Search_information' => 'معلومات البحث',
+    'End_date' => 'تاريخ النهايه',
+    'Subject_List' => 'قائمة المواد الدراسية',
+    'Online_class' => 'الحصص الأونلاين',
+    'Online_Classes_List' => 'قائمة الحصص الأونلاين',
+    'Online_classes' => 'الحصص الأونلاين',
+    'Class_title' => 'عنوان الحصة',
+    'Start_date' => 'تاريخ البدء',
+    'Class_time' => 'مدة الحصة',
+    'Share_link' => 'رابط المشاركة',
+    'Join_now' => 'انضم الآن',
 
 
 

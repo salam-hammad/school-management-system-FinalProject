@@ -8,6 +8,7 @@ use App\Http\Controllers\backend\Students\dashboard\ExamsController;
 use App\Http\Controllers\backend\Students\dashboard\StudentRegistrationController;
 use App\Http\Controllers\backend\Students\dashboard\ProfileController;
 use App\Http\Controllers\backend\Students\dashboard\LibraryController;
+use App\Http\Controllers\backend\Students\dashboard\OnlineZoomClassesController;
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -65,12 +66,21 @@ Route::group(
             Route::post('profile-student/{id}', [ProfileController::class, 'update'])->name('profile-student.update');
         });
 
-        
+        //============================== عرض المكتبة ============================
         Route::prefix('student')->group(function () {
             Route::get('/library', [LibraryController::class, 'index'])->name('student.library.index');
             Route::get('/library/downloaded', [LibraryController::class, 'downloaded'])->name('student.library.downloaded');
             Route::get('/library/search', [LibraryController::class, 'search'])->name('student.library.search');
         });
+
+
+        //============================== عرض الحصص الاونلاين ============================
+        Route::prefix('student')->middleware(['auth:student'])->group(function () {
+            Route::get('/online-classes', [OnlineZoomClassesController::class, 'index'])
+                 ->name('student.online_classes.index');
+        });
+
+
 
     }
 );

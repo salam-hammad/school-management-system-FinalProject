@@ -172,5 +172,9 @@ return [
     'Test_date'=>'Test date',
     'End_date'=>'End date',
     'Subject_List' => 'Subject List',
+    'Online_class' => 'Online Class',
+    'Online_Classes_List' => 'Online Classes List',
+
+
 
 ];
