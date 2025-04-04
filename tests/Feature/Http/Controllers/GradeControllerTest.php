@@ -1,6 +1,8 @@
 <?php
 
+
 namespace Tests\Feature\Http\Controllers\Grade;
+
 
 use App\Models\Grade;
 use Database\Factories\GradeFactory;
@@ -34,6 +36,7 @@ use Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect;
 class GradeControllerTest extends TestCase
 {
     use RefreshDatabase;
+
 
 
     /** @test */

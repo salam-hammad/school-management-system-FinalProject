@@ -125,7 +125,6 @@ class ClassroomController extends Controller
     return redirect()->route('Classrooms.index');
   }
 
-
   public function Filter_Classes(Request $request)
   {
       $Grades = Grade::all();

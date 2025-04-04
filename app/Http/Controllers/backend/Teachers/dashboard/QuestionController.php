@@ -27,20 +27,17 @@ class QuestionController extends Controller
         }
     }
 
-
     public function show($id)
     {
         $quizz_id = $id;
         return view('pages.Teachers.dashboard.Questions.create', compact('quizz_id'));
     }
 
-
     public function edit($id)
     {
         $question = Question::findorFail($id);
         return view('pages.Teachers.dashboard.Questions.edit', compact('question'));
     }
-
 
     public function update(Request $request, $id)
     {
@@ -57,7 +54,6 @@ class QuestionController extends Controller
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
-
 
     public function destroy($id)
     {

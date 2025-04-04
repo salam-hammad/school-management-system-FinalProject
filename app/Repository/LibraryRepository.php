@@ -8,7 +8,6 @@ use App\Models\Library;
 
 class LibraryRepository implements LibraryRepositoryInterface
 {
-
     use AttachFilesTrait;
 
     public function index()
@@ -28,13 +27,14 @@ class LibraryRepository implements LibraryRepositoryInterface
         try {
             $books = new Library();
             $books->title = $request->title;
-            $books->file_name =  $request->file('file_name')->getClientOriginalName();
+            $books->file_name = $request->file('file_name')->getClientOriginalName();
             $books->Grade_id = $request->Grade_id;
             $books->classroom_id = $request->Classroom_id;
             $books->section_id = $request->section_id;
             $books->teacher_id = 1;
             $books->save();
 
+            // حل المشكلة بتمرير المجلد كمعامل ثالث
             $this->uploadFile($request, 'file_name', 'library');
 
             toastr()->success(trans('messages.success'));
@@ -44,24 +44,22 @@ class LibraryRepository implements LibraryRepositoryInterface
         }
     }
 
-
     public function edit($id)
     {
         $grades = Grade::all();
-        $book = library::findorFail($id);
+        $book = Library::findOrFail($id);
         return view('pages.library.edit', compact('book', 'grades'));
     }
 
     public function update($request)
     {
         try {
-            $book = Library::findorFail($request->id);
+            $book = Library::findOrFail($request->id);
             $book->title = $request->title;
 
-            if ($request->hasfile('file_name')) {
+            if ($request->hasFile('file_name')) {
                 $this->deleteFile($book->file_name);
                 $this->uploadFile($request, 'file_name', 'library');
-
                 $file_name_new = $request->file('file_name')->getClientOriginalName();
                 $book->file_name = $book->file_name !== $file_name_new ? $file_name_new : $book->file_name;
             }
@@ -79,24 +77,16 @@ class LibraryRepository implements LibraryRepositoryInterface
         }
     }
 
-
     public function destroy($request)
     {
         $this->deleteFile($request->file_name);
-        library::destroy($request->id);
+        Library::destroy($request->id);
         toastr()->error(trans('messages.Delete'));
         return redirect()->route('library.index');
     }
 
-
     public function download($filename)
     {
-        // return response()->download(public_path('attachments/library/' . $filename));
-
-        $filePath = public_path('attachments/library/' . $filename);
-        if (!file_exists($filePath)) {
-            return redirect()->back()->with(['error' => 'The requested file does not exist.']);
-        }
-        return response()->download($filePath);
+        return response()->download(public_path('attachments/library/' . $filename));
     }
 }

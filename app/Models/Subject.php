@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subject extends Model
 {
@@ -49,10 +49,17 @@ class Subject extends Model
             ->withPivot('teacher_id');
     }
 
+    /*
     // علاقة المادة مع الحصص الأونلاين
-public function onlineClasses()
-{
-    return $this->hasMany(online_classe::class, 'subject_id');
-}
+    public function onlineClasses()
+    {
+        return $this->belongsToMany(online_classe::class, 'subject_id');
+    }
+        */
+
+    public function onlineClasses()
+    {
+        return $this->hasMany(online_classe::class, 'subject_id');
+    }
 
 }

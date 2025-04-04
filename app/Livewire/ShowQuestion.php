@@ -37,7 +37,6 @@ class ShowQuestion extends Component
             $degree->date = date('Y-m-d');
             $degree->save();
         } else {
-
             // update
             if ($stuDegree->question_id >= $this->data[$this->counter]->id) {
                 $stuDegree->score = 0;
@@ -46,7 +45,6 @@ class ShowQuestion extends Component
                 toastr()->error('تم إلغاء الاختبار لإكتشاف تلاعب بالنظام');
                 return redirect('student_exams');
             } else {
-
                 $stuDegree->question_id = $question_id;
                 if (strcmp(trim($answer), trim($right_answer)) === 0) {
                     $stuDegree->score += $score;

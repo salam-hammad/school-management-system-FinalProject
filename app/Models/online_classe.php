@@ -12,9 +12,18 @@ class online_classe extends Model
     ];
 
     protected $fillable = [
-        'integration', 'Grade_id', 'Classroom_id', 'section_id',
-        'created_by', 'meeting_id', 'topic', 'start_at',
-        'duration', 'password', 'start_url', 'join_url'
+        'integration',
+        'Grade_id',
+        'Classroom_id',
+        'section_id',
+        'created_by',
+        'meeting_id',
+        'topic',
+        'start_at',
+        'duration',
+        'password',
+        'start_url',
+        'join_url'
     ];
 
     // العلاقات
@@ -35,6 +44,6 @@ class online_classe extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class, 'subject_online_class');
+        return $this->belongsToMany(Subject::class, 'subject_online_class_pivot');
     }
 }

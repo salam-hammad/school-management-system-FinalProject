@@ -9,6 +9,7 @@ class GradeFactory extends Factory
 {
     protected $model = Grade::class;
 
+
     /**
      * Define the model's default state.
      */
