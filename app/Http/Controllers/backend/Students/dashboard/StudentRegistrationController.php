@@ -27,7 +27,6 @@ class StudentRegistrationController extends Controller
         $subjects = Subject::where('grade_id', $student->Grade_id)
             ->where('classroom_id', $student->Classroom_id)
             ->get();
-            
         foreach ($subjects as $subject) {
             Registration::updateOrCreate([
                 'student_id' => $student->id,

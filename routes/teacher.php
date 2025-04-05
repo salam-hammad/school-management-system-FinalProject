@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\backend\AjaxController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\Teachers\dashboard\QuizzController;
 use App\Http\Controllers\backend\Teachers\dashboard\QuestionController;
@@ -46,8 +47,9 @@ Route::group(
             Route::put('/quizzes/update', [QuizzController::class, 'update'])->name('quizzes.update');
             Route::get('/quizzes/show/{id}', [QuizzController::class, 'show'])->name('quizzes.show');
             Route::delete('/quizzes/destroy/{id}', [QuizzController::class, 'destroy'])->name('quizzes.destroy');
-            // Route::get('/Get_classrooms/{id}', [QuizzController::class, 'getClassrooms'])->name('getClassrooms');
-            // Route::get('/Get_Sections/{id}', [QuizzController::class, 'Get_Sections'])->name('Get_Sections');
+
+            // Route::get('/Get_classrooms/{id}', [AjaxController::class, 'getClassrooms'])->name('getClassroomsTeacher');
+            //Route::get('/Get_Sections/{id}', [AjaxController::class, 'Get_Sections'])->name('Get_SectionsTeacher');
 
             Route::post('/questions/store', [QuestionController::class, 'store'])->name('questions.store');
             Route::get('/questions/show/{id}', [QuestionController::class, 'show'])->name('questions.show');

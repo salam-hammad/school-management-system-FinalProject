@@ -28,5 +28,7 @@ return [
     'Delete'=>'Delete',
     'Close' => 'Close',
     'Name_Teacher' => 'Teacher Name',
+    'Search_information'=>' Search Information',
+
 
 ];

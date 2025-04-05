@@ -17,9 +17,9 @@ class OnlineZoomClassesController extends Controller
 
         {
             $student = Auth::user();
-           // dd(DB::table('subject_online_class_pivot')->get()); //
+            //dd(DB::table('subject_online_class_pivot')->get()); //
 
-           //dd($student->subjects);
+//dd($student->subjects);
 
             $online_classes = online_classe::whereHas('subjects', function($query) use ($student) {
                 $query->whereHas('students', function($q) use ($student) {
