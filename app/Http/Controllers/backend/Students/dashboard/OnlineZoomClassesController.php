@@ -13,23 +13,25 @@ use Illuminate\Support\Facades\DB;
 class OnlineZoomClassesController extends Controller
 {
 
-    public function index()
+        public function index()
 
-    {
-        $student = Auth::user();
-        // dd(DB::table('subject_online_class_pivot')->get()); //
+        {
+            $student = Auth::user();
+           // dd(DB::table('subject_online_class_pivot')->get()); //
 
-        //dd($student->subjects);
+           //dd($student->subjects);
 
-        $online_classes = online_classe::whereHas('subjects', function ($query) use ($student) {
-            $query->whereHas('students', function ($q) use ($student) {
-                $q->where('students.id', $student->id);
-            });
-        })
+            $online_classes = online_classe::whereHas('subjects', function($query) use ($student) {
+                $query->whereHas('students', function($q) use ($student) {
+                    $q->where('students.id', $student->id);
+                });
+            })
             ->orderBy('start_at', 'desc')
             ->get();
-        //  dd($online_classes);
+          //  dd($online_classes);
 
-        return view('pages.Students.dashboard.online_classes.index', compact('online_classes'));
-    }
+            return view('pages.Students.dashboard.online_classes.index', compact('online_classes'));
+        }
+
+
 }

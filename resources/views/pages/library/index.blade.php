@@ -49,8 +49,7 @@
                                                 <td>
                                                     <a href="{{ route('downloadAttachment', $book->file_name) }}"
                                                         title="تحميل الكتاب" class="btn btn-warning btn-sm"
-                                                        role="button" aria-pressed="true"><i
-                                                            class="fas fa-download"></i></a>
+                                                        role="button" aria-pressed="true"><i class="fa fa-download"></i></a>
                                                     <a href="{{ route('library.edit', $book->id) }}"
                                                         class="btn btn-info btn-sm" role="button"
                                                         aria-pressed="true"><i class="fa fa-edit"></i></a>

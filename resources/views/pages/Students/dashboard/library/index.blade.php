@@ -31,10 +31,10 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>عنوان الكتاب</th>
-                                            <th>اسم المادة</th>
-                                            <th>الملف</th>
-                                            <th>العمليات</th>
+                                            <th>{{ trans('Students_trans.Books_name') }}</th>
+                                            <th>{{ trans('Students_trans.Name_of_material') }}</th>
+                                            <th>{{ trans('Students_trans.filename') }}</th>
+                                            <th>{{ trans('Students_trans.Processes') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -45,9 +45,11 @@
                                                 <td>{{ $book->subject_name }}</td>
                                                 <td>{{ $book->file_name }}</td>
                                                 <td>
-                                                    <a href="{{ route('student.library.download', $book->file_name) }}" class="btn btn-primary btn-sm">
-                                                        <i class="fas fa-download"></i> تحميل
+
+                                                    <a href="{{ route('downloadAttachmentStudent', $book->file_name) }}" class="btn btn-primary btn-sm">
+                                                        <i class="fas fa-download"></i> {{ trans('Students_trans.Download') }}
                                                     </a>
+
                                                 </td>
                                             </tr>
                                         @endforeach

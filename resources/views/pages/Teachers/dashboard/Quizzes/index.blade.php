@@ -47,7 +47,7 @@
                                                 <td>{{ $quizze->classroom->Name_Class }}</td>
                                                 <td>{{ $quizze->section->Name_Section }}</td>
                                                 <td>
-                                                    <a href="{{ route('quizzes.edit', $quizze->id) }}"
+                                                    <a href="{{ route('quizzes.edit', $quizze->id) }}" title="تعديل"
                                                         class="btn btn-info btn-sm" role="button"
                                                         aria-pressed="true"><i class="fa fa-edit"></i></a>
                                                     <button type="button" class="btn btn-danger btn-sm"

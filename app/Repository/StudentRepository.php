@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Repository;
-
 use App\Models\Classroom;
 use App\Models\Gender;
 use App\Models\Grade;
@@ -14,12 +12,7 @@ use App\Models\Type_Blood;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-
-
-
 class StudentRepository implements StudentRepositoryInterface{
-
-
     public function Get_Student()
     {
         $students = Student::all();
@@ -64,13 +57,12 @@ class StudentRepository implements StudentRepositoryInterface{
 
     public function Create_Student(){
 
-        return [
-            'my_classes' => Grade::all(),
-            'parents' => My_Parent::all(),
-            'Genders' => Gender::all(),
-            'nationals' => Nationality::all(),
-            'bloods' => Type_Blood::all(),
-        ];
+       $data['my_classes'] = Grade::all();
+       $data['parents'] = My_Parent::all();
+       $data['Genders'] = Gender::all();
+       $data['nationals'] = Nationality::all();
+       $data['bloods'] = Type_Blood::all();
+       return view('pages.Students.add',$data);
 
     }
 

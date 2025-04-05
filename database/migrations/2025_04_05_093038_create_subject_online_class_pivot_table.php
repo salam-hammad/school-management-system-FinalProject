@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subject_online_class', function (Blueprint $table) {
+        Schema::create('subject_online_class_pivot', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('online_classe_id'); // تغيير هنا
+            $table->unsignedBigInteger('online_classe_id');  
             $table->unsignedBigInteger('subject_id');
             $table->timestamps();
 
