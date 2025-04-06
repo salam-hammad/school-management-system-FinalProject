@@ -31,5 +31,6 @@ return [
     'Close' => 'إغلاق',
     'Number_of_sections' => 'عدد الأقسام',
     'Academic_departments'=>'  الأقسام الدراسية',
-    'Search_information'=>'معلومات البحث'
+    'Search_information'=>'معلومات البحث',
+    'Search_information'=>'معلومات البحث',
 ];

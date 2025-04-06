@@ -104,8 +104,6 @@ class Student extends Authenticatable
             ->withPivot('teacher_id')
             ->with(['teacher']); // جلب بيانات المعلم المسؤول عن المادة
     }
-
-
     public function onlineClasses()
     {
         return $this->hasManyThrough(
@@ -122,4 +120,3 @@ class Student extends Authenticatable
         });
     }
 }
-

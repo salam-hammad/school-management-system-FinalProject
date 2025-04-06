@@ -45,7 +45,7 @@
                                                         <a href="{{ route('student_exams.show', $quizze->id) }}"
                                                             class="btn btn-outline-success btn-sm" role="button"
                                                             aria-pressed="true" onclick="alertAbuse()">
-                                                            <i class="fas fa-person-booth"></i></a>
+                                                            <i class="fas fa-check"></i></a>
                                                     @endif
                                                     {{-- <a href="{{ route('student_exams.show', $quizze->id) }}"
                                                         class="btn btn-outline-success btn-sm" role="button"
