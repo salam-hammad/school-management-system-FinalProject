@@ -144,6 +144,7 @@
 @toastr_render
 
 <script>
+<<<<<<< HEAD
     $(document).ready(function() {
         $('select[name="Grade_id"]').on('change', function() {
             var Grade_id = $(this).val();
@@ -168,11 +169,37 @@
                 console.log('AJAX load did not work');
             }
         });
+=======
+
+ $(document).ready(function () {
+    $('select[name="Grade_id"]').on('change', function () {
+        var Grade_id = $(this).val();
+        if (Grade_id) {
+            $.ajax({
+                url: "{{ route('getClassrooms', ':id') }}".replace(':id', Grade_id),
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $('select[name="Classroom_id"]').empty();
+                    $('select[name="Classroom_id"]').append('<option selected disabled >{{trans('Parent_trans.Choose')}}...</option>');
+                    $.each(data, function (key, value) {
+                        $('select[name="Classroom_id"]').append('<option value="' + key + '">' + value + '</option>');
+                    });
+                },
+            });
+        }
+        else {
+            console.log('AJAX load did not work');
+        }
+>>>>>>> cb62a6aac4bbfb2520a1020bc6f0968424630f3e
     });
+});
+
 </script>
 
 
 <script>
+<<<<<<< HEAD
     $(document).ready(function() {
         $('select[name="Classroom_id"]').on('change', function() {
             var Classroom_id = $(this).val();
@@ -194,7 +221,29 @@
                 console.log('AJAX load did not work');
             }
         });
+=======
+  $(document).ready(function () {
+    $('select[name="Classroom_id"]').on('change', function () {
+        var Classroom_id = $(this).val();
+        if (Classroom_id) {
+            $.ajax({
+                url: "{{ route('Get_Sections', ':id') }}".replace(':id', Classroom_id),
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $('select[name="section_id"]').empty();
+                    $.each(data, function (key, value) {
+                        $('select[name="section_id"]').append('<option value="' + key + '">' + value + '</option>');
+                    });
+                },
+            });
+        }
+        else {
+            console.log('AJAX load did not work');
+        }
+>>>>>>> cb62a6aac4bbfb2520a1020bc6f0968424630f3e
     });
+});
 </script>
 
 @endsection

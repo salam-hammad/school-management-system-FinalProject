@@ -18,12 +18,20 @@ class LibraryController extends Controller
 
             // جلب المواد الدراسية الخاصة بالطالب
             $subjects = $student->subjects;
+<<<<<<< HEAD
             //   dd($subjects);
+=======
+         //   dd($subjects);
+>>>>>>> cb62a6aac4bbfb2520a1020bc6f0968424630f3e
 
             // جلب الكتب الدراسية المرتبطة بالمواد الدراسية
             $books = [];
             foreach ($subjects as $subject) {
+<<<<<<< HEAD
                 /*
+=======
+/*
+>>>>>>> cb62a6aac4bbfb2520a1020bc6f0968424630f3e
                 $subjectBooks = Library::where('subject_id', $subject->id)//no subject_id colum in library table
                     ->where('grade_id', $student->Grade_id)
                     ->where('classroom_id', $student->Classroom_id)
@@ -39,14 +47,22 @@ class LibraryController extends Controller
                     ->orderBy('id', 'DESC')
                     ->get();
 
+<<<<<<< HEAD
                 //  dd($subjectBooks);
+=======
+                  //  dd($subjectBooks);
+>>>>>>> cb62a6aac4bbfb2520a1020bc6f0968424630f3e
 
                 foreach ($subjectBooks as $book) {
                     $book->subject_name = $subject->getTranslation('name', 'ar'); // إضافة اسم المادة بالعربية
                     $books[] = $book;
                 }
             }
+<<<<<<< HEAD
             //  dd($books);
+=======
+          //  dd($books);
+>>>>>>> cb62a6aac4bbfb2520a1020bc6f0968424630f3e
 
             // عرض الصفحة مع البيانات
             return view('pages.Students.dashboard.library.index', compact('books'));
@@ -97,6 +113,12 @@ class LibraryController extends Controller
 
     public function downloadAttachmentStudent($filename)
     {
+<<<<<<< HEAD
         return response()->download(public_path('attachments/library/' . $filename));
     }
 }
+=======
+        return response()->download(public_path('attachments/library/'.$filename));
+    }
+}
+>>>>>>> cb62a6aac4bbfb2520a1020bc6f0968424630f3e

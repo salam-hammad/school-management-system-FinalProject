@@ -29,4 +29,9 @@ return [
     'Close' => 'Close',
     'Name_Teacher' => 'Teacher Name',
     'Search_information'=>' Search Information',
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> cb62a6aac4bbfb2520a1020bc6f0968424630f3e
 ];

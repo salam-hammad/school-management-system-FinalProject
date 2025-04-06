@@ -32,5 +32,8 @@ return [
     'Number_of_sections' => 'عدد الأقسام',
     'Academic_departments'=>'  الأقسام الدراسية',
     'Search_information'=>'معلومات البحث',
+<<<<<<< HEAD
     'Search_information'=>'معلومات البحث',
+=======
+>>>>>>> cb62a6aac4bbfb2520a1020bc6f0968424630f3e
 ];
